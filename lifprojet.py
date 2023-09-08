@@ -24,7 +24,9 @@ death_cert_number = []
 for line in lines:
     name = line[0:80].strip() 
     gender_code = line[80:81]  # On garde le code du genre (1 = Masculin, 2= Féminin)
-    date_of_birth = line[81:89]
+    date_year = line[81:85]
+    date_month = line[85:87]
+    date_day = line[87:89]
     birthplace_code = line[89:94].strip()
     birthplace_text = line[94:124].strip()
     birthplace_details_text = line[124:154].strip()
@@ -43,7 +45,7 @@ for line in lines:
     # On fait un append de l'information de la ligne qu'on a traité à la liste du tableau
     names.append(name)
     gender.append(gender_text)
-    dob.append(date_of_birth)
+    dob.append(date_day + "/" + date_month + "/" + date_year)
     birthplace_code_list.append(birthplace_code)
     birthplace.append(birthplace_text)
     birthplace_details.append(birthplace_details_text)
