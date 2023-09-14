@@ -22,6 +22,8 @@ noms = []
 prenoms = []
 Age = []
 
+#je fais un teste la
+
 # On fait une itération sur chaque ligne pour extraire les données selon la position et la longueur du format de la base
 # On utilse stip() pour effacer les espaces en blanc au début et à la fin
 
