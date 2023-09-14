@@ -22,6 +22,8 @@ noms = []
 prenoms = []
 Age = []
 
+#je fais un teste la
+
 # On fait une itération sur chaque ligne pour extraire les données selon la position et la longueur du format de la base
 # On utilse stip() pour effacer les espaces en blanc au début et à la fin
 
@@ -106,8 +108,8 @@ app.layout = html.Div([
     html.Div(children='My First App with Data'),
     dash_table.DataTable(data=df.to_dict('records'), page_size=10),
     dcc.Graph(figure=px.histogram(df, x='Sex', y='Age', histfunc='avg'),
-              style = {'width' : 500})
-
+              style = {'width' : 500}),
+    html.Iframe(srcDoc=open("emmanuel.html", "r").read(), width="100%", height="600px")
 ])
 
 # Run the app
