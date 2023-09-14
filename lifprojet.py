@@ -104,13 +104,12 @@ df = pd.DataFrame(data)
 app = Dash(__name__)
 
 # App layout
-app.layout = html.Div([
-    html.Div(children='My First App with Data', style = {'color' : 'red'}),
+layout = html.Div([
+    html.H1(children='TABLEAU'),
     dash_table.DataTable(data=df.to_dict('records'), page_size=10),
-    dcc.Graph(figure=px.histogram(df, x='Sex', y='Age', histfunc='avg'),
-              style = {'width' : 500}),
+    
 ])
 
 # Run the app
-if __name__ == '__main__':
-    app.run(debug=True)
+#if __name__ == '__main__':
+ #   app.run(debug=True)
