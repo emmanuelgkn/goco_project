@@ -3,9 +3,10 @@ import pandas as pd
 import plotly.express as px
 
 from lifprojet import *
-app = Dash(__name__)
 
-app.layout = html.Div([
+
+def page2_layout():
+    return html.Div([
     html.H1("GRAPHIQUE"),
     dcc.Graph(figure=px.histogram(df, x='Sex', y='Age', histfunc='avg'),
               style = {'width' : 500}, id="my-graph")

@@ -104,11 +104,11 @@ df = pd.DataFrame(data)
 app = Dash(__name__)
 
 # App layout
-layout = html.Div([
-    html.H1(children='TABLEAU'),
-    dash_table.DataTable(data=df.to_dict('records'), page_size=10),
-    
-])
+def page1_layout():
+    return html.Div([
+        html.H1(children='TABLEAU'),
+        dash_table.DataTable(data=df.to_dict('records'), page_size=10),
+        ])
 
 # Run the app
 #if __name__ == '__main__':
