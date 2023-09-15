@@ -17,6 +17,7 @@ birthplace = []
 birthplace_details = []
 dod = []
 deathplace_code = []
+deathplace = []
 death_cert_number = []
 noms = []
 prenoms = []
@@ -56,6 +57,10 @@ for line in lines:
     if birthplace_details_text == '':
         birthplace_details_text = "FRANCE"
         
+    if deathplace_code_text == birthplace_code:
+        deathplace.append(birthplace_text)
+    else:
+        deathplace.append("NULL")
 
     # On fait un append de l'information de la ligne qu'on a traité à la liste du tableau
     names.append(name)
@@ -84,6 +89,7 @@ data = {
     "Date of Death": dod,
     "Deathplace Code": deathplace_code,
     "Death Certificate Number": death_cert_number,
+    "Deathplace": deathplace,
 }
 
 # On crée le DataFrame avec panda
@@ -101,16 +107,15 @@ df = pd.DataFrame(data)
 
 
 # On initialise la app
-app = Dash(__name__)
+app = Dash(__name__, suppress_callback_exceptions=True)
 
 # App layout
-app.layout = html.Div([
-    html.Div(children='My First App with Data', style = {'color' : 'red'}),
-    dash_table.DataTable(data=df.to_dict('records'), page_size=10),
-    dcc.Graph(figure=px.histogram(df, x='Sex', y='Age', histfunc='avg'),
-              style = {'width' : 500}),
-])
+def page1_layout():
+    return html.Div([
+        html.H1(children='TABLEAU'),
+        dash_table.DataTable(data=df.to_dict('records'), page_size=10),
+        ])
 
 # Run the app
-if __name__ == '__main__':
-    app.run(debug=True)
+#if __name__ == '__main__':
+ #   app.run(debug=True)
