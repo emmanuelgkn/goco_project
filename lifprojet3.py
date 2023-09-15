@@ -15,6 +15,10 @@ birthplace_options.sort(key=lambda x: x['label'])
 def page3_layout():
     return html.Div([
     
+        html.Div(
+            html.H1("Carte",
+                    style = {"font-family" : "verdana"}),
+            style = { "background-color" : "antiquewhite"}),
         # Création ménu déroulant
         dcc.Dropdown(
         id='birthplace-dropdown',
