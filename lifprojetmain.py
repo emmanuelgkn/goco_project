@@ -21,7 +21,9 @@ app.layout = html.Div([
                 'line-height': '2em',
                 'border': '1px black',
                 'font-family': 'verdana',
-                'font-size': '20px'
+                'font-size': '20px',
+                'text-decoration' : 'none',
+                'color': 'black'
         }
 
     ),
