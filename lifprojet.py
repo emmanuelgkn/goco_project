@@ -97,16 +97,24 @@ df = pd.DataFrame(data)
 # On passe c'est deux colonnes au début du tableau
 #df = df[['First Name', 'Last Name'] + [col for col in df.columns if col not in ['First Name', 'Last Name']]]
 
-
-
-
 # On initialise la app
 app = Dash(__name__, suppress_callback_exceptions=True)
 
 # App layout
+def Accueil_layout():
+    return html.Div([
+                    html.Iframe(open("emmanuel.html", "r").read(), 
+                                width = '100%', 
+                                height= '100%',
+                                style={'border':'none'})
+    ])
+
 def page1_layout():
     return html.Div([
-        html.H1(children='TABLEAU'),
+        html.Div(
+            html.H1("Tableau",
+                    style = {"font-family" : "verdana"}),
+            style = { "background-color" : "antiquewhite"}),
         dash_table.DataTable(data=df.to_dict('records'), page_size=10),
         ])
 

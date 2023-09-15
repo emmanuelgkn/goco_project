@@ -1,17 +1,35 @@
 from dash import Dash, html, dash_table, dcc
 from dash.dependencies import Input, Output
 
+from lifprojet4 import *
 
-from lifprojet3 import *
 
 # Configuration de la barre de navigation
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
-    html.Nav([
-        dcc.Link('Page 1', href='/page1'),
-        dcc.Link('Page 2', href='/page2'),
-        dcc.Link('Page 3', href='/page3'),
+    html.Nav(children = [
+        dcc.Link('Accueil', href='/Accueil'),
+        dcc.Link('Base', href='/page1'),
+        dcc.Link('Histogramme', href='/page2'),
+        dcc.Link('Carte', href='/page3')],
+        style={
+                'display' : 'flex',
+                'justify-content' : 'space-around',
+                'background-color' : 'rgb(74, 172, 185)',
+                ' padding-left': '1em',
+                'padding-right': '1em',
+                'line-height': '2em',
+                'border': '1px black',
+                'font-family': 'verdana',
+                'font-size': '20px'
+        }
 
+    ),
+    html.Div([
+         html.Iframe(open("emmanuel.html", "r").read(),
+                                width = '100%', 
+                                height= '100%',
+                                style={'border':'none'})
     ]),
     html.Div(id='page-content')
 ])
@@ -26,6 +44,8 @@ def display_page(pathname):
         return page2_layout()
     if pathname == '/page3':
         return page3_layout()
+    if pathname == '/Accueil':
+        return Accueil_layout()
     else:
         return 'Page introuvable'
 
