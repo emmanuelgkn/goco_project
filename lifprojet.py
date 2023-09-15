@@ -101,7 +101,7 @@ df = pd.DataFrame(data)
 
 
 # On initialise la app
-app = Dash(__name__)
+app = Dash(__name__, suppress_callback_exceptions=True)
 
 # App layout
 def page1_layout():
