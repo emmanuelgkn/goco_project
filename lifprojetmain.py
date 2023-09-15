@@ -1,11 +1,8 @@
 from dash import Dash, html, dash_table, dcc
 from dash.dependencies import Input, Output
 
-from lifprojet import app as page1_app, layout as page1_layout
-from lifprojet2 import app as page2_app, layout2 as page2_layout
-from lifprojet3 import app as page3_app, layout3 as page3_layout
 
-app = Dash(__name__)
+from lifprojet3 import *
 
 # Configuration de la barre de navigation
 app.layout = html.Div([
@@ -24,11 +21,11 @@ app.layout = html.Div([
 
 def display_page(pathname):
     if pathname == '/page1':
-        return page1_layout
+        return page1_layout()
     if pathname == '/page2':
-        return page2_layout
+        return page2_layout()
     if pathname == '/page3':
-        return page3_layout
+        return page3_layout()
     else:
         return 'Page introuvable'
 

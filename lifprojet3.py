@@ -2,29 +2,29 @@ from dash import Dash, html, dash_table, dcc
 import pandas as pd
 import plotly.express as px
 
-from lifprojet import *
+from lifprojet2 import *
 from dash.dependencies import Input, Output
 
 birthplace_options = [{'label': city, 'value': city} for city in df['Birthplace'].unique()]
 birthplace_options.sort(key=lambda x: x['label'])
 
 # On initialise la app
-app = Dash(__name__)
+
 
 # App layout
-app.layout = html.Div([
-    html.Div(children='list', style={'color': 'red'}),
-
-    # Création ménu déroulant
-    dcc.Dropdown(
+def page3_layout():
+    return html.Div([
+    
+        # Création ménu déroulant
+        dcc.Dropdown(
         id='birthplace-dropdown',
         options=birthplace_options,
         placeholder="Sélectionnez une ville de naissance"
-    ),
+        ),
 
-    # On affiche les noms et prénoms qui sont nés dans la ville selectionnée
-    html.Div(id='selected-names')
-])
+         # On affiche les noms et prénoms qui sont nés dans la ville selectionnée
+         html.Div(id='selected-names')
+         ])
 
 # Définissez un callback pour mettre à jour les noms et prénoms en fonction de la ville sélectionnée
 @app.callback(
