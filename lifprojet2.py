@@ -8,8 +8,13 @@ from lifprojet import *
 def page2_layout():
     return html.Div([
     html.Div(
+<<<<<<< HEAD
             html.H1("Histograme",
                     style = {"font-family" : "verdana"}),
+=======
+        html.H1("Histograme",
+                style = {"font-family" : "verdana"}),
+>>>>>>> origin/Jofrix98
             style = { "background-color" : "antiquewhite"}),
     dcc.Graph(figure=px.histogram(df, x='Sex', y='Age', histfunc='avg'),
               style = {'width' : 500}, id="my-graph")

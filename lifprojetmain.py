@@ -3,6 +3,10 @@ from dash.dependencies import Input, Output
 
 from lifprojet4 import *
 
+<<<<<<< HEAD
+=======
+from lifprojet4 import *
+>>>>>>> origin/Jofrix98
 
 # Configuration de la barre de navigation
 app.layout = html.Div([
@@ -21,10 +25,21 @@ app.layout = html.Div([
                 'line-height': '2em',
                 'border': '1px black',
                 'font-family': 'verdana',
+<<<<<<< HEAD
                 'font-size': '20px',
                 'text-decoration' : 'none',
                 'color': 'black'
         }
+=======
+                'font-size': '20px'
+        }
+    ),
+    html.Div([
+         html.Iframe(open("emmanuel.html", "r").read(),
+                                width = '100%', 
+                                height= '100%',
+                                style={'border':'none'})
+>>>>>>> origin/Jofrix98
 
     ),
     html.Div([
