@@ -103,21 +103,18 @@ data = {
 # Créez le DataFrame avec pandas
 df = pd.DataFrame(data)
 
-# On fait un split pour séparer le prénom et le nom famille et on efface l'étoile qui est donnée par la base
-#df[['Last Name', 'First Name']] = df['Name'].str.split('*', n=1, expand=True)
-
-#df.drop(columns=['Name'], inplace=True)
-
-# On passe c'est deux colonnes au début du tableau
-#df = df[['First Name', 'Last Name'] + [col for col in df.columns if col not in ['First Name', 'Last Name']]]
-
-
-
-
-# On initialise la app
-app = Dash(__name__)
+# Initialisez l'application Dash
+app = Dash(__name__, suppress_callback_exceptions=True)
 
 # App layout
+def Accueil_layout():
+    return html.Div([
+        html.Iframe(open("emmanuel.html", "r").read(), 
+                    width = '100%', 
+                    height= '100%',
+                    style={'border':'none'})
+    ])
+
 def page1_layout():
     return html.Div([
         html.Div(

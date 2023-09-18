@@ -20,10 +20,6 @@ def page3_layout():
                     style = {"font-family" : "verdana"}),
             style = { "background-color" : "antiquewhite"}),
     
-        html.Div(
-            html.H1("Carte",
-                    style = {"font-family" : "verdana"}),
-            style = { "background-color" : "antiquewhite"}),
         # Création ménu déroulant
         dcc.Dropdown(
         id='birthplace-dropdown',

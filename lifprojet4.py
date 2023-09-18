@@ -5,9 +5,5 @@ import plotly.express as px
 from lifprojet3 import *
 
 def page4_layout():
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> origin/Jofrix98
     return 1
