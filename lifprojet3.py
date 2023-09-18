@@ -14,6 +14,11 @@ birthplace_options.sort(key=lambda x: x['label'])
 # App layout
 def page3_layout():
     return html.Div([
+
+        html.Div(
+            html.H1("Carte",
+                    style = {"font-family" : "verdana"}),
+            style = { "background-color" : "antiquewhite"}),
     
         # Création ménu déroulant
         dcc.Dropdown(
@@ -38,7 +43,7 @@ def update_selected_names(selected_birthplace):
     
     
     # On crée une liste de noms et prénoms à afficher
-    names_to_display = [f"{row['Prenom(s)']} {row['Nom']} Naissance: {row['Birthplace Code']} Mort à: {row['Deathplace Code']} Ville: {row['Deathplace']}" for index, row in filtered_data.iterrows()]
+    names_to_display = [f"{row['Prenom(s)']} {row['Nom']} Naissance: {row['Birthplace Code']} Mort à: {row['Deathplace Code']} Ville: {row['Death Place']}" for index, row in filtered_data.iterrows()]
     
     # On affiche tous les noms
     if len(names_to_display) > 0:
