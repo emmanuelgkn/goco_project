@@ -1,6 +1,8 @@
 from dash import Dash, html, dash_table, dcc
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
+import plotly.express as px
 
 from lifprojet2 import *
 from dash.dependencies import Input, Output
@@ -13,6 +15,7 @@ birthplace_options.sort(key=lambda x: x['label'])
 
 # App layout
 def page3_layout():
+    
     return html.Div([
 
         html.Div(
@@ -28,8 +31,29 @@ def page3_layout():
         ),
 
          # On affiche les noms et prénoms qui sont nés dans la ville selectionnée
-         html.Div(id='selected-names')
+         html.Div(id='selected-names'),
+         html.Div([
+            dcc.Graph(id='map-plot')
+        ], style={"width": "50%", "margin-top": "20px", "text-align": "center"}),
          ])
+
+@app.callback(
+    Output('map-plot', 'figure'),
+    Input('birthplace-dropdown', 'value')
+)
+def update_map(selected_birthplace):
+    fig = go.Figure(go.Scattermapbox())
+
+
+    fig.update_layout(
+    margin ={'l':0,'t':0,'b':0,'r':0},
+    mapbox = {
+        'center': {'lon': 10, 'lat': 10},
+        'style': "stamen-terrain",
+        'center': {'lon': 0, 'lat': 47},
+        'zoom': 4})
+    return fig
+      
 
 # Définissez un callback pour mettre à jour les noms et prénoms en fonction de la ville sélectionnée
 @app.callback(
@@ -40,13 +64,12 @@ def update_selected_names(selected_birthplace):
 
     # On filtre le DataFrame pour obtenir les noms et prénoms correspondants à la ville sélectionnée
     filtered_data = df[df['Birthplace'] == selected_birthplace]
-    
-    
+      
     # On crée une liste de noms et prénoms à afficher
     names_to_display = [f"{row['Prenom(s)']} {row['Nom']} Naissance: {row['Birthplace Code']} Mort à: {row['Deathplace Code']} Ville: {row['Death Place']}" for index, row in filtered_data.iterrows()]
     
     # On affiche tous les noms
     if len(names_to_display) > 0:
         return html.Ul([html.Li(name) for name in names_to_display])
-
+    
 layout3 = app.layout
