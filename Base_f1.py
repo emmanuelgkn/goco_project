@@ -9,7 +9,10 @@ with open("./deces-2023-m08.txt", "r") as file:
     lines = file.readlines()
 
 # On charge le jeu de données pour pouvoir connaître la position géographique des villes en France
-positions_geo = pd.read_csv('communes-departement-region.csv', usecols=[0, 5, 6])
+positions_geo = pd.read_csv('communes-departement-region.csv', usecols=[0, 1, 5, 6])
+
+# On ajoute un 0 dans le cas où les codes on seulement 4 chiffres
+positions_geo['code_commune_INSEE'] = positions_geo['code_commune_INSEE'].str.zfill(5)
 
 # On initialise les listes vides pour chaque colonne du tableau
 names = []
@@ -107,7 +110,17 @@ data = {
 df = pd.DataFrame(data)
 
 # On crée un DataFrame avec toute l'information ensemble pour pouvoir comparer les Villes avec leur position géographique
-merged_df = df.merge(positions_geo, left_on='Deathplace Code', right_on='code_commune_INSEE', how='left')
+# Realizar la fusión para las coordenadas de muerte
+merged_df_death = df.merge(positions_geo, left_on='Deathplace Code', right_on='code_commune_INSEE', how='left')
+merged_df_death = merged_df_death.rename(columns={'longitude': 'longitude_death', 'latitude': 'latitude_death'})
+
+# Realizar la fusión para las coordenadas de nacimiento
+merged_df_birth = df.merge(positions_geo, left_on='Birthplace Code', right_on='code_commune_INSEE', how='left')
+merged_df_birth = merged_df_birth.rename(columns={'longitude': 'longitude_birth', 'latitude': 'latitude_birth'})
+
+# Combinar ambos DataFrames en uno solo
+merged_df = pd.concat([merged_df_death, merged_df_birth[['longitude_birth', 'latitude_birth']]], axis=1)
+
 
 # Initialisez l'application Dash
 app = Dash(__name__, suppress_callback_exceptions=True)
@@ -125,4 +138,11 @@ def page1_layout():
                     style = {"font-family" : "verdana"}),
             style = { "background-color" : "antiquewhite"}),
         dash_table.DataTable(data=df.to_dict('records'), page_size=10),
+
+        html.Div(
+            html.H1("Tableau",
+                    style = {"font-family" : "verdana"}),
+            style = { "background-color" : "antiquewhite"}),
+        dash_table.DataTable(data=merged_df.to_dict('records'), page_size=10),
+
         ])
