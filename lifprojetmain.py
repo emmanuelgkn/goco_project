@@ -2,7 +2,7 @@ from dash import Dash, html, dash_table, dcc
 from dash.dependencies import Input, Output
 
 
-from lifprojet4 import *
+from Noms_f4 import *
 
 # Configuration de la barre de navigation
 app.layout = html.Div([
@@ -11,7 +11,8 @@ app.layout = html.Div([
         dcc.Link('Accueil', href='/Accueil'),
         dcc.Link('Base', href='/page1'),
         dcc.Link('Histogramme', href='/page2'),
-        dcc.Link('Carte', href='/page3')],
+        dcc.Link('Carte', href='/page3'),
+        dcc.Link('Top Noms', href='/page4')],
         style={
                 'display' : 'flex',
                 'justify-content' : 'space-around',
@@ -24,13 +25,6 @@ app.layout = html.Div([
                 'font-size': '20px'
         }
     ),
-    html.Div([
-         html.Iframe(open("emmanuel.html", "r").read(),
-                                width = '100%', 
-                                height= '100%',
-                                style={'border':'none'})
-
-    ]),
     html.Div(id='page-content')
 ])
 
@@ -44,6 +38,8 @@ def display_page(pathname):
         return page2_layout()
     if pathname == '/page3':
         return page3_layout()
+    if pathname == '/page4':
+        return page4_layout()
     if pathname == '/Accueil':
         return Accueil_layout()
     else:

@@ -2,7 +2,7 @@ from dash import Dash, html, dash_table, dcc
 import pandas as pd
 import plotly.express as px
 
-from lifprojet import *
+from Base_f1 import *
 
 
 def page2_layout():
