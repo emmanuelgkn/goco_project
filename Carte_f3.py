@@ -37,6 +37,7 @@ def page3_layout():
          html.Div([
             dcc.Graph(id='map-plot')
         ], style={"width": "50%", "margin-top": "20px", "text-align": "center"}),
+
          ])
 
 @app.callback(
@@ -47,12 +48,13 @@ def update_map(selected_birthplace):
     # Verifier si Birthplace dans le ménu déroulant a été bien sélectionné
     if selected_birthplace:
         # Filtrer merged_df pour trouver l'information correspondante au Birthplace sélectionné
-        filtered_df = merged_df[merged_df['Death Place'] == selected_birthplace]
+        filtered_df = merged_df[merged_df['Birthplace'] == selected_birthplace]
         
-        #print(filtered_df)
+        print(filtered_df[['Nom', 'Prenom(s)', 'Birthplace', 'Death Place', 'longitude_death', 'latitude_death', 'longitude_birth', 'latitude_birth']])
+
         # On obtient la longitude et la latitude
-        longitude = filtered_df.iloc[0]['longitude']
-        latitude = filtered_df.iloc[0]['latitude']
+        longitude = filtered_df.iloc[0]['longitude_birth']
+        latitude = filtered_df.iloc[0]['latitude_birth']
         
         # On affiche le point sur la carte
         fig = go.Figure(go.Scattermapbox(
