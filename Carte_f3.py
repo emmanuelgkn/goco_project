@@ -32,6 +32,8 @@ def page3_layout():
 
          # On affiche les noms et prénoms qui sont nés dans la ville selectionnée
          html.Div(id='selected-names'),
+
+         # Affichage carte
          html.Div([
             dcc.Graph(id='map-plot')
         ], style={"width": "50%", "margin-top": "20px", "text-align": "center"}),
@@ -42,16 +44,44 @@ def page3_layout():
     Input('birthplace-dropdown', 'value')
 )
 def update_map(selected_birthplace):
-    fig = go.Figure(go.Scattermapbox())
+    # Verifier si Birthplace dans le ménu déroulant a été bien sélectionné
+    if selected_birthplace:
+        # Filtrer merged_df pour trouver l'information correspondante au Birthplace sélectionné
+        filtered_df = merged_df[merged_df['Death Place'] == selected_birthplace]
+        
+        #print(filtered_df)
+        # On obtient la longitude et la latitude
+        longitude = filtered_df.iloc[0]['longitude']
+        latitude = filtered_df.iloc[0]['latitude']
+        
+        # On affiche le point sur la carte
+        fig = go.Figure(go.Scattermapbox(
+            mode="markers+lines",
+            lon=[longitude],
+            lat=[latitude],
+            marker={'size': 10}
+        ))
 
+        # On affiche la carte
+        fig.update_layout(
+            margin ={'l':0,'t':0,'b':0,'r':0},
+            mapbox = {
+                'center': {'lon': 10, 'lat': 10},
+                'style': "stamen-terrain",
+                'center': {'lon': 0, 'lat': 47},
+                'zoom': 4})
+    else:
+        # On affiche la carte même si on a pas sélectionné une ville
+        fig = go.Figure(go.Scattermapbox())
 
-    fig.update_layout(
-    margin ={'l':0,'t':0,'b':0,'r':0},
-    mapbox = {
-        'center': {'lon': 10, 'lat': 10},
-        'style': "stamen-terrain",
-        'center': {'lon': 0, 'lat': 47},
-        'zoom': 4})
+        fig.update_layout(
+            margin ={'l':0,'t':0,'b':0,'r':0},
+            mapbox = {
+                'center': {'lon': 10, 'lat': 10},
+                'style': "stamen-terrain",
+                'center': {'lon': 0, 'lat': 47},
+                'zoom': 4})
+
     return fig
       
 
@@ -71,5 +101,7 @@ def update_selected_names(selected_birthplace):
     # On affiche tous les noms
     if len(names_to_display) > 0:
         return html.Ul([html.Li(name) for name in names_to_display])
+
+
     
 layout3 = app.layout
