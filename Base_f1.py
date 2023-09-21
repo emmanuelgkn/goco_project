@@ -115,7 +115,7 @@ app = Dash(__name__, suppress_callback_exceptions=True)
 # App layout
 def Accueil_layout():
     return html.Div([
-        html.Iframe(src='emmanuel.html', width='100%', height='500px')
+        html.Iframe(srcDoc=open('emmanuel.html',"r").read(), style={'border': 'none', 'width': '100%', 'height': '100vh'})
     ])
 
 def page1_layout():
