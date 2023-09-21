@@ -2,7 +2,7 @@ from dash import Dash, html, dash_table, dcc
 from dash.dependencies import Input, Output
 
 
-from Noms_f4 import *
+from LieuDeces_f5 import *
 
 # Configuration de la barre de navigation
 app.layout = html.Div([
@@ -12,7 +12,8 @@ app.layout = html.Div([
         dcc.Link('Base', href='/page1'),
         dcc.Link('Histogramme', href='/page2'),
         dcc.Link('Carte', href='/page3'),
-        dcc.Link('Top Noms', href='/page4')],
+        dcc.Link('Top Noms', href='/page4'),
+        dcc.Link('Lieux Décès', href='/page5')],
         style={
                 'display' : 'flex',
                 'justify-content' : 'space-around',
@@ -22,7 +23,8 @@ app.layout = html.Div([
                 'line-height': '2em',
                 'border': '1px black',
                 'font-family': 'verdana',
-                'font-size': '20px'
+                'font-size': '20px',
+                'text-decoration' : 'none',
         }
     ),
     html.Div(id='page-content')
@@ -40,10 +42,12 @@ def display_page(pathname):
         return page3_layout()
     if pathname == '/page4':
         return page4_layout()
+    if pathname == '/page5':
+        return page5_layout()
     if pathname == '/Accueil':
         return Accueil_layout()
     else:
-        return 'Page introuvable'
+        return Accueil_layout()
 
 if __name__ == '__main__':
     app.run_server(debug=True, port = 8080)
