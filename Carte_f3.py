@@ -4,7 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.express as px
 
-from lifprojet2 import *
+from MoyenneAge_f2 import *
 from dash.dependencies import Input, Output
 
 birthplace_options = [{'label': city, 'value': city} for city in df['Birthplace'].unique()]
