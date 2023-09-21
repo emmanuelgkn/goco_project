@@ -3,10 +3,13 @@ from dash import Dash, html, dash_table, dcc
 import pandas as pd
 import plotly.express as px
 
-# On lit le jeu de données ligne par ligne
+# On lit le jeu de données des décès en France ligne par ligne
 lines = []
 with open("./deces-2023-m08.txt", "r") as file:
     lines = file.readlines()
+
+# On charge le jeu de données pour pouvoir connaître la position géographique des villes en France
+positions_geo = pd.read_csv('communes-departement-region.csv', usecols=[0, 5, 6])
 
 # On initialise les listes vides pour chaque colonne du tableau
 names = []
@@ -102,6 +105,9 @@ data = {
 
 # Créez le DataFrame avec pandas
 df = pd.DataFrame(data)
+
+# On crée un DataFrame avec toute l'information ensemble pour pouvoir comparer les Villes avec leur position géographique
+merged_df = df.merge(positions_geo, left_on='Deathplace Code', right_on='code_commune_INSEE', how='left')
 
 # Initialisez l'application Dash
 app = Dash(__name__, suppress_callback_exceptions=True)
