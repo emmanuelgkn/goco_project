@@ -139,3 +139,4 @@ def page1_layout():
             style = { "background-color" : "antiquewhite"}),
         dash_table.DataTable(data=df.to_dict('records'), page_size=10),
         ])
+ 
