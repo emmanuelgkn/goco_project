@@ -61,7 +61,7 @@ def update_map(selected_birthplace):
             mode="markers+lines",
             lon=[longitude],
             lat=[latitude],
-            marker={'size': 10}
+            marker={'size': 10} 
         ))
 
         # On affiche la carte
