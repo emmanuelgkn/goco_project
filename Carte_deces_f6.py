@@ -7,20 +7,20 @@ from dash.dependencies import Input, Output
 
 from LieuDeces_f5 import *
 
-fig = go.Figure(go.Scattergeo(
+fig = go.Figure(go.Scattermapbox(
     lon=[2.209666999999996],
     lat=[46.232192999999995],
     text="France",
-    mode='markers',
+    mode='markers'
 ))
 
 fig.update_layout(
     margin ={'l':0,'t':0,'b':0,'r':0},
     mapbox = {
         'center': {'lon': 10, 'lat': 10},
-        'style': "stamen-terrain",
-        'center': {'lon': 0, 'lat': 47},
-        'zoom': 4}
+        'style': "open-street-map",
+        'center': {'lon': 2, 'lat': 47},
+        'zoom': 5}
 )
 
 # App layout
@@ -32,12 +32,6 @@ def page6_layout():
             html.H1("Carte Décès",
                     style = {"font-family" : "verdana"}),
             style = { "background-color" : "antiquewhite"}),
-
-        dcc.Dropdown(
-        id='birthplace-d',
-        options=birthplace_options,
-        placeholder="Entrez une ville de naissance"
-        ),
 
          # Affichage carte
         html.Div([
