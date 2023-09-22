@@ -50,6 +50,7 @@ def page4_layout():
         html.H1("Top Noms",
                 style = {"font-family" : "verdana"}),
         style = { "background-color" : "antiquewhite"}),
+        html.P("Ce sont les noms les plus populaires donneés des dates de naissances allant de l'année 1912 à 2023"),
         html.Div([
         create_top_names_table("Paris", top_names_paris),
         create_top_names_table("Lyon", top_names_lyon),
