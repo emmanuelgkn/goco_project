@@ -114,13 +114,15 @@ df = pd.DataFrame(data)
 merged_df_death = df.merge(positions_geo, left_on='Deathplace Code', right_on='code_commune_INSEE', how='left')
 merged_df_death = merged_df_death.rename(columns={'longitude': 'longitude_death', 'latitude': 'latitude_death'})
 
-# Realizar la fusión para las coordenadas de nacimiento
 merged_df_birth = df.merge(positions_geo, left_on='Birthplace Code', right_on='code_commune_INSEE', how='left')
 merged_df_birth = merged_df_birth.rename(columns={'longitude': 'longitude_birth', 'latitude': 'latitude_birth'})
+grouped_df_birth = merged_df_birth.groupby('Nom').agg({
+    'longitude_birth': 'first',  # Utilisez 'first' pour obtenir le premier valeur non nulle.
+    'latitude_birth': 'first',   # Utilisez 'first' pour obtenir le premier valeur non nulle.
+}).reset_index()
 
-# Combinar ambos DataFrames en uno solo
-merged_df = pd.concat([merged_df_death, merged_df_birth[['longitude_birth', 'latitude_birth']]], axis=1)
-
+# Fusionnez les données de décès avec les données de naissance en utilisant la colonne "Nom" comme clé
+merged_df = merged_df_death.merge(grouped_df_birth[['Nom', 'longitude_birth', 'latitude_birth']], on='Nom', how='left')
 
 # Initialisez l'application Dash
 app = Dash(__name__, suppress_callback_exceptions=True)
@@ -144,5 +146,7 @@ def page1_layout():
                     style = {"font-family" : "verdana"}),
             style = { "background-color" : "antiquewhite"}),
         dash_table.DataTable(data=merged_df.to_dict('records'), page_size=10),
+
+        
 
         ])
