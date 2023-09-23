@@ -38,6 +38,7 @@ NOTA : Certains enregistrements peuvent contenir en toute fin des caractères no
 
 idées:
 carte deces
+(https://plotly.com/python/bubble-maps/)
 
 data mining 
 -distribution des distances au deces 
