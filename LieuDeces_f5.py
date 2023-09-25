@@ -4,7 +4,7 @@ import plotly.express as px
 
 from Noms_f4 import *
 
-paris = df[df['Death Place'].str.contains('PARIS', case=False, regex=True)]
+paris = df[df['Death Place'].str.contains('PARIS ', case=False, regex=True)]
 toulouse = df[df['Death Place'].str.contains('TOULOUSE', case=False, regex=True)]
 lyon = df[df['Death Place'].str.contains('LYON', case=False, regex=True)]
 marseille = df[df['Death Place'].str.contains('MARSEILLE', case=False, regex=True)]
