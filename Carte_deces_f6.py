@@ -16,7 +16,7 @@ villes_m2 = merged_df_death.groupby('Death Place').size().reset_index(name='nomb
 villes_m2 = villes_m2.merge(villes_m[['Death Place', 'longitude_death', 'latitude_death']], on='Death Place', how='left')
 villes_m2_sort= villes_m2.sort_values(by='nombre', ascending=False).head(15)
 villes_m2_sort = villes_m2_sort.drop(1068)
-print(villes_m2_sort)
+#print(villes_m2_sort)
 
 figue = px.scatter_mapbox(villes_m2_sort,
                     lat = "latitude_death",
