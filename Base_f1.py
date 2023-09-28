@@ -2,6 +2,7 @@
 from dash import Dash, html, dash_table, dcc
 import pandas as pd
 import plotly.express as px
+import numpy as np
 
 # On lit le jeu de données des décès en France ligne par ligne
 lines = []
@@ -10,6 +11,10 @@ with open("./deces-2023-m08.txt", "r") as file:
 
 # On charge le jeu de données pour pouvoir connaître la position géographique des villes en France
 positions_geo = pd.read_csv('communes-departement-region.csv', usecols=[0, 1, 5, 6])
+
+# On lit le jeu de données des positions des pays étrangers ligne par ligne
+with open("./positions-pays-étrangers.txt", "r") as file2:
+    country_data = file2.readlines()
 
 # On ajoute un 0 dans le cas où les codes on seulement 4 chiffres
 positions_geo['code_commune_INSEE'] = positions_geo['code_commune_INSEE'].str.zfill(5)
@@ -123,6 +128,26 @@ grouped_df_birth = merged_df_birth.groupby('Nom').agg({
 
 # Fusionnez les données de décès avec les données de naissance en utilisant la colonne "Nom" comme clé
 merged_df = merged_df_death.merge(grouped_df_birth[['Nom', 'longitude_birth', 'latitude_birth']], on='Nom', how='left')
+
+merged_df.loc[merged_df['Birthplace Details'] != 'FRANCE', ['latitude_birth', 'longitude_birth']] = np.nan
+
+
+country_coordinates = {}
+for line in country_data:
+    parts = line.strip().split()
+    if len(parts) == 3:
+        country, latitude, longitude = parts
+        country_coordinates[country] = (latitude, longitude)
+
+def update_coordinates(row):
+    country = row['Birthplace Details']
+    if country in country_coordinates:
+        latitude, longitude = country_coordinates[country]
+        row['latitude_birth'] = latitude
+        row['longitude_birth'] = longitude
+    return row
+
+merged_df = merged_df.apply(update_coordinates, axis=1)
 
 # Initialisez l'application Dash
 app = Dash(__name__, suppress_callback_exceptions=True)

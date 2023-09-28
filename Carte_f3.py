@@ -49,72 +49,20 @@ def page3_layout():
 
 @app.callback(
     Output('map-plot', 'figure'),
-    Input('birthplace-dropdown', 'value')
+    [Input('birthplace-dropdown', 'value'),
+     Input('international_countries-dropdown', 'value')]
 )
-def update_map(selected_birthplace):
-    # Verifier si Birthplace dans le ménu déroulant a été bien sélectionné
+def update_map(selected_birthplace, selected_country):
+    # 
     if selected_birthplace:
-        # Filtrer merged_df pour trouver l'information correspondante au Birthplace sélectionné
+        # Filtrar merged_df para encontrar la información correspondiente al Birthplace seleccionado
         filtered_df = merged_df[merged_df['Birthplace'] == selected_birthplace]
-         # On obtient la longitude et la latitude
-        longitude_birth = filtered_df.iloc[0]['longitude_birth']
-        latitude_birth = filtered_df.iloc[0]['latitude_birth']
-        
-        # On affiche le point sur la carte
-        fig = go.Figure(go.Scattermapbox(
-            mode="markers+lines",
-            lon=[longitude_birth],
-            lat=[latitude_birth],
-            marker={'size': 10, 'color': 'blue'} 
-        ))
-        # Créez des listes vides pour stocker les coordonnées de latitude et de longitude du lieu de décès
-        lats_death = []
-        lons_death = []
-
-        # Itérer sur les lignes de filtered_df
-        for _, row in filtered_df.iterrows():
-            latitude_death = row['latitude_death']
-            longitude_death = row['longitude_death']
-            
-            if latitude_death is not latitude_birth and longitude_death is not longitude_birth:
-                # Ajoutez les coordonnées à la liste
-                lats_death.append(latitude_death)
-                lons_death.append(longitude_death)
-
-        # Créez la figure de la carte
-        fig = go.Figure()
-
-        # Ajoutez des marqueurs pour chaque lieu de décès
-        for i in range(len(lats_death)):
-            if filtered_df.iloc[i]['Death Place'] != "NULL":
-                hover_text = filtered_df.iloc[i]['Death Place']
-            else:
-                hover_text = ""  # Texte vide si la valeur est "NULL"
-
-            fig.add_trace(go.Scattermapbox(
-                mode="markers+lines",
-                lon=[lons_death[i], longitude_birth],
-                lat=[lats_death[i], latitude_birth],
-                marker={'size': 10, 'color': 'red'},
-                showlegend=False,
-                hovertext=[hover_text],  # Utilisez le texte de survol créé
-                hoverinfo = None,
-            ))
-
-        # Mettez à jour la mise en page de la carte
-        fig.update_layout(
-            margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
-            mapbox={
-                'center': {'lon': 10, 'lat': 10},
-                'style': "stamen-terrain",
-                'center': {'lon': 0, 'lat': 47},
-                'zoom': 4
-            }
-        )
+    elif selected_country:
+        # Filtrar merged_df para encontrar la información correspondiente al país de Birthplace Details seleccionado
+        filtered_df = merged_df[merged_df['Birthplace Details'] == selected_country]
     else:
-        # On affiche la carte même si on n'a pas sélectionné une ville
+        # Mostrar una figura vacía si no se ha seleccionado ni Birthplace ni país
         fig = go.Figure(go.Scattermapbox())
-
         fig.update_layout(
             margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
             mapbox={
@@ -124,89 +72,62 @@ def update_map(selected_birthplace):
                 'zoom': 4
             }
         )
+        return fig
+
+    # Obtener la longitud y latitud
+    longitude_birth = filtered_df.iloc[0]['longitude_birth']
+    latitude_birth = filtered_df.iloc[0]['latitude_birth']
+
+    # Crear la figura del mapa
+    fig = go.Figure(go.Scattermapbox(
+        mode="markers+lines",
+        lon=[longitude_birth],
+        lat=[latitude_birth],
+        marker={'size': 10, 'color': 'blue'}
+    ))
+
+    # Crear listas vacías para las coordenadas de latitud y longitud de los lugares de fallecimiento
+    lats_death = []
+    lons_death = []
+
+    # Iterar sobre las filas de filtered_df
+    for _, row in filtered_df.iterrows():
+        latitude_death = row['latitude_death']
+        longitude_death = row['longitude_death']
+
+        if latitude_death is not latitude_birth and longitude_death is not longitude_birth:
+            # Agregar las coordenadas a la lista
+            lats_death.append(latitude_death)
+            lons_death.append(longitude_death)
+
+    # Agregar marcadores para cada lugar de fallecimiento
+    for i in range(len(lats_death)):
+        if filtered_df.iloc[i]['Death Place'] != "NULL":
+            hover_text = filtered_df.iloc[i]['Death Place']
+        else:
+            hover_text = ""  # Texto vacío si el valor es "NULL"
+
+        fig.add_trace(go.Scattermapbox(
+            mode="markers+lines",
+            lon=[lons_death[i], longitude_birth],
+            lat=[lats_death[i], latitude_birth],
+            marker={'size': 10, 'color': 'red'},
+            showlegend=False,
+            hovertext=[hover_text],  # Usar el texto de sobrecrecimiento creado
+            hoverinfo=None,
+        ))
+
+    # Actualizar el diseño del mapa
+    fig.update_layout(
+        margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
+        mapbox={
+            'center': {'lon': 10, 'lat': 10},
+            'style': "stamen-terrain",
+            'center': {'lon': 0, 'lat': 47},
+            'zoom': 4
+        }
+    )
 
     return fig
 
-'''
-@app.callback(
-    Output('map-plot', 'figure'),
-    Input('international_countries-dropdown', 'value')
-)
-def update_map_international(selected_country_birthplace):
-    # Verifier si Birthplace dans le ménu déroulant a été bien sélectionné
-    if selected_country_birthplace:
-        # Filtrer merged_df pour trouver l'information correspondante au Birthplace sélectionné
-        filtered_df = merged_df[merged_df['Birthplace Details'] == selected_birthplace]
-         # On obtient la longitude et la latitude
-        longitude_birth = filtered_df.iloc[0]['longitude_birth']
-        latitude_birth = filtered_df.iloc[0]['latitude_birth']
-        
-        # On affiche le point sur la carte
-        fig = go.Figure(go.Scattermapbox(
-            mode="markers+lines",
-            lon=[longitude_birth],
-            lat=[latitude_birth],
-            marker={'size': 10, 'color': 'blue'} 
-        ))
-        # Créez des listes vides pour stocker les coordonnées de latitude et de longitude du lieu de décès
-        lats_death = []
-        lons_death = []
-
-        # Itérer sur les lignes de filtered_df
-        for _, row in filtered_df.iterrows():
-            latitude_death = row['latitude_death']
-            longitude_death = row['longitude_death']
-            
-            if latitude_death is not latitude_birth and longitude_death is not longitude_birth:
-                # Ajoutez les coordonnées à la liste
-                lats_death.append(latitude_death)
-                lons_death.append(longitude_death)
-
-        # Créez la figure de la carte
-        fig = go.Figure()
-
-        # Ajoutez des marqueurs pour chaque lieu de décès
-        for i in range(len(lats_death)):
-            if filtered_df.iloc[i]['Death Place'] != "NULL":
-                hover_text = filtered_df.iloc[i]['Death Place']
-            else:
-                hover_text = ""  # Texte vide si la valeur est "NULL"
-
-            fig.add_trace(go.Scattermapbox(
-                mode="markers+lines",
-                lon=[lons_death[i], longitude_birth],
-                lat=[lats_death[i], latitude_birth],
-                marker={'size': 10, 'color': 'red'},
-                showlegend=False,
-                hovertext=[hover_text],  # Utilisez le texte de survol créé
-                hoverinfo = None,
-            ))
-
-        # Mettez à jour la mise en page de la carte
-        fig.update_layout(
-            margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
-            mapbox={
-                'center': {'lon': 10, 'lat': 10},
-                'style': "stamen-terrain",
-                'center': {'lon': 0, 'lat': 47},
-                'zoom': 4
-            }
-        )
-    else:
-        # On affiche la carte même si on n'a pas sélectionné une ville
-        fig = go.Figure(go.Scattermapbox())
-
-        fig.update_layout(
-            margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
-            mapbox={
-                'center': {'lon': 10, 'lat': 10},
-                'style': "stamen-terrain",
-                'center': {'lon': 0, 'lat': 47},
-                'zoom': 4
-            }
-        )
-
-    return fig
-'''
-    
 layout3 = app.layout
