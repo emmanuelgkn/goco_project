@@ -116,6 +116,7 @@ df = pd.DataFrame(data)
 
 # On crée un DataFrame avec toute l'information ensemble pour pouvoir comparer les Villes avec leur position géographique
 # Realizar la fusión para las coordenadas de muerte
+positions_geo.drop_duplicates(inplace=True)
 merged_df_death = df.merge(positions_geo, left_on='Deathplace Code', right_on='code_commune_INSEE', how='left')
 merged_df_death = merged_df_death.rename(columns={'longitude': 'longitude_death', 'latitude': 'latitude_death'})
 
@@ -171,7 +172,4 @@ def page1_layout():
                     style = {"font-family" : "verdana"}),
             style = { "background-color" : "antiquewhite"}),
         dash_table.DataTable(data=merged_df.to_dict('records'), page_size=10),
-
-        
-
         ])
