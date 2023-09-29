@@ -12,12 +12,14 @@ with open("./deces-2023-m08.txt", "r") as file:
 # On charge le jeu de données pour pouvoir connaître la position géographique des villes en France
 positions_geo = pd.read_csv('communes-departement-region.csv', usecols=[0, 1, 5, 6])
 
+
 # On lit le jeu de données des positions des pays étrangers ligne par ligne
 with open("./positions-pays-étrangers.txt", "r") as file2:
     country_data = file2.readlines()
 
 # On ajoute un 0 dans le cas où les codes on seulement 4 chiffres
 positions_geo['code_commune_INSEE'] = positions_geo['code_commune_INSEE'].str.zfill(5)
+
 
 # On initialise les listes vides pour chaque colonne du tableau
 names = []
@@ -114,25 +116,37 @@ data = {
 # Créez le DataFrame avec pandas
 df = pd.DataFrame(data)
 
+
 # On crée un DataFrame avec toute l'information ensemble pour pouvoir comparer les Villes avec leur position géographique
 # Realizar la fusión para las coordenadas de muerte
 merged_df_death = df.merge(positions_geo, left_on='Deathplace Code', right_on='code_commune_INSEE', how='left')
 merged_df_death = merged_df_death.rename(columns={'longitude': 'longitude_death', 'latitude': 'latitude_death'})
 
+
 merged_df_birth = df.merge(positions_geo, left_on='Birthplace Code', right_on='code_commune_INSEE', how='left')
 merged_df_birth = merged_df_birth.rename(columns={'longitude': 'longitude_birth', 'latitude': 'latitude_birth'})
+
 grouped_df_birth = merged_df_birth.groupby('Nom').agg({
     'longitude_birth': 'first',  # Utilisez 'first' pour obtenir le premier valeur non nulle.
     'latitude_birth': 'first',   # Utilisez 'first' pour obtenir le premier valeur non nulle.
 }).reset_index()
 
+
 # Fusionnez les données de décès avec les données de naissance en utilisant la colonne "Nom" comme clé
 merged_df = merged_df_death.merge(grouped_df_birth[['Nom', 'longitude_birth', 'latitude_birth']], on='Nom', how='left')
-
 merged_df.loc[merged_df['Birthplace Details'] != 'FRANCE', ['latitude_birth', 'longitude_birth']] = np.nan
 
-
 country_coordinates = {}
+'''
+for line in country_data:
+    country = line[0:150]
+    
+    longitude = line[150:200].strip()
+    latitude = line[200:300].strip()
+    country_coordinates[country] = (latitude, longitude)
+
+print (country_coordinates)
+'''
 for line in country_data:
     parts = line.strip().split()
     if len(parts) == 3:
