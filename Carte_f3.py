@@ -14,6 +14,7 @@ birthplace_options.sort(key=lambda x: x['label'])
 international_countries = merged_df[merged_df['Birthplace Details'] != 'FRANCE']
 international_countries_options = [{'label': country, 'value': country} for country in international_countries['Birthplace Details'].unique() ]
 international_countries_options.sort(key=lambda x: x['label'])
+
 # On initialise la app
 
 
@@ -46,6 +47,22 @@ def page3_layout():
         ], style={"width": "100vw", "height": "100%"}),
 
          ])
+         
+@app.callback(
+    [Output('birthplace-dropdown', 'value'),
+     Output('international_countries-dropdown', 'value')],
+    [Input('birthplace-dropdown', 'value'),
+     Input('international_countries-dropdown', 'value')]
+)
+def clear_and_set_values(selected_birthplace, selected_country):
+    # Effacez la sélection du premier menu déroulant si une valeur est sélectionnée dans le deuxième
+    if selected_country:
+        selected_birthplace = None
+    # Effacez la sélection du deuxième menu déroulant si une valeur est sélectionnée dans le premier
+    elif selected_birthplace:
+        selected_country = None
+
+    return selected_birthplace, selected_country
 
 @app.callback(
     Output('map-plot', 'figure'),
@@ -53,15 +70,19 @@ def page3_layout():
      Input('international_countries-dropdown', 'value')]
 )
 def update_map(selected_birthplace, selected_country):
-    # 
-    if selected_birthplace:
-        # Filtrar merged_df para encontrar la información correspondiente al Birthplace seleccionado
-        filtered_df = merged_df[merged_df['Birthplace'] == selected_birthplace]
-    elif selected_country:
-        # Filtrar merged_df para encontrar la información correspondiente al país de Birthplace Details seleccionado
+    # Initialisation de filtered_df
+    filtered_df = merged_df
+
+    if selected_country:
+        # Filtrer merged_df pour trouver les informations correspondant au pays de Birthplace Details sélectionné
         filtered_df = merged_df[merged_df['Birthplace Details'] == selected_country]
+
+    elif selected_birthplace:
+        # Filtrer merged_df pour trouver les informations correspondant au Birthplace sélectionné
+        filtered_df = merged_df[merged_df['Birthplace'] == selected_birthplace]
+
     else:
-        # Mostrar una figura vacía si no se ha seleccionado ni Birthplace ni país
+        # Afficher une figure vide si ni Birthplace ni pays n'ont été sélectionnés
         fig = go.Figure(go.Scattermapbox())
         fig.update_layout(
             margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
@@ -74,11 +95,11 @@ def update_map(selected_birthplace, selected_country):
         )
         return fig
 
-    # Obtener la longitud y latitud
+    # Obtention de la longitude et de la latitude
     longitude_birth = filtered_df.iloc[0]['longitude_birth']
     latitude_birth = filtered_df.iloc[0]['latitude_birth']
 
-    # Crear la figura del mapa
+    # Création de la figure du carte
     fig = go.Figure(go.Scattermapbox(
         mode="markers+lines",
         lon=[longitude_birth],
@@ -86,26 +107,43 @@ def update_map(selected_birthplace, selected_country):
         marker={'size': 10, 'color': 'blue'}
     ))
 
-    # Crear listas vacías para las coordenadas de latitud y longitud de los lugares de fallecimiento
+    # Création de listes vides pour les coordonnées de latitude et de longitude des lieux de décès
     lats_death = []
     lons_death = []
+    lon_list = []
+    lat_list = []
 
-    # Iterar sobre las filas de filtered_df
     for _, row in filtered_df.iterrows():
-        latitude_death = row['latitude_death']
-        longitude_death = row['longitude_death']
+        lon_list.append(row['longitude_death'])
+        lat_list.append(row['latitude_death'])
 
-        if latitude_death is not latitude_birth and longitude_death is not longitude_birth:
-            # Agregar las coordenadas a la lista
-            lats_death.append(latitude_death)
-            lons_death.append(longitude_death)
+    lons_death = np.empty(3* len(filtered_df))
+    lons_death[::3] = longitude_birth
+    lons_death[1::3] = lon_list
+    lons_death[2::3] = None
 
-    # Agregar marcadores para cada lugar de fallecimiento
+    lats_death = np.empty(3* len(filtered_df))
+    lats_death[::3] = latitude_birth
+    lats_death[1::3] = lat_list
+    lats_death[2::3] = None
+
+
+    fig.add_trace(go.Scattermapbox(
+            mode="markers+lines",
+            lon=lons_death,
+            lat=lats_death,
+            marker={'size': 10, 'color': 'red'},
+            showlegend=False,
+            #hovertext=[hover_text],  # Utiliser le texte de surbrillance créé
+            hoverinfo=None,
+            
+        ))
+    '''
     for i in range(len(lats_death)):
         if filtered_df.iloc[i]['Death Place'] != "NULL":
             hover_text = filtered_df.iloc[i]['Death Place']
         else:
-            hover_text = ""  # Texto vacío si el valor es "NULL"
+            hover_text = ""  # Texte vide si la valeur est "NULL"
 
         fig.add_trace(go.Scattermapbox(
             mode="markers+lines",
@@ -113,11 +151,14 @@ def update_map(selected_birthplace, selected_country):
             lat=[lats_death[i], latitude_birth],
             marker={'size': 10, 'color': 'red'},
             showlegend=False,
-            hovertext=[hover_text],  # Usar el texto de sobrecrecimiento creado
+            hovertext=[hover_text],  # Utiliser le texte de surbrillance créé
             hoverinfo=None,
+            
         ))
+    '''
 
-    # Actualizar el diseño del mapa
+
+    # Mettre à jour la mise en page de la carte
     fig.update_layout(
         margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
         mapbox={
