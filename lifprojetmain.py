@@ -7,7 +7,7 @@ from Carte_deces_f6 import *
 # Configuration de la barre de navigation
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
-    html.Nav(children = [
+    html.Nav(className="nave",children = [
         dcc.Link('Accueil', href='/Accueil'),
         dcc.Link('Base', href='/page1'),
         dcc.Link('Histogramme', href='/page2'),
@@ -15,18 +15,6 @@ app.layout = html.Div([
         dcc.Link('Top Noms', href='/page4'),
         dcc.Link('Lieux Décès', href='/page5'),
         dcc.Link('Carte Deces', href='/page6')],
-        style={
-                'display' : 'flex',
-                'justify-content' : 'space-around',
-                'background-color' : 'rgb(74, 172, 185)',
-                ' padding-left': '1em',
-                'padding-right': '1em',
-                'line-height': '2em',
-                'border': '1px black',
-                'font-family': 'verdana',
-                'font-size': '20px',
-                'text-decoration' : 'none',
-        }
     ),
     html.Div(id='page-content')
 ])

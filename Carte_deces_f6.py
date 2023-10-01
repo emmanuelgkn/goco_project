@@ -30,7 +30,7 @@ villes_m2 = villes_m2.groupby('Death Place').agg(
     longitude=('longitude', 'first'),  # Utilisez 'first' pour obtenir la première valeur non nulle.
     nombre=('Death Place', 'size')  # Utilisez 'size' pour obtenir le nombre d'occurrences.
 ).reset_index()
-villes_m2_sort= villes_m2.sort_values(by='nombre', ascending=False).head(5)
+villes_m2_sort= villes_m2.sort_values(by='nombre', ascending=False)
 villes_m2_sort = villes_m2_sort.drop(1062)
 villes_m2_sort
 
@@ -44,14 +44,14 @@ figue = px.scatter_mapbox(villes_m2_sort,
                     size_max=40 
                     )
 
-figue.update_layout(
-    margin ={'l':0,'t':0,'b':0,'r':0},
-    mapbox = {
-        'center': {'lon': 10, 'lat': 10},
-        'style': "open-street-map",
-        'center': {'lon': 2, 'lat': 47},
-        'zoom': 5}
-)
+# figue.update_layout(
+#     margin ={'l':0,'t':0,'b':0,'r':0},
+#     mapbox = {
+#         'center': {'lon': 10, 'lat': 10},
+#         'style': "open-street-map",
+#         'center': {'lon': 2, 'lat': 47},
+#         'zoom': 5}
+# )
 
 
 figue.update_traces(marker=dict(sizemode='diameter', sizeref=17))
@@ -68,7 +68,7 @@ def page6_layout():
 
          # Affichage carte
         html.Div([
-            dcc.Graph(id = 'map', figure = figue ,style={"width": "100%", "height": "80vh"})
+            dcc.Graph(id = 'map', style={"width": "100%", "height": "80vh"})
         ], style={"width": "100vw", "height": "100%"}),
     ])
 
@@ -79,7 +79,8 @@ def page6_layout():
     [Input('map', 'relayoutData')]
 )
 def update_map_layout(relayout_data):
-    zoom_level = relayout_data.get('mapbox', {}).get('zoom', 5) if relayout_data else 5
+    
+    zoom_level = relayout_data.get('mapbox.zoom', 5)
     
     # Adjust the number of markers dynamically based on zoom level
     # You can customize this logic to achieve the desired progressive zoom effect
@@ -107,5 +108,4 @@ def update_map_layout(relayout_data):
     )
 
     fig.update_traces(marker=dict(sizemode='diameter', sizeref=17))
-    
     return fig
