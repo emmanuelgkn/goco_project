@@ -1,0 +1,22 @@
+nav {
+    display: flex;
+    justify-content: space-around;    
+	background-color: rgb(74, 172, 185);
+    padding-left: 1em;
+    padding-right: 1em;
+	line-height: 2em;
+    border: 1px black;
+    font-family: verdana;
+    font-size: 20px;
+}
+
+nav a:link, nav a:visited, nav a:active{
+    text-decoration: none;
+    color: black;
+}
+
+nav a:hover{
+    color: rgb(249, 249, 249);
+    text-shadow: 2px, rgb(114, 114, 114);
+    
+}
