@@ -138,20 +138,12 @@ merged_df = merged_df_death.merge(grouped_df_birth[['Nom', 'longitude_birth', 'l
 merged_df.loc[merged_df['Birthplace Details'] != 'FRANCE', ['latitude_birth', 'longitude_birth']] = np.nan
 
 country_coordinates = {}
-'''
-for line in country_data:
-    country = line[0:150]
-    
-    longitude = line[150:200].strip()
-    latitude = line[200:300].strip()
-    country_coordinates[country] = (latitude, longitude)
 
-print (country_coordinates)
-'''
 for line in country_data:
     parts = line.strip().split()
     if len(parts) == 3:
-        country, latitude, longitude = parts
+        country = parts[0].replace('*', ' ')
+        latitude, longitude = parts[1], parts[2]
         country_coordinates[country] = (latitude, longitude)
 
 def update_coordinates(row):
@@ -163,6 +155,7 @@ def update_coordinates(row):
     return row
 
 merged_df = merged_df.apply(update_coordinates, axis=1)
+merged_df['density'] = 1
 
 # Initialisez l'application Dash
 app = Dash(__name__, suppress_callback_exceptions=True)
