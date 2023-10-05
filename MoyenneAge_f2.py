@@ -4,8 +4,6 @@ import plotly.express as px
 
 from Base_f1 import *
 
-
-
 def page2_layout():
     return html.Div([
     html.Div(
