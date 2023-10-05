@@ -1,4 +1,4 @@
-from dash import Dash, html, dash_table, dcc
+from dash import Dash, html, dash_table, dcc, no_update
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -7,6 +7,7 @@ import plotly.express as px
 from MoyenneAge_f2 import *
 from dash.dependencies import Input, Output
 
+display_options = ["Lignes", "Densité"]
 french_cities = merged_df[merged_df['Birthplace Details'] == 'FRANCE']
 birthplace_options = [{'label': city, 'value': city} for city in french_cities['Birthplace'].unique() ]
 birthplace_options.sort(key=lambda x: x['label'])
@@ -14,6 +15,7 @@ birthplace_options.sort(key=lambda x: x['label'])
 international_countries = merged_df[merged_df['Birthplace Details'] != 'FRANCE']
 international_countries_options = [{'label': country, 'value': country} for country in international_countries['Birthplace Details'].unique() ]
 international_countries_options.sort(key=lambda x: x['label'])
+
 
 # On initialise la app
 
@@ -29,6 +31,13 @@ def page3_layout():
             style = { "background-color" : "antiquewhite"}),
     
         # Création ménu déroulant
+
+        dcc.Dropdown(
+        id='display-dropdown',
+        options=display_options,
+        placeholder="Sélectionnez le type d'affichage"
+        ),
+
         dcc.Dropdown(
         id='birthplace-dropdown',
         options=birthplace_options,
@@ -47,29 +56,34 @@ def page3_layout():
         ], style={"width": "100vw", "height": "100%"}),
 
          ])
-         
-@app.callback(
-    [Output('birthplace-dropdown', 'value'),
-     Output('international_countries-dropdown', 'value')],
-    [Input('birthplace-dropdown', 'value'),
-     Input('international_countries-dropdown', 'value')]
-)
-def clear_and_set_values(selected_birthplace, selected_country):
-    # Effacez la sélection du premier menu déroulant si une valeur est sélectionnée dans le deuxième
-    if selected_country:
-        selected_birthplace = None
-    # Effacez la sélection du deuxième menu déroulant si une valeur est sélectionnée dans le premier
-    elif selected_birthplace:
-        selected_country = None
 
-    return selected_birthplace, selected_country
+@app.callback(
+    Output('birthplace-dropdown', 'value'),
+    [Input('international_countries-dropdown', 'value')]
+)
+def clear_birthplace(selected_country):
+    # Borrar la selección del lugar de nacimiento cuando se seleccione un país extranjero
+    if selected_country:
+        return None
+    return no_update
+
+@app.callback(
+    Output('international_countries-dropdown', 'value'),
+    [Input('birthplace-dropdown', 'value')]
+)
+def clear_country(selected_birthplace):
+    # Borrar la selección del país extranjero cuando se seleccione un lugar de nacimiento
+    if selected_birthplace:
+        return None
+    return no_update
 
 @app.callback(
     Output('map-plot', 'figure'),
-    [Input('birthplace-dropdown', 'value'),
+    [Input('display-dropdown', 'value'),
+     Input('birthplace-dropdown', 'value'),
      Input('international_countries-dropdown', 'value')]
 )
-def update_map(selected_birthplace, selected_country):
+def update_map(selected_display, selected_birthplace, selected_country):
     # Initialisation de filtered_df
     filtered_df = merged_df
 
@@ -94,7 +108,7 @@ def update_map(selected_birthplace, selected_country):
             }
         )
         return fig
-
+    
     # Obtention de la longitude et de la latitude
     longitude_birth = filtered_df.iloc[0]['longitude_birth']
     latitude_birth = filtered_df.iloc[0]['latitude_birth']
@@ -127,36 +141,22 @@ def update_map(selected_birthplace, selected_country):
     lats_death[1::3] = lat_list
     lats_death[2::3] = None
 
-
-    fig.add_trace(go.Scattermapbox(
-            mode="markers+lines",
-            lon=lons_death,
-            lat=lats_death,
-            marker={'size': 10, 'color': 'red'},
-            showlegend=False,
-            #hovertext=[hover_text],  # Utiliser le texte de surbrillance créé
-            hoverinfo=None,
-            
-        ))
-    '''
-    for i in range(len(lats_death)):
-        if filtered_df.iloc[i]['Death Place'] != "NULL":
-            hover_text = filtered_df.iloc[i]['Death Place']
-        else:
-            hover_text = ""  # Texte vide si la valeur est "NULL"
-
+    if selected_display == "Lignes":
         fig.add_trace(go.Scattermapbox(
-            mode="markers+lines",
-            lon=[lons_death[i], longitude_birth],
-            lat=[lats_death[i], latitude_birth],
-            marker={'size': 10, 'color': 'red'},
-            showlegend=False,
-            hovertext=[hover_text],  # Utiliser le texte de surbrillance créé
-            hoverinfo=None,
+                mode="markers+lines",
+                lon=lons_death,
+                lat=lats_death,
+                marker={'size': 10, 'color': 'red'},
+                showlegend=False,
+                #hovertext=[hover_text],  # Utiliser le texte de surbrillance créé
+                hoverinfo=None,
             
         ))
-    '''
-
+        
+    elif selected_display == "Densité":
+        fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
+                        center=dict(lat=0, lon=180), zoom=0,
+                        mapbox_style="stamen-terrain")
 
     # Mettre à jour la mise en page de la carte
     fig.update_layout(
