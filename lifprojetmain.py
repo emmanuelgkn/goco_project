@@ -10,7 +10,7 @@ app.layout = html.Div([
     html.Nav(className="nave",children = [
         dcc.Link('Accueil', href='/Accueil'),
         dcc.Link('Base', href='/page1'),
-        dcc.Link('Histogramme', href='/page2'),
+        dcc.Link('Graphiques', href='/page2'),
         dcc.Link('Carte', href='/page3'),
         dcc.Link('Top Noms', href='/page4'),
         dcc.Link('Lieux Décès', href='/page5'),
