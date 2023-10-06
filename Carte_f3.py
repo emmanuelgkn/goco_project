@@ -126,10 +126,13 @@ def update_map(selected_display, selected_birthplace, selected_country):
     lons_death = []
     lon_list = []
     lat_list = []
+    city_names = []
 
     for _, row in filtered_df.iterrows():
         lon_list.append(row['longitude_death'])
         lat_list.append(row['latitude_death'])
+        city_names.append(row['Death Place'])
+
 
     lons_death = np.empty(3* len(filtered_df))
     lons_death[::3] = longitude_birth
@@ -148,9 +151,6 @@ def update_map(selected_display, selected_birthplace, selected_country):
                 lat=lats_death,
                 marker={'size': 10, 'color': 'red'},
                 showlegend=False,
-                #hovertext=[hover_text],  # Utiliser le texte de surbrillance créé
-                hoverinfo=None,
-            
         ))
         
     elif selected_display == "Densité":
