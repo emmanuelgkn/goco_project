@@ -48,7 +48,7 @@ figue.update_layout(
      margin ={'l':0,'t':0,'b':0,'r':0},
      mapbox = {
          'center': {'lon': 10, 'lat': 10},
-         'style': "open-street-map",
+         'style': "carto-positron",
          'center': {'lon': 2, 'lat': 47},
          'zoom': 5}
  )
@@ -62,7 +62,7 @@ def page6_layout():
     return html.Div([
 
         html.Div(
-            html.H1("Carte Décès",
+            html.H1("Carte du nombre de décès par ville",
                     style = {"font-family" : "verdana"}),
             style = { "background-color" : "antiquewhite"}),
 

@@ -2,7 +2,7 @@ from dash import Dash, html, dash_table, dcc
 from dash.dependencies import Input, Output
 
 
-from Carte_deces_f6 import *
+from Distance_f7 import *
 
 # Configuration de la barre de navigation
 app.layout = html.Div([
@@ -14,7 +14,8 @@ app.layout = html.Div([
         dcc.Link('Carte', href='/page3'),
         dcc.Link('Top Noms', href='/page4'),
         dcc.Link('Lieux Décès', href='/page5'),
-        dcc.Link('Carte Deces', href='/page6')],
+        dcc.Link('Carte Deces', href='/page6'),
+        dcc.Link('Distance', href='/page7')],
     ),
     html.Div(id='page-content')
 ])
@@ -35,6 +36,8 @@ def display_page(pathname):
         return page5_layout()
     if pathname == '/page6':
         return page6_layout()
+    if pathname == '/page7':
+        return page7_layout()
     if pathname == '/Accueil':
         return Accueil_layout()
     else:
