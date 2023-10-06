@@ -111,3 +111,54 @@ SAINT-VINCENT-ET-LES*GRENADINES       13.2528                              -61.1
 REPUBLIQUE*DEMOCRATIQUE*ALLEMA         8.9806                              -79.5197
 VANUATU                               -17.7431                             168.3213
 CHYPRE*EUROPE                         35.1667                              33.3667
+AFGHANISTAN                           34.5553                              69.2075
+ARGENTINE                             -34.665167                          -58.410747
+AZERBAIDJAN                           40.4093                              49.8671
+BANGLADESH                            23.8103                              90.4125
+BURKINA                               12.6392                              1.2275
+BURUNDI                               -3.370833                            29.368080
+CAMEROUN*ET*TOGO                      3.8480                               11.5021
+CROATIE                               45.8150                              15.9819
+DANEMARK                              56.2639                              9.5018
+DOMINICAINE*(REPUBLIQUE)              18.494259                            -69.896619
+DOMINIQUE                             15.445745                            -61.341248
+EL*SALVADOR                           13.704138                            -89.215903
+FINLANDE                              60.1699                              24.9384
+GHANA                                 7.2500                               0.0833
+GUYANA                                6.8013                               -58.1551
+HONG-KONG                             22.3193                              114.1694
+ISLANDE                               64.1283                              -21.8278
+JAMAIQUE                              18.0179                              -76.8099
+KAZAKHSTAN                            51.1605                              71.4704
+KOSOVO                                42.6634                              21.1572
+LETTONIE                              56.9465                              24.1049
+LITUANIE                              54.6896                              25.2799
+MAURITANIE                            18.0858                              -15.9785
+MEXIQUE                               19.4326                              -99.1332
+MONTENEGRO                            42.4426                              19.2685
+NORVEGE                               60.4720                              8.4689
+OCEAN*INDIEN*(TERRITOIRE*BRITA        7.3344                               72.4245
+OUGANDA                               1.3733                               32.2903
+OUZBEKISTAN                           41.2995                              69.2401
+PEROU                                 -12.0464                             -77.0428
+PROVINCES*ESPAGNOLES*D'AFRIQUE        35.291677                            -2.945771
+REPUBLIQUE*DEMOCRATIQUE*ALLEMA        52.524073                            13.325674
+RWANDA                                -1.9403                               29.8739
+SAHARA*OCCIDENTAL                     27.143186                            -13.192747
+SIERRA*LEONE                          8.4840                               -13.2344
+SRI*LANKA                             6.9271                               79.8612
+SUEDE                                 59.3293                              18.0686
+SURINAME                              5.8520                               -55.2038
+TCHAD                                 12.1048                              15.0445
+TERRITOIRES*DU*ROYAUME-UNI*AUX        32.310487                            -64.740666
+THAILANDE                             13.7563                              100.5018
+TURKMENISTAN                          38.9697                              59.5563
+VENEZUELA                             10.4880                              -66.8792
+ZIMBABWE                              -17.8312                              31.0522
+
+
+
+
+
+
+
