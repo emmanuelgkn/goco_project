@@ -169,13 +169,13 @@ def Accueil_layout():
 def page1_layout():
     return html.Div([
         html.Div(
-            html.H1("Tableau",
+            html.H1("Tableau df",
                     style = {"font-family" : "verdana"}),
             style = { "background-color" : "antiquewhite"}),
         dash_table.DataTable(data=df.to_dict('records'), page_size=10),
 
         html.Div(
-            html.H1("Tableau",
+            html.H1("Tableau df_merged",
                     style = {"font-family" : "verdana"}),
             style = { "background-color" : "antiquewhite"}),
         dash_table.DataTable(data=merged_df.to_dict('records'), page_size=10),
