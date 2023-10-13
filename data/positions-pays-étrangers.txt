@@ -155,10 +155,3 @@ THAILANDE                             13.7563                              100.5
 TURKMENISTAN                          38.9697                              59.5563
 VENEZUELA                             10.4880                              -66.8792
 ZIMBABWE                              -17.8312                              31.0522
-
-
-
-
-
-
-
