@@ -53,7 +53,7 @@ figue.update_layout(
  )
 
 
-figue.update_traces(marker=dict(sizemode='diameter', sizeref=17))
+figue.update_traces(marker=dict(sizemode='diameter', sizeref=50))
 
 # App layout
 def page6_layout():
