@@ -7,7 +7,6 @@ import plotly.express as px
 from MoyenneAge_f2 import *
 from dash.dependencies import Input, Output
 
-display_options = ["Lignes", "Densité"]
 french_cities = merged_df[merged_df['Birthplace Details'] == 'FRANCE']
 birthplace_options = [{'label': city, 'value': city} for city in french_cities['Birthplace'].unique() ]
 birthplace_options.sort(key=lambda x: x['label'])
@@ -27,16 +26,33 @@ def page3_layout():
 
         html.Div(
             html.H1("Carte",
-                    style = {"font-family" : "verdana"}),
-            style = { "background-color" : "antiquewhite"}),
-    
-        # Création ménu déroulant
+                    style = {"font-family" : "verdana",
+                             "background-color" : "antiquewhite"})),
 
-        dcc.Dropdown(
-        id='display-dropdown',
-        options=display_options,
-        placeholder="Sélectionnez le type d'affichage"
-        ),
+        html.Div(
+            html.H1("Dans cette page vous pouvez afficher sur la carte les mouvements des personnes qui sont décédés en France. N'hésitez pas a jouer avec la base pour afficher des traces ou des points de chaleur en mode statique ou en mode animation pour voir le passage du temps.",
+                    style = {"font-family" : "verdana",
+                             "font-size" : "15px"})),
+
+        html.Div(
+            html.H1("Choisissez le mode d'affichage",
+                    style = {"font-family" : "verdana",
+                             "font-size" : "20px"})),
+
+        # Création des options d'affichage
+        dcc.RadioItems(options=['Lignes', 'Densité'], value='Lignes', id='radio-display', inline=True,
+        style={'font-family': 'arial'}),
+
+        dcc.Checklist(
+            ['Animation'],
+            id = 'animation-check'),
+
+        html.Div(
+            html.H1("Choisissez l'endroit de naissance",
+                    style = {"font-family" : "verdana",
+                             "font-size" : "20px"})),
+
+        # Création ménu déroulant
 
         dcc.Dropdown(
         id='birthplace-dropdown',
@@ -78,12 +94,24 @@ def clear_country(selected_birthplace):
     return no_update
 
 @app.callback(
-    Output('map-plot', 'figure'),
-    [Input('display-dropdown', 'value'),
-     Input('birthplace-dropdown', 'value'),
-     Input('international_countries-dropdown', 'value')]
+    Output('animation-check', 'style'),
+    [Input('radio-display', 'value')]
 )
-def update_map(selected_display, selected_birthplace, selected_country):
+def display_animation_radio(display_value):
+    if display_value == 'Densité':
+        return {'display': 'inline',
+                'font-family': 'arial'}
+    return {'display': 'none',
+            'font-family': 'arial'}
+    
+@app.callback(
+    Output('map-plot', 'figure'),
+    [Input('radio-display', 'value'),
+     Input('birthplace-dropdown', 'value'),
+     Input('international_countries-dropdown', 'value'),
+     Input('animation-check', 'value')]
+)
+def update_map(selected_display, selected_birthplace, selected_country, selected_animation):
     # Initialisation de filtered_df
     filtered_df = merged_df
 
@@ -151,12 +179,19 @@ def update_map(selected_display, selected_birthplace, selected_country):
                 lat=lats_death,
                 marker={'size': 10, 'color': 'red'},
                 showlegend=False,
+                
         ))
         
     elif selected_display == "Densité":
-        fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
-                        center=dict(lat=0, lon=180), zoom=0,
-                        mapbox_style="stamen-terrain")
+        if "Animation" in selected_animation:
+            filtered_df = filtered_df.sort_values('Year')
+            fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
+                            center=dict(lat=0, lon=180), zoom=0, animation_frame = 'Year',
+                            mapbox_style="stamen-terrain")
+        else:
+            fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
+                            center=dict(lat=0, lon=180), zoom=0,
+                            mapbox_style="stamen-terrain")
 
     # Mettre à jour la mise en page de la carte
     fig.update_layout(
