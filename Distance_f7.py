@@ -110,9 +110,9 @@ def update_graph(selected_birthplace,typeaxis,yearselected):
         figure = px.histogram(filtered_df, 
                     x="distance", 
                     labels={'count':'Nombre de personnes','distance':'Distance (Km)'},
-                    range_x=[0, 18000],
+                    range_x=[0, 17000],
                     range_y=[0, 4],
-                    title='Nombre de personnes par de distance parcourue')
+                    title='Nombre de personnes par de distance parcourue log')
         figure.update_layout(yaxis_type=typeaxis)
         
     figure.update_layout(yaxis_title='Nombre de personnes')
