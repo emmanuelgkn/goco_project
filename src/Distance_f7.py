@@ -17,10 +17,12 @@ df_distance = merged_df.copy()
 df_distance = df_distance.dropna(subset=['latitude_birth', 'longitude_birth', 'latitude_death', 'longitude_death'])
 
 # Fonction pour calculer la distance entre deux points
-def calculate_distance(row):
+def calculate_distance(row, round_to=10):
     birth_coords = (row['latitude_birth'], row['longitude_birth'])
     death_coords = (row['latitude_death'], row['longitude_death'])
-    return geodesic(birth_coords, death_coords).kilometers
+    distance = geodesic(birth_coords, death_coords).kilometers
+    rounded_distance = round(distance / round_to) * round_to
+    return rounded_distance
 
 # Appliquer la fonction pour calculer la distance
 df_distance['distance'] = df_distance.apply(calculate_distance, axis=1)
@@ -88,33 +90,25 @@ def page7_layout():
      Input('yaxis-type','value'),
      Input('year--slider', 'value')],
 )
-def update_graph(selected_birthplace,typeaxis,yearselected):
-    #print("truc",selected_birthplace)
-    # Vérifiez si une ville de naissance est sélectionnée
 
+def update_graph(selected_birthplace, typeaxis, yearselected):
     filtered_df = df_distance[df_distance['Year of Death'] == yearselected].copy()
 
     if selected_birthplace:
         filtered_df = filtered_df[filtered_df['Birthplace'] == selected_birthplace]
     else:
-        # Si aucune ville n'est sélectionnée, utilisez la dataframe complète
         filtered_df = filtered_df
-    if typeaxis == 'linear':
-        figure = px.histogram(filtered_df, 
-                    x="distance", 
-                    labels={'count':'Nombre de personnes','distance':'Distance (Km)'},
-                    range_x=[0, 18000],
-                    title='Nombre de personnes par de distance parcourue')
-        figure.update_layout(yaxis_type=typeaxis)
-    else:
-        figure = px.histogram(filtered_df, 
-                    x="distance", 
-                    labels={'count':'Nombre de personnes','distance':'Distance (Km)'},
-                    range_x=[0, 17000],
-                    range_y=[0, 4],
-                    title='Nombre de personnes par de distance parcourue log')
-        figure.update_layout(yaxis_type=typeaxis)
-        
-    figure.update_layout(yaxis_title='Nombre de personnes')
-    return figure
 
+    if typeaxis == 'linear':
+        counts = filtered_df['distance'].value_counts().sort_index()
+        figure = px.line(x=counts.index, y=counts.values, labels={'y':'Nombre de personnes','x':'Distance (Km)'},
+                         title='Nombre de personnes par de distance parcourue', line_shape="spline", render_mode="svg")
+        figure.update_layout(xaxis=dict(title='Distance (Km)'), yaxis=dict(title='Nombre de personnes'))
+    else:
+        counts = filtered_df['distance'].value_counts().sort_index()
+        figure = px.line(x=counts.index, y=counts.values, labels={'y':'Nombre de personnes','x':'Distance (Km)'},
+                         title='Nombre de personnes par de distance parcourue', line_shape="spline", render_mode="svg")
+        figure.update_layout(xaxis=dict(title='Distance (Km)'), yaxis=dict(title='Nombre de personnes'))
+        figure.update_layout(yaxis_type=typeaxis)
+
+    return figure
