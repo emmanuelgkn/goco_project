@@ -1,8 +1,7 @@
 from dash import Dash, html, dash_table, dcc
 from dash.dependencies import Input, Output
 
-
-from Distance_f7 import *
+from PyramideAge_f8 import *
 
 # Configuration de la barre de navigation
 app.layout = html.Div([
@@ -15,14 +14,14 @@ app.layout = html.Div([
         dcc.Link('Top Noms', href='/page4'),
         dcc.Link('Lieux Décès', href='/page5'),
         dcc.Link('Carte Deces', href='/page6'),
-        dcc.Link('Distance', href='/page7')],
+        dcc.Link('Distance', href='/page7'),
+        dcc.Link('Pyramide age', href='/page8')],
     ),
     html.Div(id='page-content')
 ])
 
 # Callback pour mettre à jour la page en fonction de l'URL
 @app.callback(Output('page-content', 'children'), Input('url', 'pathname'))
-
 def display_page(pathname):
     if pathname == '/page1':
         return page1_layout()
@@ -38,6 +37,8 @@ def display_page(pathname):
         return page6_layout()
     if pathname == '/page7':
         return page7_layout()
+    if pathname == '/page8':
+        return page8_layout()
     if pathname == '/Accueil':
         return Accueil_layout()
     else:
