@@ -129,7 +129,6 @@ def update_map(selected_display, selected_birthplace, selected_country, selected
         fig.update_layout(
             margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
             mapbox={
-                'center': {'lon': 10, 'lat': 10},
                 'style': "stamen-terrain",
                 'center': {'lon': 0, 'lat': 47},
                 'zoom': 4
@@ -146,7 +145,8 @@ def update_map(selected_display, selected_birthplace, selected_country, selected
         mode="markers+lines",
         lon=[longitude_birth],
         lat=[latitude_birth],
-        marker={'size': 10, 'color': 'blue'}
+        marker={'size': 10, 'color': 'blue'},
+        hoverinfo='skip' 
     ))
 
     # Création de listes vides pour les coordonnées de latitude et de longitude des lieux de décès
@@ -179,10 +179,13 @@ def update_map(selected_display, selected_birthplace, selected_country, selected
                 lat=lats_death,
                 marker={'size': 10, 'color': 'red'},
                 showlegend=False,
-                
+                hoverinfo='skip'         
         ))
         
     elif selected_display == "Densité":
+        fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
+                        center=dict(lat=0, lon=180), zoom=0,
+                        mapbox_style="stamen-terrain")
         if "Animation" in selected_animation:
             filtered_df = filtered_df.sort_values('Year')
             fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
@@ -197,7 +200,6 @@ def update_map(selected_display, selected_birthplace, selected_country, selected
     fig.update_layout(
         margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
         mapbox={
-            'center': {'lon': 10, 'lat': 10},
             'style': "stamen-terrain",
             'center': {'lon': 0, 'lat': 47},
             'zoom': 4

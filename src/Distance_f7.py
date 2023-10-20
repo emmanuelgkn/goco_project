@@ -110,5 +110,7 @@ def update_graph(selected_birthplace, typeaxis, yearselected):
                          title='Nombre de personnes par de distance parcourue', line_shape="spline", render_mode="svg")
         figure.update_layout(xaxis=dict(title='Distance (Km)'), yaxis=dict(title='Nombre de personnes'))
         figure.update_layout(yaxis_type=typeaxis)
+        figure.update_layout(xaxis_type=typeaxis)
+
 
     return figure
