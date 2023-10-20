@@ -166,7 +166,8 @@ app = Dash(__name__, suppress_callback_exceptions=True, assets_folder='../assets
 # App layout
 def Accueil_layout():
     return html.Div([
-        html.Iframe(srcDoc=open('emmanuel.html',"r").read(), style={'border': 'none', 'width': '100%', 'height': '100vh'})
+        html.Title("Goco Project"),
+        html.H1("STATISTIQUES SUR LES DONNEES DE DECES")
     ])
 
 def page1_layout():
@@ -182,4 +183,4 @@ def page1_layout():
                     style = {"font-family" : "verdana"}),
             style = { "background-color" : "antiquewhite"}),
         dash_table.DataTable(data=merged_df.to_dict('records'), page_size=10),
-        ])
+    ])
