@@ -1,13 +1,18 @@
 nav {
     display: flex;
-    justify-content: space-around;    
+    justify-content: flex-end;
+    /*justify-content: space-around;   */ 
 	background-color: rgb(74, 172, 185);
-    padding-left: 1em;
+   padding-left: 0;
     padding-right: 1em;
 	line-height: 2em;
-    border: 1px black;
+   /* border: 1px black;*/
     font-family: verdana;
     font-size: 20px;
+    margin-left: 'auto';
+    border: 0;
+    padding-left: 0;
+
 }
 
 nav a:link, nav a:visited, nav a:active{
@@ -28,4 +33,34 @@ nav a:hover{
 
 .dash-debug-menu__outer, .dash-debug-menu {
     display: none !important;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li{
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+
+}
+
+nav ul li a {
+    display: block;
+}
+
+nav ul li ul li{
+    display: none;
+    text-align: left;
+    background-color: rgb(147, 194, 201);;
+}
+nav ul li:hover ul li {
+    display: block;
 }

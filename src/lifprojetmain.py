@@ -6,17 +6,24 @@ from PyramideAge_f8 import *
 # Configuration de la barre de navigation
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
-    html.Nav(className="nave",children = [
-        dcc.Link('Accueil', href='/Accueil'),
-        dcc.Link('Base', href='/page1'),
-        dcc.Link('Graphiques', href='/page2'),
-        dcc.Link('Carte', href='/page3'),
-        dcc.Link('Top Noms', href='/page4'),
-        dcc.Link('Lieux Décès', href='/page5'),
-        dcc.Link('Carte Deces', href='/page6'),
-        dcc.Link('Distance', href='/page7'),
-        dcc.Link('Pyramide age', href='/page8')],
-    ),
+    html.Nav(className="nave", children=[
+    html.Ul(className="listacceuil", children=[
+        html.Li(html.A("Home", href='/Acceuil')),
+            html.Li( children = [ "Stats",
+                html.Ul([
+                    html.Li(html.A("Base", href="/page1")),
+                    html.Li(html.A("Graphique", href="/page2")),
+                    html.Li(html.A("Carte", href="/page3")),
+                    html.Li(html.A("Top Noms", href="/page4")),
+                    html.Li(html.A("Lieu Deces", href="/page5")),
+                    html.Li(html.A("Carte Deces", href="/page6")),
+                    html.Li(html.A("Distance", href="/page7")),
+                    html.Li(html.A("Pyramide age", href="/page8"))
+                ])
+            ]),
+        html.Li(html.A("About us", href='/Acceuil'))
+    ])
+]),
     html.Div(id='page-content')
 ])
 

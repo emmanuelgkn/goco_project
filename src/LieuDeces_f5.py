@@ -30,7 +30,7 @@ fig = px.bar(dff, x="Ville", y="Nombre")
 
 
 def page5_layout():
-        return html.Div(style={'backgroundColor': colors['background']}, children=[
+        return html.Div( children=[
             dcc.Graph(id='example-graph-2', figure=fig),
             dash_table.DataTable(
             data=dff.to_dict('records'),
