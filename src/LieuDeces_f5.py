@@ -30,7 +30,7 @@ fig = px.bar(dff, x="Ville", y="Nombre")
 
 
 def page5_layout():
-        return html.Div( children=[
+        return html.Div(className='corpslambda' ,children=[
             dcc.Graph(id='example-graph-2', figure=fig),
             dash_table.DataTable(
             data=dff.to_dict('records'),

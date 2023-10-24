@@ -7,8 +7,8 @@ from PyramideAge_f8 import *
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Nav(className="nave", children=[
-    html.Ul(className="listacceuil", children=[
-        html.Li(html.A("Home", href='/Acceuil')),
+        html.Ul(className="listacceuil", children=[
+            html.Li(html.A("Home", href='/Acceuil')),
             html.Li( children = [ "Stats",
                 html.Ul([
                     html.Li(html.A("Base", href="/page1")),
@@ -21,10 +21,10 @@ app.layout = html.Div([
                     html.Li(html.A("Pyramide age", href="/page8"))
                 ])
             ]),
-        html.Li(html.A("About us", href='/Acceuil'))
-    ])
-]),
-    html.Div(id='page-content')
+            html.Li(html.A("About us", href='/Acceuil'))
+        ])
+    ]),
+    html.Div(id='page-content',className='corps')
 ])
 
 # Callback pour mettre à jour la page en fonction de l'URL

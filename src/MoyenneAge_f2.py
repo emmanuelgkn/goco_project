@@ -43,7 +43,7 @@ fig_moyenne.update_layout(
 )
 
 def page2_layout():
-    return html.Div([
+    return html.Div(className='corpslambda',children=[
     html.Div(
         html.H1("Graphiques",
                 style = {"font-family" : "verdana"}),

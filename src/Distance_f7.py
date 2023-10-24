@@ -45,7 +45,7 @@ fig.update_layout(yaxis_title='Nombre de personnes')
 fig.update_layout(yaxis_type="log")
 
 def page7_layout():
-    return html.Div(children=[
+    return html.Div(className='corpslambda' ,children=[
     html.Div(
         html.H1("Distance",
             style = {"font-family" : "verdana"}),

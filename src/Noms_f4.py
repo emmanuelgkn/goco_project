@@ -45,7 +45,7 @@ def create_top_names_table(city_name, top_names_df):
 
 # App layout
 def page4_layout():
-    return html.Div([
+    return html.Div(className='corpslambda', children=[
         html.Div(
         html.H1("Top Noms",
                 style = {"font-family" : "verdana"}),

@@ -58,7 +58,7 @@ figue.update_traces(marker=dict(sizemode='diameter', sizeref=50))
 # App layout
 def page6_layout():
     
-    return html.Div([
+    return html.Div(className='corpslambda', children=[
 
         html.Div(
             html.H1("Carte du nombre de décès par ville",
