@@ -37,7 +37,7 @@ df_pyramid["Female_Width"] = df_pyramid["Female"]
 df_pyramid["Male_Left"] = -df_pyramid["Male"]
 df_pyramid["Male_Width"] = df_pyramid["Male"]
 # Vérification du DataFrame
-print(df_pyramid.head())
+#print(df_pyramid.head())
 # Inverser l'ordre des colonnes pour afficher les hommes d'abord
 df_pyramid = df_pyramid[['Age', 'Male', 'Female', 'Male_Left', 'Male_Width', 'Female_Left', 'Female_Width']]
 
@@ -56,7 +56,7 @@ fig.update_layout(barmode='stack',
 
 
 def page8_layout():
-    return html.Div(children=[
+    return html.Div(className='corpslambda', children=[
     html.H1("Pyramide Age", style={"font-family": "verdana"}),
     dcc.Markdown(className="manu", children="""
     Ce graphe représente pour la l'âge moyen le nombre d'hommes et de femmes en France.

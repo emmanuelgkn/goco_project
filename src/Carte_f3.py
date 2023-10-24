@@ -22,7 +22,7 @@ international_countries_options.sort(key=lambda x: x['label'])
 # App layout
 def page3_layout():
     
-    return html.Div([
+    return html.Div(className='corpslambda',children=[
 
         html.Div(
             html.H1("Carte",

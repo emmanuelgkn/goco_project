@@ -165,13 +165,12 @@ app = Dash(__name__, suppress_callback_exceptions=True, assets_folder='../assets
 
 # App layout
 def Accueil_layout():
-    return html.Div([
-        html.Title("Goco Project"),
-        html.H1("STATISTIQUES SUR LES DONNEES DE DECES")
+    return html.Div(className='corpsacceuil',children=[
+        html.H1(className='h1acc', children=["STATISTIQUES SUR LES DONNEES DE DECES"])
     ])
 
 def page1_layout():
-    return html.Div([
+    return html.Div(className='corpslambda',children=[
         html.Div(
             html.H1("Tableau df",
                     style = {"font-family" : "verdana"}),
