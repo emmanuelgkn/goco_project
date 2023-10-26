@@ -44,10 +44,7 @@ fig_moyenne.update_layout(
 
 def page2_layout():
     return html.Div(className='corpslambda',children=[
-    html.Div(
-        html.H1("Graphiques",
-                style = {"font-family" : "verdana"}),
-            style = { "background-color" : "antiquewhite"}),
+    html.H1("Graphiques"),
     dcc.Graph(figure=fig_HF),
     dcc.Graph(figure = fig_moyenne)
     # Autres composants pour la page 1

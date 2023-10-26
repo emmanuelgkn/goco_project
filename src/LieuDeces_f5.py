@@ -31,6 +31,7 @@ fig = px.bar(dff, x="Ville", y="Nombre")
 
 def page5_layout():
         return html.Div(className='corpslambda' ,children=[
+            html.Div(className='petit-titre', children=[html.H1("Lieu Deces")]),
             dcc.Graph(id='example-graph-2', figure=fig),
             dash_table.DataTable(
             data=dff.to_dict('records'),

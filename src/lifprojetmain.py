@@ -1,6 +1,7 @@
 from dash import Dash, html, dash_table, dcc
 from dash.dependencies import Input, Output
 
+
 from PyramideAge_f8 import *
 
 # Configuration de la barre de navigation

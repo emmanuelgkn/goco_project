@@ -46,10 +46,7 @@ fig.update_layout(yaxis_type="log")
 
 def page7_layout():
     return html.Div(className='corpslambda' ,children=[
-    html.Div(
-        html.H1("Distance",
-            style = {"font-family" : "verdana"}),
-        style = { "background-color" : "antiquewhite"}),
+    html.H1("Distance"),
     dcc.Markdown(className = "manu",children = """
     Cet Histogramme représente la distance parcourue (ici la distance entre
     le lieu de naissance et le lieu de mort) en fonction du nombre de personnes.
