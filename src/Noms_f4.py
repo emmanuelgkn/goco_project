@@ -46,7 +46,7 @@ def create_top_names_table(city_name, top_names_df):
 # App layout
 def page4_layout():
     return html.Div(className='corpslambda', children=[
-        html.Div(className='petit-titre', children=[html.H1("Top Noms")]),
+        html.H1("Top Noms"),
         html.P("Ce sont les noms les plus populaires donneés des dates de naissances allant de l'année 1912 à 2023"),
         html.Div([
         create_top_names_table("Paris", top_names_paris),

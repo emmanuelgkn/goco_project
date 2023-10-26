@@ -24,7 +24,7 @@ def page3_layout():
     
     return html.Div(className='corpslambda',children=[
 
-        html.Div(className='petit-titre', children=[html.H1("Carte")]),
+        html.H1("Carte"),
 
         html.Div(
             html.H1("Dans cette page vous pouvez afficher sur la carte les mouvements des personnes qui sont décédés en France. N'hésitez pas a jouer avec la base pour afficher des traces ou des points de chaleur en mode statique ou en mode animation pour voir le passage du temps.",
