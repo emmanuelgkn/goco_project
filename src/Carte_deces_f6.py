@@ -60,10 +60,7 @@ def page6_layout():
     
     return html.Div(className='corpslambda', children=[
 
-        html.Div(
-            html.H1("Carte du nombre de décès par ville",
-                    style = {"font-family" : "verdana"}),
-            style = { "background-color" : "antiquewhite"}),
+        html.H1("Carte du nombre de décès par ville"),
 
          # Affichage carte
         html.Div([

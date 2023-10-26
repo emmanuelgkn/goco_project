@@ -17,13 +17,17 @@ nav {
     position: fixed; 
     right: 10px; 
     top: 10px; 
-    border-radius: 
-    10px; z-index: 1000;
+    border-radius: 10px; 
+    z-index: 1000;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color:rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.5);
+
 }
 
 nav a:link, nav a:visited, nav a:active{
     text-decoration: none;
-    color: black;
+    color:rgb(234, 248, 243);
 }
 
 nav a:hover{
@@ -62,10 +66,20 @@ nav ul li a {
     display: block;
 }
 
+nav ul li ul{
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    position: absolute;
+    border-radius: 10px; 
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
 nav ul li ul li{
     display: none;
     text-align: left;
-    background-color: rgb(147, 194, 201);;
+    color:rgb(234, 248, 243);
+    
 }
 
 nav ul li:hover ul li {
@@ -98,4 +112,9 @@ html, body {
 .h1acc{
     padding-top: 60px;
     padding-left: 10px;
+}
+
+.petit-titre{
+    font-family: verdana;
+    background-color: bisque;
 }

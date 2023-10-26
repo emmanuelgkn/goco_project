@@ -3,6 +3,9 @@ from dash import Dash, html, dash_table, dcc
 import pandas as pd
 import plotly.express as px
 import numpy as np
+import dash_daq as daq
+import dash_bootstrap_components as dbc
+
 
 # On lit le jeu de données des décès en France ligne par ligne
 lines = []
@@ -161,7 +164,15 @@ merged_df = merged_df.apply(update_coordinates, axis=1)
 merged_df['density'] = 1
 
 # Initialisez l'application Dash
-app = Dash(__name__, suppress_callback_exceptions=True, assets_folder='../assets')
+app = Dash(__name__, suppress_callback_exceptions=True, assets_folder='../assets', external_stylesheets=[dbc.themes.CYBORG])
+
+theme = {
+    'dark': True,
+    'detail': '#007439',
+    'primary': '#00EA64',
+    'secondary': '#6E6E6E',
+}
+
 
 # App layout
 def Accueil_layout():
@@ -171,15 +182,9 @@ def Accueil_layout():
 
 def page1_layout():
     return html.Div(className='corpslambda',children=[
-        html.Div(
-            html.H1("Tableau df",
-                    style = {"font-family" : "verdana"}),
-            style = { "background-color" : "antiquewhite"}),
+        html.Div(className='petit-titre', children=[html.H1("Tableau df")]),
         dash_table.DataTable(data=df.to_dict('records'), page_size=10),
 
-        html.Div(
-            html.H1("Tableau df_merged",
-                    style = {"font-family" : "verdana"}),
-            style = { "background-color" : "antiquewhite"}),
+        html.Div(className='petit-titre', children=[html.H1("Tableau df_merged")]),
         dash_table.DataTable(data=merged_df.to_dict('records'), page_size=10),
     ])
