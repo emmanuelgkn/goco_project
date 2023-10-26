@@ -1,4 +1,4 @@
-from dash import Dash, html, dash_table, dcc, no_update
+from dash import Dash, html, dash_table, dcc, no_update, exceptions
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -71,24 +71,17 @@ def page3_layout():
          ])
 
 @app.callback(
-    Output('birthplace-dropdown', 'value'),
-    [Input('international_countries-dropdown', 'value')]
+    [Output('birthplace-dropdown', 'value'),
+     Output('international_countries-dropdown', 'value')],
+    [Input('birthplace-dropdown', 'value'),
+     Input('international_countries-dropdown', 'value')]
 )
-def clear_birthplace(selected_country):
-    # Borrar la selección del lugar de nacimiento cuando se seleccione un país extranjero
+def update_dropdowns(selected_birthplace, selected_country):
     if selected_country:
-        return None
-    return no_update
-
-@app.callback(
-    Output('international_countries-dropdown', 'value'),
-    [Input('birthplace-dropdown', 'value')]
-)
-def clear_country(selected_birthplace):
-    # Borrar la selección del país extranjero cuando se seleccione un lugar de nacimiento
-    if selected_birthplace:
-        return None
-    return no_update
+        return None, selected_country
+    elif selected_birthplace:
+        return selected_birthplace, None
+    raise exceptions.PreventUpdate
 
 @app.callback(
     Output('animation-check', 'style'),
@@ -143,7 +136,8 @@ def update_map(selected_display, selected_birthplace, selected_country, selected
         lon=[longitude_birth],
         lat=[latitude_birth],
         marker={'size': 10, 'color': 'blue'},
-        hoverinfo='skip' 
+        hoverinfo='skip',
+        showlegend=False
     ))
 
     # Création de listes vides pour les coordonnées de latitude et de longitude des lieux de décès
@@ -179,20 +173,18 @@ def update_map(selected_display, selected_birthplace, selected_country, selected
                 hoverinfo='skip'         
         ))
         
+    elif selected_display == "Densité" and selected_animation:
+        filtered_df = filtered_df.sort_values('Year')
+        fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
+                            center=dict(lat=0, lon=180), zoom=0, animation_frame='Year',
+                            mapbox_style="stamen-terrain")
+        #return fig
+            
     elif selected_display == "Densité":
         fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
-                        center=dict(lat=0, lon=180), zoom=0,
-                        mapbox_style="stamen-terrain")
-        if "Animation" in selected_animation:
-            filtered_df = filtered_df.sort_values('Year')
-            fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
-                            center=dict(lat=0, lon=180), zoom=0, animation_frame = 'Year',
-                            mapbox_style="stamen-terrain")
-        else:
-            fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
-                            center=dict(lat=0, lon=180), zoom=0,
-                            mapbox_style="stamen-terrain")
-
+                                center=dict(lat=0, lon=180), zoom=0,
+                                mapbox_style="stamen-terrain")
+        #return fig
     # Mettre à jour la mise en page de la carte
     fig.update_layout(
         margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
