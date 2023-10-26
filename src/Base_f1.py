@@ -182,9 +182,9 @@ def Accueil_layout():
 
 def page1_layout():
     return html.Div(className='corpslambda',children=[
-        html.Div(className='petit-titre', children=[html.H1("Tableau df")]),
+        html.H1("Tableau df"),
         dash_table.DataTable(data=df.to_dict('records'), page_size=10),
 
-        html.Div(className='petit-titre', children=[html.H1("Tableau df_merged")]),
+        html.H1("Tableau df_merged"),
         dash_table.DataTable(data=merged_df.to_dict('records'), page_size=10),
     ])

@@ -60,7 +60,7 @@ def page6_layout():
     
     return html.Div(className='corpslambda', children=[
 
-        html.H1("Carte du nombre de décès par ville"),
+        html.H1("Carte Décès"),
 
          # Affichage carte
         html.Div([
