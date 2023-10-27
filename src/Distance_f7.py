@@ -41,8 +41,8 @@ fig = px.histogram(df_distance,
                    range_y=[0, 4],
                    title='Nombre de personnes par de distance parcourue')
 
-fig.update_layout(yaxis_title='Nombre de personnes')
-fig.update_layout(yaxis_type="log")
+fig.update_layout(yaxis_title='Nombre de personnes', plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
+fig.update_layout(yaxis_type="log", plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
 
 def page7_layout():
     return html.Div(className='corpslambda' ,children=[
@@ -100,14 +100,16 @@ def update_graph(selected_birthplace, typeaxis, yearselected):
         counts = filtered_df['distance'].value_counts().sort_index()
         figure = px.line(x=counts.index, y=counts.values, labels={'y':'Nombre de personnes','x':'Distance (Km)'},
                          title='Nombre de personnes par de distance parcourue', line_shape="spline", render_mode="svg")
-        figure.update_layout(xaxis=dict(title='Distance (Km)'), yaxis=dict(title='Nombre de personnes'))
+        figure.update_layout(xaxis=dict(title='Distance (Km)'), yaxis=dict(title='Nombre de personnes'),
+                             plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
     else:
         counts = filtered_df['distance'].value_counts().sort_index()
         figure = px.line(x=counts.index, y=counts.values, labels={'y':'Nombre de personnes','x':'Distance (Km)'},
                          title='Nombre de personnes par de distance parcourue', line_shape="spline", render_mode="svg")
-        figure.update_layout(xaxis=dict(title='Distance (Km)'), yaxis=dict(title='Nombre de personnes'))
-        figure.update_layout(yaxis_type=typeaxis)
-        figure.update_layout(xaxis_type=typeaxis)
+        figure.update_layout(xaxis=dict(title='Distance (Km)'), yaxis=dict(title='Nombre de personnes'), 
+                             plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
+        figure.update_layout(yaxis_type=typeaxis, plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
+        figure.update_layout(xaxis_type=typeaxis, plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
 
 
     return figure

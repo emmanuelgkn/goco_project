@@ -27,6 +27,12 @@ dff = pd.DataFrame({
 })
 
 fig = px.bar(dff, x="Ville", y="Nombre")
+fig.update_layout(
+    plot_bgcolor= '#111111',
+    paper_bgcolor= '#111111',
+    font_color='#e0e0e0'
+)
+
 
 
 def page5_layout():
@@ -34,7 +40,18 @@ def page5_layout():
             html.H1("Lieu Deces"),
             dcc.Graph(id='example-graph-2', figure=fig),
             dash_table.DataTable(
-            data=dff.to_dict('records'),
-            columns=[{'name': 'Ville', 'id': 'Ville'}, {'name': 'Nb Morts', 'id': 'Nombre'}],
-        ),
+                data=dff.to_dict('records'),
+                columns=[{'name': 'Ville', 'id': 'Ville'}, {'name': 'Nb Morts', 'id': 'Nombre'}],
+                style_data={
+                    'color': '#e0e0e0',
+                    'backgroundColor': 'rgb(50, 50, 50)',
+                    'fontWeight': 'bold',
+                },
+                style_cell={'padding': '5px'},
+                style_header={
+                    'color': '#e0e0e0',
+                    'backgroundColor': 'rgb(30, 30, 30)',
+                    'fontWeight': 'bold',
+                },
+            ),
 ])

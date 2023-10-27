@@ -39,6 +39,17 @@ def create_top_names_table(city_name, top_names_df):
         dash_table.DataTable(
             data=top_names_df.to_dict('records'),
             columns=[{'name': 'Nom', 'id': 'Nom'}, {'name': 'Count', 'id': 'Count'}],
+            style_data={
+                'color': '#e0e0e0',
+                'backgroundColor': 'rgb(50, 50, 50)',
+                'fontWeight': 'bold',
+            },
+            style_cell={'padding': '5px'},
+            style_header={
+                'color': '#e0e0e0',
+                'backgroundColor': 'rgb(30, 30, 30)',
+                'fontWeight': 'bold',
+            },
         ),
     ])
 
