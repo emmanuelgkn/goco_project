@@ -54,13 +54,15 @@ def page3_layout():
         dcc.Dropdown(
         id='birthplace-dropdown',
         options=birthplace_options,
-        placeholder="Sélectionnez une ville de naissance"
+        placeholder="Sélectionnez une ville de naissance",
+        style={'background-color':'#292A30','font-color':'white','border-color':'grey'}
         ),
 
         dcc.Dropdown(
         id='international_countries-dropdown',
         options=international_countries_options,
-        placeholder="Sélectionnez un pays étranger"
+        placeholder="Sélectionnez un pays étranger",
+        style={'background-color':'#292A30', 'font-color':'white','border-color':'grey'}
         ),
 
          # Affichage carte

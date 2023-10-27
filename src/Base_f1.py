@@ -183,8 +183,28 @@ def Accueil_layout():
 def page1_layout():
     return html.Div(className='corpslambda',children=[
         html.H1("Tableau df"),
-        dash_table.DataTable(data=df.to_dict('records'), page_size=10),
+        dash_table.DataTable(data=df.to_dict('records'), page_size=10, style_data={
+                'color': '#e0e0e0',
+                'backgroundColor': 'rgb(50, 50, 50)',
+                'fontWeight': 'bold',
+            },
+            style_cell={'padding': '5px'},
+            style_header={
+                'color': '#e0e0e0',
+                'backgroundColor': 'rgb(30, 30, 30)',
+                'fontWeight': 'bold',
+            },),
 
         html.H1("Tableau df_merged"),
-        dash_table.DataTable(data=merged_df.to_dict('records'), page_size=10),
+        dash_table.DataTable(data=merged_df.to_dict('records'), page_size=10, style_data={
+                'color': '#e0e0e0',
+                'backgroundColor': 'rgb(50, 50, 50)',
+                'fontWeight': 'bold',
+            },
+            style_cell={'padding': '5px'},
+            style_header={
+                'color': '#e0e0e0',
+                'backgroundColor': 'rgb(30, 30, 30)',
+                'fontWeight': 'bold',
+            },),
     ])

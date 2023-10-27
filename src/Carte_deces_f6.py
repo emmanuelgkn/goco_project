@@ -49,7 +49,9 @@ figue.update_layout(
          'center': {'lon': 10, 'lat': 10},
          'style': "carto-positron",
          'center': {'lon': 2, 'lat': 47},
-         'zoom': 5}
+         'zoom': 5},
+         paper_bgcolor= '#292A30',
+         font_color='#e0e0e0'
  )
 
 

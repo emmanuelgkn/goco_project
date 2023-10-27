@@ -51,6 +51,7 @@ def display_page(pathname):
         return Accueil_layout()
     else:
         return Accueil_layout()
-
+print('Site Utilisable')
 if __name__ == '__main__':
     app.run_server(debug=True, port = 8080)
+
