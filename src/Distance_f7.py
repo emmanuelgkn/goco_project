@@ -83,9 +83,9 @@ def page7_layout():
 
 @app.callback(
     Output('my-graph', 'figure'),
-    [Input('birthplace-dropdown', 'value'),
-     Input('yaxis-type','value'),
-     Input('year--slider', 'value')],
+    Input('birthplace-dropdown', 'value'),
+    Input('yaxis-type','value'),
+    Input('year--slider', 'value'),
 )
 
 def update_graph(selected_birthplace, typeaxis, yearselected):
