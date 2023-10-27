@@ -50,9 +50,13 @@ fig.add_trace(go.Bar(y=df_pyramid["Age"], x=df_pyramid["Female_Width"], base=0, 
                      hoverinfo='text', marker=dict(color="#ee7a87")))
 
 fig.update_layout(barmode='stack',
-                  title="US Population Pyramid Chart",
-                  xaxis_title="Percent (%)",
-                  yaxis_title="Age Range")
+                  title="Carte population France",
+                  xaxis_title="Pourcentage (%)",
+                  yaxis_title="Tranche d'âge",
+                  plot_bgcolor= '#111111',
+                  paper_bgcolor= '#111111',
+                  font_color='#e0e0e0'
+                )
 
 
 def page8_layout():
