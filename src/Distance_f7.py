@@ -64,7 +64,8 @@ def page7_layout():
         id='birthplace-dropdown',
         options=birthplace_options,
         placeholder="Sélectionnez une ville de naissance",
-        value='BORDEAUX'
+        value='BORDEAUX',
+        style={'background-color':'#292A30', 'color':'black','border-color':'grey'}
         ),
     dcc.RadioItems(
         options=[
