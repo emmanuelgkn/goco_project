@@ -64,7 +64,7 @@ def page6_layout():
 
         html.H1("Carte Décès"),
 
-         # Affichage carte
+        # Affichage carte
         html.Div([
             dcc.Graph(id = 'map', figure=figue,style={"width": "100%", "height": "80vh"})
         ], style={"width": "100vw", "height": "100%"}),
