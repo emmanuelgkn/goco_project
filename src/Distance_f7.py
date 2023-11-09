@@ -64,6 +64,7 @@ def page7_layout():
         id='birthplace-dropdown',
         options=birthplace_options,
         placeholder="Sélectionnez une ville de naissance",
+        value='BORDEAUX'
         ),
     dcc.RadioItems(
         options=[
@@ -96,7 +97,6 @@ def page7_layout():
 
 def update_graph(selected_birthplace, typeaxis, yearselected):
     filtered_df = df_distance[df_distance['Year of Death'] == yearselected].copy()
-
     if selected_birthplace:
         filtered_df = filtered_df[filtered_df['Birthplace'] == selected_birthplace]
     else:
