@@ -122,7 +122,7 @@ def update_map(selected_display, selected_birthplace, selected_country, selected
         fig.update_layout(
             margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
             mapbox={
-                'style': "stamen-terrain",
+                'style': "carto-positron",
                 'center': {'lon': 0, 'lat': 47},
                 'zoom': 4
             }
@@ -180,19 +180,19 @@ def update_map(selected_display, selected_birthplace, selected_country, selected
         filtered_df = filtered_df.sort_values('Year')
         fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
                             center=dict(lat=0, lon=180), zoom=0, animation_frame='Year',
-                            mapbox_style="stamen-terrain")
+                            mapbox_style="carto-positron")
         #return fig
             
     elif selected_display == "Densité":
         fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
                                 center=dict(lat=0, lon=180), zoom=0,
-                                mapbox_style="stamen-terrain")
+                                mapbox_style="carto-positron")
         #return fig
     # Mettre à jour la mise en page de la carte
     fig.update_layout(
         margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
         mapbox={
-            'style': "stamen-terrain",
+            'style': "carto-positron",
             'center': {'lon': 0, 'lat': 47},
             'zoom': 4
         }
