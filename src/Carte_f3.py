@@ -8,7 +8,7 @@ from MoyenneAge_f2 import *
 from dash.dependencies import Input, Output
 
 french_cities = merged_df[merged_df['Birthplace Details'] == 'FRANCE']
-birthplace_options = [{'label': city, 'value': city} for city in french_cities['Birthplace'].unique() ]
+birthplace_options = [{'label': city, 'value': city} for city in french_cities['Birthplace'].unique() if city and not pd.isnull(city)]
 birthplace_options.sort(key=lambda x: x['label'])
 
 international_countries = merged_df[merged_df['Birthplace Details'] != 'FRANCE']
@@ -52,18 +52,18 @@ def page3_layout():
         # Création ménu déroulant
 
         dcc.Dropdown(
+        birthplace_options,
+        className='dropdown',
         id='birthplace-dropdown',
-        options=birthplace_options,
         placeholder="Sélectionnez une ville de naissance",
-        style={'background-color':'#292A30', 'color':'black','border-color':'grey'},
-
+        style={'background-color': '#292A30', 'border-color': 'grey'},
         ),
 
         dcc.Dropdown(
         id='international_countries-dropdown',
         options=international_countries_options,
         placeholder="Sélectionnez un pays étranger",
-        style={'background-color':'#292A30', 'color':'black','border-color':'grey'}
+        style={'backgroundColor':'#292A30', 'color':'black','border-color':'grey'}
         ),
 
          # Affichage carte
