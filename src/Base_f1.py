@@ -164,7 +164,7 @@ merged_df = merged_df.apply(update_coordinates, axis=1)
 merged_df['density'] = 1
 
 # Initialisez l'application Dash
-app = Dash(__name__, suppress_callback_exceptions=True, assets_folder='../assets', external_stylesheets=[dbc.themes.CYBORG])
+app = Dash(__name__, suppress_callback_exceptions=True, assets_folder='../assets', external_stylesheets=[dbc.themes.DARKLY])
 
 theme = {
     'dark': True,

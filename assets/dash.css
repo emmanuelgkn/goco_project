@@ -120,3 +120,16 @@ html, body {
     background-color: bisque;
 }
 
+.Select-control {
+    background-color: rgb(25, 25, 25) !important;
+    color:white;
+  }
+  
+.Select-menu-outer {
+    background-color: rgb(25, 25, 25);
+    color: white;
+}
+
+.Select-value-label {
+    color: white !important;
+}
