@@ -86,15 +86,28 @@ def update_dropdowns(selected_firstname, selected_secondname):
 def update_map(selected_fstname, selected_sndname):
 
     if selected_fstname:
+
         myorigins_filtered_df = myorigins_df[myorigins_df['Prenom(s)'] == selected_fstname]
-        fig = px.density_mapbox(myorigins_filtered_df, lat='latitude_birth', lon='longitude_birth', z='density', radius=10,
+
+        if myorigins_filtered_df['Birthplace Details'].eq('FRANCE').any():
+            fig = px.density_mapbox(myorigins_filtered_df, lat='latitude_birth', lon='longitude_birth', z='density', radius=10,
                                 center=dict(lat=47, lon=0), zoom=4,
+                                mapbox_style="carto-positron")
+        else:
+            fig = px.density_mapbox(myorigins_filtered_df, lat='latitude_birth', lon='longitude_birth', z='density', radius=10,
+                                center=dict(lat=47, lon=0), zoom=1,
                                 mapbox_style="carto-positron")
     elif selected_sndname:
         myorigins_filtered_df = myorigins_df[myorigins_df['Nom'] == selected_sndname]
-        fig = px.density_mapbox(myorigins_filtered_df, lat='latitude_birth', lon='longitude_birth', z='density', radius=10,
+
+        if myorigins_filtered_df['Birthplace Details'].eq('FRANCE').any():
+            fig = px.density_mapbox(myorigins_filtered_df, lat='latitude_birth', lon='longitude_birth', z='density', radius=10,
                                 center=dict(lat=47, lon=0), zoom=4,
-                                mapbox_style="carto-positron")    
+                                mapbox_style="carto-positron")
+        else:
+            fig = px.density_mapbox(myorigins_filtered_df, lat='latitude_birth', lon='longitude_birth', z='density', radius=10,
+                                center=dict(lat=47, lon=0), zoom=1,
+                                mapbox_style="carto-positron")   
     else:
         fig = go.Figure(go.Scattermapbox())
         # Afficher une figure vide si ni Birthplace ni pays n'ont été sélectionnés
@@ -107,15 +120,15 @@ def update_map(selected_fstname, selected_sndname):
             }
         )
         return fig
-        
+    '''    
     # Mettre à jour la mise en page de la carte
     fig.update_layout(
         margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
         mapbox={
             'style': "carto-positron",
             'center': {'lon': 0, 'lat': 47},
-            'zoom': 4
+            'zoom': 1
         }
-    )
-
+    )'''
+        
     return fig
