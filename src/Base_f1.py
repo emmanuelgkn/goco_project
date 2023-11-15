@@ -133,14 +133,8 @@ merged_df_death = merged_df_death.rename(columns={'longitude': 'longitude_death'
 merged_df_birth = df.merge(positions_geo, left_on='Birthplace Code', right_on='code_commune_INSEE', how='left')
 merged_df_birth = merged_df_birth.rename(columns={'longitude': 'longitude_birth', 'latitude': 'latitude_birth'})
 
-grouped_df_birth = merged_df_birth.groupby('Nom').agg({
-    'longitude_birth': 'first',  # Utilisez 'first' pour obtenir le premier valeur non nulle.
-    'latitude_birth': 'first',   # Utilisez 'first' pour obtenir le premier valeur non nulle.
-}).reset_index()
-
-
 # Fusionnez les données de décès avec les données de naissance en utilisant la colonne "Nom" comme clé
-merged_df = merged_df_death.merge(grouped_df_birth[['Nom', 'longitude_birth', 'latitude_birth']], on='Nom', how='left')
+merged_df = merged_df_death.merge(merged_df_birth[['longitude_birth', 'latitude_birth']], left_index=True, right_index=True, how='left')
 merged_df.loc[merged_df['Birthplace Details'] != 'FRANCE', ['latitude_birth', 'longitude_birth']] = np.nan
 
 country_coordinates = {}
