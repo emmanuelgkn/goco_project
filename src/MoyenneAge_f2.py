@@ -22,8 +22,8 @@ fig_HF.update_traces(marker_color=None, selector={'name': 'Masculin'})
 fig_HF.update_layout(
     xaxis_title='Genre',  # Renommez l'axe x
     yaxis_title='Âge moyen',
-    plot_bgcolor= '#111111',
-    paper_bgcolor= '#111111',
+    plot_bgcolor= '#292A30',
+    paper_bgcolor= '#292A30',
     font_color='#e0e0e0'
 )
 
@@ -43,8 +43,8 @@ fig_moyenne.update_layout(
         range=[1900, 2025],
         dtick=5
     ),
-    plot_bgcolor= '#111111',
-    paper_bgcolor= '#111111',
+    plot_bgcolor= '#292A30',
+    paper_bgcolor= '#292A30',
     font_color='#e0e0e0'
 )
 

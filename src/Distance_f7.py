@@ -4,7 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
 import pandas as pd
-from geopy.distance import geodesic
+from geopy.distance import distance
 import time
 
 
@@ -13,15 +13,21 @@ from Carte_deces_f6 import *
 # Créer une copie de votre dataframe
 df_distance = merged_df.copy()
 
+
 # Supprimer les lignes avec des données manquantes
 df_distance = df_distance.dropna(subset=['latitude_birth', 'longitude_birth', 'latitude_death', 'longitude_death'])
 
 # Fonction pour calculer la distance entre deux points
 def calculate_distance(row, round_to=10):
-    birth_coords = (row['latitude_birth'], row['longitude_birth'])
-    death_coords = (row['latitude_death'], row['longitude_death'])
-    distance = geodesic(birth_coords, death_coords).kilometers
-    rounded_distance = round(distance / round_to) * round_to
+    birth_latitude, birth_longitude = row['latitude_birth'], row['longitude_birth']
+    death_latitude, death_longitude = row['latitude_death'], row['longitude_death']
+
+    birth_coords = (birth_latitude, birth_longitude)
+    death_coords = (death_latitude, death_longitude)
+
+    distancee = distance(birth_coords, death_coords).kilometers
+    rounded_distance = round(distancee / round_to) * round_to
+
     return rounded_distance
 
 # Appliquer la fonction pour calculer la distance
@@ -41,8 +47,8 @@ fig = px.histogram(df_distance,
                    range_y=[0, 4],
                    title='Nombre de personnes par de distance parcourue')
 
-fig.update_layout(yaxis_title='Nombre de personnes', plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
-fig.update_layout(yaxis_type="log", plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
+fig.update_layout(yaxis_title='Nombre de personnes', plot_bgcolor= '#292A30', paper_bgcolor= '#292A30', font_color='#e0e0e0')
+fig.update_layout(yaxis_type="log", plot_bgcolor= '#292A30', paper_bgcolor= '#292A30', font_color='#e0e0e0')
 
 def page7_layout():
     return html.Div(className='corpslambda' ,children=[
@@ -58,6 +64,7 @@ def page7_layout():
         id='birthplace-dropdown',
         options=birthplace_options,
         placeholder="Sélectionnez une ville de naissance",
+        style={'background-color':'#292A30', 'color':'black','border-color':'grey'}
         ),
     dcc.RadioItems(
         options=[
@@ -83,14 +90,13 @@ def page7_layout():
 
 @app.callback(
     Output('my-graph', 'figure'),
-    [Input('birthplace-dropdown', 'value'),
-     Input('yaxis-type','value'),
-     Input('year--slider', 'value')],
+    Input('birthplace-dropdown', 'value'),
+    Input('yaxis-type','value'),
+    Input('year--slider', 'value'),
 )
 
 def update_graph(selected_birthplace, typeaxis, yearselected):
     filtered_df = df_distance[df_distance['Year of Death'] == yearselected].copy()
-
     if selected_birthplace:
         filtered_df = filtered_df[filtered_df['Birthplace'] == selected_birthplace]
     else:
@@ -101,15 +107,15 @@ def update_graph(selected_birthplace, typeaxis, yearselected):
         figure = px.line(x=counts.index, y=counts.values, labels={'y':'Nombre de personnes','x':'Distance (Km)'},
                          title='Nombre de personnes par de distance parcourue', line_shape="spline", render_mode="svg")
         figure.update_layout(xaxis=dict(title='Distance (Km)'), yaxis=dict(title='Nombre de personnes'),
-                             plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
+                             plot_bgcolor= '#292A30', paper_bgcolor= '#292A30', font_color='#e0e0e0')
     else:
         counts = filtered_df['distance'].value_counts().sort_index()
         figure = px.line(x=counts.index, y=counts.values, labels={'y':'Nombre de personnes','x':'Distance (Km)'},
                          title='Nombre de personnes par de distance parcourue', line_shape="spline", render_mode="svg")
         figure.update_layout(xaxis=dict(title='Distance (Km)'), yaxis=dict(title='Nombre de personnes'), 
-                             plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
-        figure.update_layout(yaxis_type=typeaxis, plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
-        figure.update_layout(xaxis_type=typeaxis, plot_bgcolor= '#111111', paper_bgcolor= '#111111', font_color='#e0e0e0')
-
+                             plot_bgcolor= '#292A30', paper_bgcolor= '#292A30', font_color='#e0e0e0')
+        figure.update_layout(yaxis_type=typeaxis, plot_bgcolor= '#292A30', paper_bgcolor= '#292A30', font_color='#e0e0e0')
+        figure.update_layout(xaxis_type=typeaxis, plot_bgcolor= '#292A30', paper_bgcolor= '#292A30', font_color='#e0e0e0')
+ 
 
     return figure

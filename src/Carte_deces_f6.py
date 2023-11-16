@@ -49,7 +49,9 @@ figue.update_layout(
          'center': {'lon': 10, 'lat': 10},
          'style': "carto-positron",
          'center': {'lon': 2, 'lat': 47},
-         'zoom': 5}
+         'zoom': 5},
+         paper_bgcolor= '#292A30',
+         font_color='#e0e0e0'
  )
 
 
@@ -62,7 +64,7 @@ def page6_layout():
 
         html.H1("Carte Décès"),
 
-         # Affichage carte
+        # Affichage carte
         html.Div([
             dcc.Graph(id = 'map', figure=figue,style={"width": "100%", "height": "80vh"})
         ], style={"width": "100vw", "height": "100%"}),
