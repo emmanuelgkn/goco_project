@@ -6,20 +6,22 @@ from Deplacements_f10 import *
 
 # Configuration de la barre de navigation
 app.layout = html.Div([
+    html.Link(
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap",
+        rel="stylesheet"
+    ),
     dcc.Location(id='url', refresh=False),
     html.Nav(className="nave", children=[
         html.Ul(className="listacceuil", children=[
             html.Li(html.A("Home", href='/Acceuil')),
             html.Li( children = [ "Stats",
                 html.Ul([
-                    html.Li(html.A("Base", href="/page1")),
-                    html.Li(html.A("Graphique", href="/page2")),
                     html.Li(html.A("Carte", href="/page3")),
                     html.Li(html.A("Top Noms", href="/page4")),
                     html.Li(html.A("Lieu Deces", href="/page5")),
                     html.Li(html.A("Carte Deces", href="/page6")),
                     html.Li(html.A("Distance", href="/page7")),
-                    html.Li(html.A("Pyramide age", href="/page8")),
+                    html.Li(html.A("Graphes age", href="/page8")),
                     html.Li(html.A("Mes origines", href="/page9")),
                     html.Li(html.A("Déplacements", href="/page10"))
                 ])
@@ -27,18 +29,31 @@ app.layout = html.Div([
             html.Li(html.A("About us", href='/Acceuil'))
         ])
     ]),
-    html.Div(id='page-content',className='corps'),
-    html.Script(src="AffichageFooter.js"),
-    html.Div(id="footer-content")
+    html.Div(id='page-content', className='corps wrapper'),
+    html.Footer(
+        html.Div(
+            className="container",
+            children=[
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.A("Home", href='/Acceuil', className = "linkFooter"),
+                html.Span(" | "),
+                html.A("About us", href='/Acceuil', className = "linkFooter"),
+                html.H5("Réalisé par Emmanuel Gokana et Jofre Coll"),
+                html.A(
+                    html.Div(className="photoGithub"),
+                    href = "https://github.com/emmanuelgkn/goco_project",     
+                )
+            ], style={'flex': '0 0 auto'}  # Ajoutez ce style pour le positionnement du footer
+        )
+    )
 ])
+ 
 
 # Callback pour mettre à jour la page en fonction de l'URL
 @app.callback(Output('page-content', 'children'), Input('url', 'pathname'))
 def display_page(pathname):
-    if pathname == '/page1':
-        return page1_layout()
-    if pathname == '/page2':
-        return page2_layout()
     if pathname == '/page3':
         return page3_layout()
     if pathname == '/page4':

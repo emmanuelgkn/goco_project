@@ -38,6 +38,11 @@ fig.update_layout(
 def page5_layout():
         return html.Div(className='corpslambda' ,children=[
             html.H1("Lieu Deces"),
+            html.Br(),
+            dcc.Markdown(className="manu", children="""
+                Ces graphes representen le nombre de morts dans les 4 villes plus grandes en France.
+            """),
+            html.Br(),
             dcc.Graph(id='example-graph-2', figure=fig),
             dash_table.DataTable(
                 data=dff.to_dict('records'),
