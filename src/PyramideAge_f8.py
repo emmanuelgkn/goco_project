@@ -53,8 +53,8 @@ fig.update_layout(barmode='stack',
                   title="Carte population France",
                   xaxis_title="Pourcentage (%)",
                   yaxis_title="Tranche d'âge",
-                  plot_bgcolor= '#111111',
-                  paper_bgcolor= '#111111',
+                  plot_bgcolor= '#292A30',
+                  paper_bgcolor= '#292A30',
                   font_color='#e0e0e0'
                 )
 
