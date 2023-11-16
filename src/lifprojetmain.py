@@ -26,7 +26,9 @@ app.layout = html.Div([
             html.Li(html.A("About us", href='/Acceuil'))
         ])
     ]),
-    html.Div(id='page-content',className='corps')
+    html.Div(id='page-content',className='corps'),
+    html.Script(src="AffichageFooter.js"),
+    html.Div(id="footer-content")
 ])
 
 # Callback pour mettre à jour la page en fonction de l'URL
