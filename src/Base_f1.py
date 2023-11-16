@@ -171,7 +171,38 @@ theme = {
 # App layout
 def Accueil_layout():
     return html.Div(className='corpsacceuil',children=[
-        html.H1(className='h1acc', children=["STATISTIQUES SUR LES DONNEES DE DECES"])
+        html.H1(className='h1acc', children=["STATISTIQUES SUR LES DONNEES DE DECES"]),
+        html.Div(className='row row0',children=[
+
+            html.Div(className='col', children=[
+                html.H1(className='h',children=["Cartes"]),
+                html.P("Nous avons fait plusieurs cartes"),
+                html.Button(html.A("Visiter", className="button",href="/page3"))
+            ]),
+
+            html.Div(className='col', children=[
+                html.A(html.Div(className='card'),href="http://127.0.0.1:8080/page3"),
+                html.Div(className='card'),
+                html.Div(className='card'),
+                html.Div(className='card'),
+                
+            ]),
+
+        ]),
+        html.Div(className='row row1',children=[
+            html.Div(className='col', children=[
+                html.H1(className='h',children=["Graphiques"]),
+                html.P("Nous avons fait plusieurs Graphiques"),
+                html.Button(html.A("Visiter", className="button",href="/page2"))
+            ]),
+            html.Div(className='col', children=[
+                html.Div(className='card graph1'),
+                html.Div(className='card graph1'),
+                html.Div(className='card graph1'),
+                html.Div(className='card graph1'),
+                
+            ])
+        ])
     ])
 
 def page1_layout():

@@ -92,17 +92,19 @@ nav ul li:hover ul li {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 100vh;
+    height: 100%;
     color: rgb(234, 248, 243);
     margin: 0; /* Remove any default margin */
     padding: 0; /* Remove any default padding */
     justify-content: end;
+    
 }
 
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-attachment: fixed;
 }
 
 .corpslambda{
@@ -112,6 +114,9 @@ html, body {
 .h1acc{
     padding-top: 60px;
     padding-left: 10px;
+    margin-top: 0px;
+    text-align: center;
+    font-size: 70px;
     
 }
 
@@ -132,4 +137,103 @@ html, body {
 
 .Select-value-label {
     color: white !important;
+}
+
+h1{
+    font-family: verdana;
+}
+
+.ligita{
+    color: black;
+    text-decoration: none;
+    font-family:arial;
+    font-size: 25px;
+    font-weight: bold;
+    list-style: none;
+}
+
+.ligita:hover{
+    color:rgb(74, 172, 185);
+}
+
+.tete{
+    background-color: antiquewhite;
+}
+
+.row{
+    display: flex;
+    height: 88%;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 50px;
+   /* background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 20px;*/
+    
+}
+
+.col{
+   
+    margin-right: 100px;
+}
+
+.h{
+    font-family: 'Roboto' , sans-serif ;
+    font-size: 70px;
+}
+
+button{
+    width: 180px;
+    color: #000;
+    font-size: 17px;
+    padding: 12px 0;
+    background: #fff;
+    border: 0;
+    border-radius: 20px;
+    outline: none;
+    margin-top: 30px;
+
+}
+
+.card{
+    width: 240px;
+    height: 250px;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 15px;
+    background-image: url(carteDensite.png);
+    background-position: center;
+    background-size: cover;
+    color:#000;
+    transition: transform 0.5s;
+}
+
+.card:hover{
+    transform: translateY(-10px);
+}
+
+.graph1{
+    background-image: url(distance.png);
+    
+}
+
+.row0{
+    margin-top: 200px;
+}
+
+.row1{
+    margin-top: 200px;
+    margin-bottom: 100px;
+    
+}
+
+.button{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    color:#000;
 }
