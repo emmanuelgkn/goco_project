@@ -53,6 +53,7 @@ fig.update_layout(yaxis_type="log", plot_bgcolor= '#292A30', paper_bgcolor= '#29
 def page7_layout():
     return html.Div(className='corpslambda' ,children=[
     html.H1("Distance"),
+    html.Br(),
     dcc.Markdown(className = "manu",children = """
     Cet Histogramme représente la distance parcourue (ici la distance entre
     le lieu de naissance et le lieu de mort) en fonction du nombre de personnes.
@@ -60,8 +61,9 @@ def page7_layout():
     parcourues par les personnes nées dans la ville. Vous pourrez aussi choisir
     l'année de déces.
     """),
+    html.Br(),
     dcc.Dropdown(
-        id='birthplace-dropdown',
+        id='birthplace-dropdown-distance',
         options=birthplace_options,
         placeholder="Sélectionnez une ville de naissance",
         style={'background-color':'#292A30', 'color':'black','border-color':'grey'}
@@ -76,27 +78,18 @@ def page7_layout():
         style={'font-family': 'arial'}),
 
     dcc.Graph(id='my-graph',figure = fig),
-    dcc.Slider(
-    min=1990,
-    max=2023,
-    step=5,
-    id='year--slider',
-    value=df_distance['Year of Death'].max(),
-    marks={str(year): str(year) for year in df_distance['Year of Death'].unique()},),
-    html.Div("  ")
 
 ],style = {'font-family':'arial'})
 
 
 @app.callback(
     Output('my-graph', 'figure'),
-    Input('birthplace-dropdown', 'value'),
+    Input('birthplace-dropdown-distance', 'value'),
     Input('yaxis-type','value'),
-    Input('year--slider', 'value'),
 )
 
-def update_graph(selected_birthplace, typeaxis, yearselected):
-    filtered_df = df_distance[df_distance['Year of Death'] == yearselected].copy()
+def update_graph(selected_birthplace, typeaxis):
+    filtered_df = df_distance.copy()
     if selected_birthplace:
         filtered_df = filtered_df[filtered_df['Birthplace'] == selected_birthplace]
     else:

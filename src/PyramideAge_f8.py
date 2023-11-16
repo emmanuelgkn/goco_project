@@ -60,10 +60,12 @@ fig.update_layout(barmode='stack',
 
 
 def page8_layout():
-    return html.Div(className='corpslambda', children=[
-    html.H1("Pyramide Age", style={"font-family": "verdana"}),
+    return html.Div(className='corpslambda',children=[
+    html.H1("Graphiques"),
     dcc.Markdown(className="manu", children="""
     Ce graphe représente pour la l'âge moyen le nombre d'hommes et de femmes en France.
     """),
-    dcc.Graph(figure=fig)
+    dcc.Graph(figure=fig_HF),
+    dcc.Graph(figure = fig_moyenne),
+    dcc.Graph(figure=fig),
 ])

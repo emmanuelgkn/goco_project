@@ -103,6 +103,13 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    flex: 1;
 }
 
 .corpslambda{
@@ -132,4 +139,30 @@ html, body {
 
 .Select-value-label {
     color: white !important;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: auto;
+    background-color: rgb(66, 66, 66);
+    padding: 10px; /* Ajoutez du padding pour un meilleur aspect */
+    text-align: center; /* Centrez le texte dans le footer */
+}
+
+H5{
+    font-family: "press Start 2P", "consolas", sans-serif;
+    font-size: 15px;
+}
+
+.linkFooter{
+    font-family: "press Start 2P", "consolas", sans-serif;
+    font-size: 10px;
+    color: white;
+}
+
+.photoGithub{
+    background: url(logoGithub.png);
+    width: 1x;
+    height: 100px;
 }
