@@ -173,6 +173,14 @@ def Accueil_layout():
     return html.Div(className='corpsacceuil',children=[
         html.H1(className='h1acc', children=["STATISTIQUES SUR LES DONNEES DE DECES"]),
         html.Div(className='row row0',children=[
+            dcc.Markdown(className="text-acceuil",children=['''
+                            Bienvenue sur notre plateforme dédiée à l'analyse approfondie des données de décès. Explorez les tendances et les schémas qui émergent de ces informations cruciales grâce à nos outils interactifs et visuels. 
+                            Notre page d'accueil offre une vue complète et captivante de divers aspects liés aux décès, avec une interface conviviale pour une expérience utilisateur optimale.
+                            Explorez, analysez et comprenez les dynamiques des décès de manière accessible et enrichissante.
+                        ''']),
+
+        ]),
+        html.Div(className='row row1',children=[
 
             html.Div(className='col', children=[
                 html.H1(className='h',children=["Cartes"]),
@@ -181,28 +189,77 @@ def Accueil_layout():
             ]),
 
             html.Div(className='col', children=[
-                html.A(html.Div(className='card'),href="http://127.0.0.1:8080/page3"),
-                html.Div(className='card'),
-                html.Div(className='card'),
-                html.Div(className='card'),
+                html.A(html.Div(className='card card1'),href="http://127.0.0.1:8080/page3"),
+                html.A(html.Div(className='card card2'),href="http://127.0.0.1:8080/page6"),
+                html.A(html.Div(className='card card3'),href="http://127.0.0.1:8080/page3"),
+                html.A(html.Div(className='card card4'),href="http://127.0.0.1:8080/page"),
                 
             ]),
 
         ]),
-        html.Div(className='row row1',children=[
+        html.Div(className='row row2',children=[
             html.Div(className='col', children=[
                 html.H1(className='h',children=["Graphiques"]),
                 html.P("Nous avons fait plusieurs Graphiques"),
-                html.Button(html.A("Visiter", className="button",href="/page2"))
+                html.Button(html.A("Visiter", className="button",href="/page8"))
             ]),
             html.Div(className='col', children=[
-                html.Div(className='card graph1'),
-                html.Div(className='card graph1'),
-                html.Div(className='card graph1'),
-                html.Div(className='card graph1'),
+                html.A(html.Div(className='card graph1'),href="http://127.0.0.1:8080/page8"),
+                html.A(html.Div(className='card graph2'),href="http://127.0.0.1:8080/page7"),
+                # html.Div(className='card graph3'),
+                # html.Div(className='card graph4'),
                 
             ])
         ])
+    ]) 
+
+def pageA_layout():
+    return html.Div(className='corpslambda',children=[
+        html.H1(className='h1acc', children=["ABOUT US"]),
+        dcc.Markdown('''
+        # Nous
+        Bienvenue sur notre page "About Us". Nous sommes deux étudiants passionnés actuellement inscrits à la faculté, poursuivant notre parcours académique dans des domaines qui nous inspirent.  
+        Voici un aperçu de qui nous sommes :
+
+        ### Présentation personnelle
+        Nous sommes [Votre Prénom] et [Autre Prénom], étudiants en [Votre Filière] à [Nom de la Faculté].  
+        Notre aventure universitaire a commencé avec un désir commun d'apprendre et de grandir dans nos domaines d'études respectifs.
+
+        ### Motivation et passion
+        Notre motivation découle de notre passion pour [Domaine d'étude]. 
+        Nous croyons en l'importance de [Un aspect particulier qui vous motive] et sommes déterminés à appliquer nos connaissances de manière significative.
+
+        ### Domaines d'études
+        En tant qu'étudiants en [Votre Filière], nous sommes immergés dans l'étude approfondie de [Sujet d'étude].  
+        Nous sommes fascinés par [Aspects spécifiques de vos domaines d'études].
+
+        ### Projets académiques
+        Notre collaboration s'est manifestée à travers des projets académiques tels que [Nom du Projet].   
+        Ces expériences nous ont permis de développer des compétences essentielles et de concrétiser nos idées.
+
+        ### Expériences extrascolaires
+        En dehors des cours, nous avons participé activement à [Nom du Club ou de l'Organisation] et avons eu l'opportunité de [Description de vos expériences].
+
+        ### Objectifs académiques et professionnels
+        Nos objectifs incluent [Vos aspirations académiques] et [Vos aspirations professionnelles].  
+        Nous sommes déterminés à appliquer nos connaissances pour [Objectif spécifique].
+
+        ### Collaboration
+        Notre collaboration repose sur la complémentarité de nos compétences et la volonté de tirer parti de nos expériences individuelles pour atteindre des objectifs communs.
+
+        ### Défis et réussites
+        Nous avons surmonté des défis tels que [Défi particulier] et avons célébré des réussites, comme [Réussite spécifique].
+
+        ### Photos et anecdotes
+        Explorez quelques moments de notre parcours universitaire à travers ces photos :
+
+        ...
+
+        Nous sommes ravis de partager notre histoire avec vous et d'apporter notre contribution à la communauté universitaire. N'hésitez pas à nous contacter pour en savoir plus !
+
+        **Bienvenue dans notre monde académique !**
+                
+    ''')
     ])
 
 def page1_layout():

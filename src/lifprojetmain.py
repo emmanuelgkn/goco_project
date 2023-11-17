@@ -26,7 +26,7 @@ app.layout = html.Div([
                     html.Li(html.A("Déplacements", href="/page10"))
                 ])
             ]),
-            html.Li(html.A("About us", href='/Acceuil'))
+            html.Li(html.A("About us", href='/About'))
         ])
     ]),
     html.Div(id='page-content', className='corps wrapper'),
@@ -55,6 +55,8 @@ app.layout = html.Div([
 # Callback pour mettre à jour la page en fonction de l'URL
 @app.callback(Output('page-content', 'children'), Input('url', 'pathname'))
 def display_page(pathname):
+    if pathname == '/About':
+        return pageA_layout()
     if pathname == '/page3':
         return page3_layout()
     if pathname == '/page4':
