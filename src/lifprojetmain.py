@@ -30,12 +30,13 @@ app.layout = html.Div([
         ])
     ]),
     html.Div(id='page-content', className='corps wrapper'),
+    html.Br(),
+    html.Br(),
+    html.Br(),
     html.Footer(
         html.Div(
             className="container",
             children=[
-                html.Br(),
-                html.Br(),
                 html.Br(),
                 html.A("Home", href='/Acceuil', className = "linkFooter"),
                 html.Span(" | "),
@@ -43,9 +44,9 @@ app.layout = html.Div([
                 html.H5("Réalisé par Emmanuel Gokana et Jofre Coll"),
                 html.A(
                     html.Div(className="photoGithub"),
-                    href = "https://github.com/emmanuelgkn/goco_project",     
+                    href = "https://github.com/emmanuelgkn/goco_project",
                 )
-            ], style={'flex': '0 0 auto'}  # Ajoutez ce style pour le positionnement du footer
+            ], style={'flex': '0 0 auto'}
         )
     )
 ])

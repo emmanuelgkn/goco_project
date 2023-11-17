@@ -233,7 +233,6 @@ button{
 
 .row1{
     margin-top: 200px;
-    margin-bottom: 100px;
     
 }
 
@@ -262,10 +261,31 @@ H5{
     font-family: "press Start 2P", "consolas", sans-serif;
     font-size: 10px;
     color: white;
+    margin-top: 0%;
 }
 
 .photoGithub{
     background: url(logoGithub.png);
-    width: 1x;
-    height: 100px;
+    width: 100px; /* ajustez la largeur selon vos besoins */
+    height: 100px; /* ajustez la hauteur selon vos besoins */
+    margin: 0 auto;
+    display: block;
+    background-size: contain;
+}
+
+/* CARTE */
+
+.container-param-carte{
+    display: flex;
+}
+
+.container-param {
+    padding: 5px 5px 5px 5px;
+    background-color: rgb(66, 66, 66);
+    border-radius: 5px;
+}
+
+.container-LDA,
+.container-LDA + div {
+    width: 100%;
 }

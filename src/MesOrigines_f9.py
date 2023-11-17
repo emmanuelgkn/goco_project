@@ -32,27 +32,45 @@ def page9_layout():
     dcc.Markdown(className="manu", children="""
     Cette carte représente les origines d'un prénom ou nom famille en France.
     """),
-
-    # Affichage menu déroulant pour les prénoms
-    dcc.Dropdown(
-        id='firstname-dropdown',
-        options=firstname_options,
-        placeholder="Sélectionnez un prénom"
-    ),
-
-    # Affichage menu déroulant pour les prénoms
-    dcc.Dropdown(
-        id='secondname-dropdown',
-        options=secondname_options,
-        placeholder="Sélectionnez un nom"
-    ),
-
-    # Affichage carte
     html.Div([
-        dcc.Graph(id='map-myorigins', style={"width": "100%", "height": "80vh"})
-    ], style={"width": "100vw", "height": "100%"}),
 
-])
+            html.Div([
+
+                html.Br(),
+
+                html.Div([
+
+                    html.H1("Choisissez un nom",
+                            style={"font-family": "verdana", "font-size": "20px", 'text-align': 'center'}),
+                    # Affichage menu déroulant pour les prénoms
+                    dcc.Dropdown(
+                        id='firstname-dropdown',
+                        options=firstname_options,
+                        placeholder="Sélectionnez un prénom"
+                    ),
+                ], className="container-LDA"),
+
+                html.Div("ou", style={'font-family': 'arial', 'margin-top': '2px','margin-bottom': '2px', 'text-align': 'center'}),
+
+                html.Div([
+                    html.H1("Choisissez un prénom",
+                            style={"font-family": "verdana", "font-size": "20px", 'text-align': 'center'}),
+
+                    # Affichage menu déroulant pour les noms
+                    dcc.Dropdown(
+                        id='secondname-dropdown',
+                        options=secondname_options,
+                        placeholder="Sélectionnez un nom"
+                    ),
+                ]),
+            ], className="container-param"),
+            
+            html.Div([
+                dcc.Graph(id='map-myorigins', style={"width": "100%", "height": "80vh"})
+            ], style={"width": "100vw", "height": "100%"}, className="container-carte"),
+            ], className="container-param-carte"),
+
+    ])
 
 # Ajoutez ces lignes avant votre fonction de rappel
 prev_firstname_value = None
