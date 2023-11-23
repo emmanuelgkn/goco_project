@@ -9,6 +9,7 @@ toulouse = df[df['Death Place'].str.contains('TOULOUSE', case=False, regex=True)
 lyon = df[df['Death Place'].str.contains('LYON', case=False, regex=True)]
 marseille = df[df['Death Place'].str.contains('MARSEILLE', case=False, regex=True)]
 
+#Pour calculer le nombre de morts 
 nb_mort_paris = len(paris)
 nb_mort_toulouse = len(toulouse)
 nb_mort_lyon = len(lyon)
@@ -19,8 +20,7 @@ colors = {
     'text': '#7FDBFF'
 }
 
-# assume you have a "long-form" data frame
-# see https://plotly.com/python/px-arguments/ for more options
+
 dff = pd.DataFrame({
     "Ville": ["Paris","Lyon","Toulouse","Marseille"],
     "Nombre": [nb_mort_paris, nb_mort_lyon, nb_mort_toulouse, nb_mort_marseille]
@@ -40,7 +40,7 @@ def page5_layout():
             html.H1("Lieu Deces"),
             html.Br(),
             dcc.Markdown(className="manu", children="""
-                Ces graphes representen le nombre de morts dans les 4 villes plus grandes en France.
+                Ce graphe representent le nombre de morts dans les 4 villes plus grandes en France.
             """),
             html.Br(),
             dcc.Graph(id='example-graph-2', figure=fig),

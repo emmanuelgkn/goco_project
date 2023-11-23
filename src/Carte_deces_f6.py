@@ -8,8 +8,8 @@ from dash.dependencies import Input, Output
 from LieuDeces_f5 import *
 
 villes_m = merged_df.groupby('Death Place').agg({
-    'longitude_death': 'first',  # Utilisez 'first' pour obtenir le premier valeur non nulle.
-    'latitude_death': 'first',   # Utilisez 'first' pour obtenir le premier valeur non nulle.
+    'longitude_death': 'first',  # Utilisez 'first' pour obtenir la premiere valeur non nulle.
+    'latitude_death': 'first',   # Utilisez 'first' pour obtenir la premiere valeur non nulle.
 }).reset_index()
 
 def extract_city_name(place_name):
@@ -23,7 +23,7 @@ def extract_city_name(place_name):
         return place_name
 villes_m2 = df.copy()
 villes_m2['Death Place'] = villes_m2['Death Place'].apply(extract_city_name)
-#villes_m2 = villes_m2.groupby('Death Place').size().reset_index(name='nombre')
+
 villes_m2 = villes_m2.merge(positions_geo, left_on='Deathplace Code', right_on='code_commune_INSEE', how='left')
 villes_m2 = villes_m2.groupby('Death Place').agg(
     latitude=('latitude', 'first'),  # Utilisez 'first' pour obtenir la première valeur non nulle.
@@ -57,12 +57,19 @@ figue.update_layout(
 
 figue.update_traces(marker=dict(sizemode='diameter', sizeref=50))
 
-# App layout
+
 def page6_layout():
     
     return html.Div(className='corpslambda', children=[
 
         html.H1("Carte Décès"),
+        html.Br(),
+            dcc.Markdown(className="manu", children="""
+                Cette carte à bulle représente les 100 premières villes ayant le plus grand nombre de décès.  
+                Dans la liste juste à côté de la carte nous avons les villes avec le plus grand nombre de décès  
+                ordonné par ordre croissant.
+            """),
+            html.Br(),
 
         # Affichage carte
         html.Div([

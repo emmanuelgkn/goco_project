@@ -55,11 +55,9 @@ def page7_layout():
     html.H1("Distance"),
     html.Br(),
     dcc.Markdown(className = "manu",children = """
-    Cet Histogramme représente la distance parcourue (ici la distance entre
-    le lieu de naissance et le lieu de mort) en fonction du nombre de personnes.
-    Ici on pourra choisir la ville de naissance pour visualiser les distances 
-    parcourues par les personnes nées dans la ville. Vous pourrez aussi choisir
-    l'année de déces.
+    Cet Histogramme représente la distance parcourue (ici la distance entre  le lieu de naissance et le lieu de mort)  
+    en fonction du nombre de personnes. Ici on pourra choisir la ville de naissance pour visualiser les distances    
+    parcourues par les personnes nées dans la ville. Vous pourrez aussi choisir l'année de déces.
     """),
     html.Br(),
     dcc.Dropdown(
@@ -110,5 +108,4 @@ def update_graph(selected_birthplace, typeaxis):
         figure.update_layout(yaxis_type=typeaxis, plot_bgcolor= '#292A30', paper_bgcolor= '#292A30', font_color='#e0e0e0')
         figure.update_layout(xaxis_type=typeaxis, plot_bgcolor= '#292A30', paper_bgcolor= '#292A30', font_color='#e0e0e0')
  
-
     return figure

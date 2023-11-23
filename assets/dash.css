@@ -175,7 +175,7 @@ h1{
 
 .col{
    
-    margin-right: 100px;
+    margin-right: 0px;
 }
 
 .h{
@@ -317,3 +317,10 @@ H5{
 .text-acceuil{
     font-size: 20px;
 }
+
+.aboutus{
+    margin-bottom: 300px;
+    font-size: 20px;
+    margin-left: 20px;
+}
+

@@ -4,7 +4,7 @@ from dash.dependencies import Input, Output
 
 from Deplacements_f10 import *
 
-# Configuration de la barre de navigation
+# Affiche de toute notre application Dash
 app.layout = html.Div([
     html.Link(
         href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap",
@@ -46,7 +46,7 @@ app.layout = html.Div([
                     html.Div(className="photoGithub"),
                     href = "https://github.com/emmanuelgkn/goco_project",
                 )
-            ], style={'flex': '0 0 auto'}
+            ], style={'flex': '0 0 auto'}  # Ajoutez ce style pour le positionnement du footer
         )
     )
 ])

@@ -125,7 +125,6 @@ df = pd.DataFrame(data)
 
 
 # On crée un DataFrame avec toute l'information ensemble pour pouvoir comparer les Villes avec leur position géographique
-# Realizar la fusión para las coordenadas de muerte
 positions_geo.drop_duplicates(inplace=True)
 merged_df_death = df.merge(positions_geo, left_on='Deathplace Code', right_on='code_commune_INSEE', how='left')
 merged_df_death = merged_df_death.rename(columns={'longitude': 'longitude_death', 'latitude': 'latitude_death'})
@@ -193,21 +192,23 @@ def Accueil_layout():
                 html.A(html.Div(className='card card1'),href="http://127.0.0.1:8080/page3"),
                 html.A(html.Div(className='card card2'),href="http://127.0.0.1:8080/page6"),
                 html.A(html.Div(className='card card3'),href="http://127.0.0.1:8080/page3"),
-                html.A(html.Div(className='card card4'),href="http://127.0.0.1:8080/page"),
+                html.A(html.Div(className='card card4'),href="http://127.0.0.1:8080/page9"),
                 
             ]),
 
         ]),
         html.Div(className='row row2',children=[
-            html.Div(className='col', children=[
+            html.Div(className='col colr21', children=[
                 html.H1(className='h',children=["Graphiques"]),
                 html.P("Nous avons fait plusieurs Graphiques"),
                 html.Button(html.A("Visiter", className="button",href="http://127.0.0.1:8080/page8"))
             ]),
+
             
             html.Br(),
             
-            html.Div(className='col', children=[
+            html.Div(className='col colr22', children=[
+
                 html.A(html.Div(className='card graph1'),href="http://127.0.0.1:8080/page8"),
                 html.A(html.Div(className='card graph2'),href="http://127.0.0.1:8080/page7"),
                 # html.Div(className='card graph3'),
@@ -217,80 +218,55 @@ def Accueil_layout():
         ])
     ]) 
 
+#Page About us
 def pageA_layout():
     return html.Div(className='corpslambda',children=[
         html.H1(className='h1acc', children=["ABOUT US"]),
-        dcc.Markdown('''
-        # Nous
-        Bienvenue sur notre page "About Us". Nous sommes deux étudiants passionnés actuellement inscrits à la faculté, poursuivant notre parcours académique dans des domaines qui nous inspirent.  
-        Voici un aperçu de qui nous sommes :
+        dcc.Markdown(className="aboutus", dangerously_allow_html = True, children = ['''
+        # Sujet
+        Dans le cadre de l'UE lifprojet nous avons créé un site web permettant de visuliser les différents apects d'un  
+        jeu de données portant principalement sur les décès enregistrés en france. Nous avons représenté ces données de  
+        différentes façons tels que par des histogrammes, des cartes ou encore une pyramide d'age.
+        <br>
+        <br>                                                                             
 
-        ### Présentation personnelle
-        Nous sommes [Votre Prénom] et [Autre Prénom], étudiants en [Votre Filière] à [Nom de la Faculté].  
-        Notre aventure universitaire a commencé avec un désir commun d'apprendre et de grandir dans nos domaines d'études respectifs.
-
-        ### Motivation et passion
-        Notre motivation découle de notre passion pour [Domaine d'étude]. 
-        Nous croyons en l'importance de [Un aspect particulier qui vous motive] et sommes déterminés à appliquer nos connaissances de manière significative.
-
-        ### Domaines d'études
-        En tant qu'étudiants en [Votre Filière], nous sommes immergés dans l'étude approfondie de [Sujet d'étude].  
-        Nous sommes fascinés par [Aspects spécifiques de vos domaines d'études].
-
-        ### Projets académiques
-        Notre collaboration s'est manifestée à travers des projets académiques tels que [Nom du Projet].   
-        Ces expériences nous ont permis de développer des compétences essentielles et de concrétiser nos idées.
-
-        ### Expériences extrascolaires
-        En dehors des cours, nous avons participé activement à [Nom du Club ou de l'Organisation] et avons eu l'opportunité de [Description de vos expériences].
-
-        ### Objectifs académiques et professionnels
-        Nos objectifs incluent [Vos aspirations académiques] et [Vos aspirations professionnelles].  
-        Nous sommes déterminés à appliquer nos connaissances pour [Objectif spécifique].
-
-        ### Collaboration
-        Notre collaboration repose sur la complémentarité de nos compétences et la volonté de tirer parti de nos expériences individuelles pour atteindre des objectifs communs.
-
-        ### Défis et réussites
-        Nous avons surmonté des défis tels que [Défi particulier] et avons célébré des réussites, comme [Réussite spécifique].
-
-        ### Photos et anecdotes
-        Explorez quelques moments de notre parcours universitaire à travers ces photos :
-
-        ...
-
-        Nous sommes ravis de partager notre histoire avec vous et d'apporter notre contribution à la communauté universitaire. N'hésitez pas à nous contacter pour en savoir plus !
-
-        **Bienvenue dans notre monde académique !**
-                
-    ''')
-    ])
-
-def page1_layout():
-    return html.Div(className='corpslambda',children=[
-        html.H1("Tableau df"),
-        dash_table.DataTable(data=df.to_dict('records'), page_size=10, style_data={
-                'color': '#e0e0e0',
-                'backgroundColor': 'rgb(50, 50, 50)',
-                'fontWeight': 'bold',
-            },
-            style_cell={'padding': '5px'},
-            style_header={
-                'color': '#e0e0e0',
-                'backgroundColor': 'rgb(30, 30, 30)',
-                'fontWeight': 'bold',
-            },),
-
-        html.H1("Tableau df_merged"),
-        dash_table.DataTable(data=merged_df.to_dict('records'), page_size=10, style_data={
-                'color': '#e0e0e0',
-                'backgroundColor': 'rgb(50, 50, 50)',
-                'fontWeight': 'bold',
-            },
-            style_cell={'padding': '5px'},
-            style_header={
-                'color': '#e0e0e0',
-                'backgroundColor': 'rgb(30, 30, 30)',
-                'fontWeight': 'bold',
-            },),
+        # Présentation personnelle
+        Nous sommes [Gokana Emmannuel](https://github.com/emmanuelgkn) et [Jofre Coll Vila](https://github.com/Jofrix98), étudiants en Licence Informatique  
+        à l'université [Claude Bernard Lyon 1](https://www.univ-lyon1.fr/).
+        <br>
+        <br>
+                                                                                                                                                                  
+        # Outils utilisés
+        Pour atteindre cet objectif, nous avons opté pour une combinaison de technologies puissantes et flexibles, mettant  
+         l'accent sur la simplicité du langage Python.
+        <br>
+        <br>
+                                                                                     
+        ### Python :  
+        [Python](https://www.python.org/) est unangage de programmation polyvalent, offrant une facilité d'utilisation et  
+        une flexibilité pour le traitement des données.
+        <br>
+        <br>
+                                                                                     
+        ### Dash (Framework de Python) :  
+        Nous avons choisi le framework [Dash](https://dash.plotly.com/) pour créer des applications web interactives. Son utilisation simplifié  
+        de Python nous a permis de concevoir des tableaux de bord dynamiques sans nécessiter  
+        une expertise approfondie en développement web.
+        <br>
+        <br>
+                                                                                     
+        ### Matplotlib (Librairie de Visualisation en Python) :  
+        [Matplotlib](https://matplotlib.org/) a été notre choix pour la création de graphiques et de visualisations. Cette librairie nous a permis de représenter  
+        de manière claire et informative les tendances et les modèles présents  
+        dans les données de décès.
+        <br>
+        <br>  
+                                                                                                                                                                                                                                              
+        ### CSS (Cascading Style Sheets) :  
+        Nous avons utilisé CSS pour personnaliser l'aspect visuel de notre site. Cela nous a donné un contrôle total sur  
+        la présentation, garantissant une expérience utilisateur agréable.
+        <br>                                                                         
+        <br>
+                                                                                                                                 
+    '''])
     ])

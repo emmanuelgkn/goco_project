@@ -141,6 +141,9 @@ def update_map(selected_fstname, selected_sndname):
             }
         )
         return fig
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/Emmanuel
         
     return fig
