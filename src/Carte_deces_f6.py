@@ -8,8 +8,8 @@ from dash.dependencies import Input, Output
 from LieuDeces_f5 import *
 
 villes_m = merged_df.groupby('Death Place').agg({
-    'longitude_death': 'first',  # Utilisez 'first' pour obtenir le premier valeur non nulle.
-    'latitude_death': 'first',   # Utilisez 'first' pour obtenir le premier valeur non nulle.
+    'longitude_death': 'first',  # Utilisez 'first' pour obtenir la premiere valeur non nulle.
+    'latitude_death': 'first',   # Utilisez 'first' pour obtenir la premiere valeur non nulle.
 }).reset_index()
 
 def extract_city_name(place_name):
@@ -23,7 +23,7 @@ def extract_city_name(place_name):
         return place_name
 villes_m2 = df.copy()
 villes_m2['Death Place'] = villes_m2['Death Place'].apply(extract_city_name)
-#villes_m2 = villes_m2.groupby('Death Place').size().reset_index(name='nombre')
+
 villes_m2 = villes_m2.merge(positions_geo, left_on='Deathplace Code', right_on='code_commune_INSEE', how='left')
 villes_m2 = villes_m2.groupby('Death Place').agg(
     latitude=('latitude', 'first'),  # Utilisez 'first' pour obtenir la première valeur non nulle.
@@ -32,7 +32,7 @@ villes_m2 = villes_m2.groupby('Death Place').agg(
 ).reset_index()
 villes_m2_sort= villes_m2.sort_values(by='nombre', ascending=False).head(100)
 villes_m2_sort = villes_m2_sort.drop(2148)
-# print(villes_m2_sort)
+
 
 figue = px.scatter_mapbox(villes_m2_sort,
                     lat = "latitude",
@@ -57,7 +57,7 @@ figue.update_layout(
 
 figue.update_traces(marker=dict(sizemode='diameter', sizeref=50))
 
-# App layout
+
 def page6_layout():
     
     return html.Div(className='corpslambda', children=[

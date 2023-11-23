@@ -200,4 +200,3 @@ def update_map(selected_display, selected_birthplace, selected_country, selected
 
     return fig
 
-layout3 = app.layout

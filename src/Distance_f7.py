@@ -108,5 +108,4 @@ def update_graph(selected_birthplace, typeaxis):
         figure.update_layout(yaxis_type=typeaxis, plot_bgcolor= '#292A30', paper_bgcolor= '#292A30', font_color='#e0e0e0')
         figure.update_layout(xaxis_type=typeaxis, plot_bgcolor= '#292A30', paper_bgcolor= '#292A30', font_color='#e0e0e0')
  
-
     return figure

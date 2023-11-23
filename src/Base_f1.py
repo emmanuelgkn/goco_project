@@ -124,7 +124,6 @@ df = pd.DataFrame(data)
 
 
 # On crée un DataFrame avec toute l'information ensemble pour pouvoir comparer les Villes avec leur position géographique
-# Realizar la fusión para las coordenadas de muerte
 positions_geo.drop_duplicates(inplace=True)
 merged_df_death = df.merge(positions_geo, left_on='Deathplace Code', right_on='code_commune_INSEE', how='left')
 merged_df_death = merged_df_death.rename(columns={'longitude': 'longitude_death', 'latitude': 'latitude_death'})
@@ -213,6 +212,7 @@ def Accueil_layout():
         ])
     ]) 
 
+#Page About us
 def pageA_layout():
     return html.Div(className='corpslambda',children=[
         html.H1(className='h1acc', children=["ABOUT US"]),
@@ -263,33 +263,4 @@ def pageA_layout():
         <br>
                                                                                                                                  
     '''])
-    ])
-
-def page1_layout():
-    return html.Div(className='corpslambda',children=[
-        html.H1("Tableau df"),
-        dash_table.DataTable(data=df.to_dict('records'), page_size=10, style_data={
-                'color': '#e0e0e0',
-                'backgroundColor': 'rgb(50, 50, 50)',
-                'fontWeight': 'bold',
-            },
-            style_cell={'padding': '5px'},
-            style_header={
-                'color': '#e0e0e0',
-                'backgroundColor': 'rgb(30, 30, 30)',
-                'fontWeight': 'bold',
-            },),
-
-        html.H1("Tableau df_merged"),
-        dash_table.DataTable(data=merged_df.to_dict('records'), page_size=10, style_data={
-                'color': '#e0e0e0',
-                'backgroundColor': 'rgb(50, 50, 50)',
-                'fontWeight': 'bold',
-            },
-            style_cell={'padding': '5px'},
-            style_header={
-                'color': '#e0e0e0',
-                'backgroundColor': 'rgb(30, 30, 30)',
-                'fontWeight': 'bold',
-            },),
     ])
