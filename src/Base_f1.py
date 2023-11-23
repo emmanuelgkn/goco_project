@@ -9,9 +9,10 @@ import dash_bootstrap_components as dbc
 
 # On lit le jeu de données des décès en France ligne par ligne
 lines = []
-with open("data/deces-2023-m08.txt", "r") as file:
-    lines = file.readlines()
-
+with open("data/deces-2020.txt", "r", encoding="utf-8") as file:
+    lines.extend(file.readlines())
+with open("data/deces-2021.txt", "r", ) as file:
+    lines.extend(file.readlines())
 # On charge le jeu de données pour pouvoir connaître la position géographique des villes en France
 positions_geo = pd.read_csv('data/communes-departement-region.csv', usecols=[0, 1, 5, 6])
 
@@ -201,8 +202,11 @@ def Accueil_layout():
             html.Div(className='col', children=[
                 html.H1(className='h',children=["Graphiques"]),
                 html.P("Nous avons fait plusieurs Graphiques"),
-                html.Button(html.A("Visiter", className="button",href="/page8"))
+                html.Button(html.A("Visiter", className="button",href="http://127.0.0.1:8080/page8"))
             ]),
+            
+            html.Br(),
+            
             html.Div(className='col', children=[
                 html.A(html.Div(className='card graph1'),href="http://127.0.0.1:8080/page8"),
                 html.A(html.Div(className='card graph2'),href="http://127.0.0.1:8080/page7"),

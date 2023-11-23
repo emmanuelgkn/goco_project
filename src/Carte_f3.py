@@ -30,7 +30,9 @@ def page3_layout():
         html.Div([
 
             html.Div([
-
+                html.Br(),
+                html.Br(),
+                html.Br(),
                 html.Br(),
 
                 html.Div([
@@ -79,6 +81,8 @@ def page3_layout():
             ], className="container-param-carte"),
     ])
 
+prev_birthplace_value = None
+prev_country_value = None
 @app.callback(
     [Output('birthplace-dropdown', 'value'),
      Output('international_countries-dropdown', 'value')],
@@ -86,11 +90,16 @@ def page3_layout():
      Input('international_countries-dropdown', 'value')]
 )
 def update_dropdowns(selected_birthplace, selected_country):
-    if selected_country:
-        return None, selected_country
-    elif selected_birthplace:
+    global prev_birthplace_value, prev_country_value
+    if selected_birthplace != prev_birthplace_value:
+        prev_birthplace_value = selected_birthplace
         return selected_birthplace, None
-    raise exceptions.PreventUpdate
+    elif selected_country != prev_country_value:
+        prev_country_value = selected_country
+        return None, selected_country
+    else:
+        return selected_birthplace, selected_country
+
 
 @app.callback(
     Output('animation-check', 'style'),
@@ -190,7 +199,7 @@ def update_map(selected_display, selected_birthplace, selected_country, selected
         #return fig
             
     elif selected_display == "Densité":
-        fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10, range_color=[0, 5],
+        fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10, range_color=[0, 8],
                                 center=dict(lat=0, lon=180), zoom=0,
                                 mapbox_style="carto-positron")
         #return fig
