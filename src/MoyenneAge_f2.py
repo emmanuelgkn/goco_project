@@ -5,6 +5,8 @@ import plotly.graph_objects as go
 
 from Base_f1 import *
 
+#Dans ce fichier on ne fait que les calculs de graphiques, l'affichage ce fait dans Page8_layout() dans PyramideAge_f8
+
 df_moyenne = df.copy()
 df_moyenne['Date of Birth'] = pd.to_datetime(df_moyenne['Date of Birth'], format='%d/%m/%Y', errors='coerce')
 # Créez une nouvelle colonne 'Year of Birth' avec l'année de naissance
@@ -47,19 +49,6 @@ fig_moyenne.update_layout(
     paper_bgcolor= '#292A30',
     font_color='#e0e0e0'
 )
-
-def page2_layout():
-    return html.Div(className='corpslambda',children=[
-    html.H1("Grapues"),
-     html.Br(),
-            dcc.Markdown(className="manu", children="""
-                Ce graphe representent le nombre de morts dans les 4 villes plus grandes en France.
-            """),
-    html.Br(),
-    dcc.Graph(figure=fig_HF),
-    dcc.Graph(figure = fig_moyenne)
-    # Autres composants pour la page 1
-])
 
 
 

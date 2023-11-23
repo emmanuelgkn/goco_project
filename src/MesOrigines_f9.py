@@ -120,15 +120,5 @@ def update_map(selected_fstname, selected_sndname):
             }
         )
         return fig
-    '''    
-    # Mettre à jour la mise en page de la carte
-    fig.update_layout(
-        margin={'l': 0, 't': 0, 'b': 0, 'r': 0},
-        mapbox={
-            'style': "carto-positron",
-            'center': {'lon': 0, 'lat': 47},
-            'zoom': 1
-        }
-    )'''
         
     return fig

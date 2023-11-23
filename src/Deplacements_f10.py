@@ -17,13 +17,11 @@ carte.update_layout(
  )
 
 def page10_layout():
-
-    #Affichage titre et sous-titre
     return html.Div(className='corpslambda', children=[
     html.H1("Déplacements", style={"font-family": "verdana"}),
     dcc.Markdown(className="manu", children="""Cette carte représente les déplacements en France."""),
-        html.Div([
-            dcc.Graph(figure=carte,style={"width": "100%", "height": "80vh"})
-        ],
-         style={"width": "100vw", "height": "100%"}),
+    html.Div([
+        dcc.Graph(figure=carte,style={"width": "100%", "height": "80vh"})
+    ],
+        style={"width": "100vw", "height": "100%"}),
 ])
