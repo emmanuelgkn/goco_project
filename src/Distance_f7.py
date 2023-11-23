@@ -55,11 +55,9 @@ def page7_layout():
     html.H1("Distance"),
     html.Br(),
     dcc.Markdown(className = "manu",children = """
-    Cet Histogramme représente la distance parcourue (ici la distance entre
-    le lieu de naissance et le lieu de mort) en fonction du nombre de personnes.
-    Ici on pourra choisir la ville de naissance pour visualiser les distances 
-    parcourues par les personnes nées dans la ville. Vous pourrez aussi choisir
-    l'année de déces.
+    Cet Histogramme représente la distance parcourue (ici la distance entre  le lieu de naissance et le lieu de mort)  
+    en fonction du nombre de personnes. Ici on pourra choisir la ville de naissance pour visualiser les distances    
+    parcourues par les personnes nées dans la ville. Vous pourrez aussi choisir l'année de déces.
     """),
     html.Br(),
     dcc.Dropdown(

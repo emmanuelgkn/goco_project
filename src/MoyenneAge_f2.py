@@ -50,11 +50,18 @@ fig_moyenne.update_layout(
 
 def page2_layout():
     return html.Div(className='corpslambda',children=[
-    html.H1("Graphiques"),
+    html.H1("Grapues"),
+     html.Br(),
+            dcc.Markdown(className="manu", children="""
+                Ce graphe representent le nombre de morts dans les 4 villes plus grandes en France.
+            """),
+    html.Br(),
     dcc.Graph(figure=fig_HF),
     dcc.Graph(figure = fig_moyenne)
     # Autres composants pour la page 1
 ])
+
+
 
 
 

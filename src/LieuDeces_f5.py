@@ -40,7 +40,7 @@ def page5_layout():
             html.H1("Lieu Deces"),
             html.Br(),
             dcc.Markdown(className="manu", children="""
-                Ces graphes representen le nombre de morts dans les 4 villes plus grandes en France.
+                Ce graphe representent le nombre de morts dans les 4 villes plus grandes en France.
             """),
             html.Br(),
             dcc.Graph(id='example-graph-2', figure=fig),

@@ -62,9 +62,14 @@ fig.update_layout(barmode='stack',
 def page8_layout():
     return html.Div(className='corpslambda',children=[
     html.H1("Graphiques"),
+    html.Br(),
     dcc.Markdown(className="manu", children="""
-    Ce graphe représente pour la l'âge moyen le nombre d'hommes et de femmes en France.
+    Cette page comporte 3 graphes:  
+        - Le Graphique représentant la moyenne d'age des hommes et des femmes  
+        - Le Graphique représentant l'Age moyen en fonction de l'annnée de décès  
+        - La Pyramide d'age de la population en france
     """),
+    html.Br(),
     dcc.Graph(figure=fig_HF),
     dcc.Graph(figure = fig_moyenne),
     dcc.Graph(figure=fig),
