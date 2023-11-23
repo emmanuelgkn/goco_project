@@ -9,9 +9,9 @@ import dash_bootstrap_components as dbc
 
 # On lit le jeu de données des décès en France ligne par ligne
 lines = []
-with open("data/deces-2020.txt", "r", encoding="utf-8") as file:
+with open("data/deces-2023-m08.txt", "r", encoding="utf-8") as file:
     lines.extend(file.readlines())
-with open("data/deces-2021.txt", "r", ) as file:
+with open("data/deces-2022-t4.txt", "r", ) as file:
     lines.extend(file.readlines())
 # On charge le jeu de données pour pouvoir connaître la position géographique des villes en France
 positions_geo = pd.read_csv('data/communes-departement-region.csv', usecols=[0, 1, 5, 6])
