@@ -2,7 +2,7 @@ from dash import Dash, html, dash_table, dcc
 from dash.dependencies import Input, Output
 
 
-from Deplacements_f10 import *
+from AboutUs_f12 import *
 
 # Affiche de toute notre application Dash
 app.layout = html.Div([
@@ -30,22 +30,23 @@ app.layout = html.Div([
         ])
     ]),
     html.Div(id='page-content', className='corps wrapper'),
+    html.Br(),
+    html.Br(),
+    html.Br(),
     html.Footer(
         html.Div(
             className="container",
             children=[
                 html.Br(),
-                html.Br(),
-                html.Br(),
                 html.A("Home", href='/Acceuil', className = "linkFooter"),
                 html.Span(" | "),
-                html.A("About us", href='/Acceuil', className = "linkFooter"),
+                html.A("About us", href='/About', className = "linkFooter"),
                 html.H5("Réalisé par Emmanuel Gokana et Jofre Coll"),
                 html.A(
                     html.Div(className="photoGithub"),
-                    href = "https://github.com/emmanuelgkn/goco_project",     
+                    href = "https://github.com/emmanuelgkn/goco_project",
                 )
-            ], style={'flex': '0 0 auto'} 
+            ], style={'flex': '0 0 auto'}  # Ajoutez ce style pour le positionnement du footer
         )
     )
 ])
@@ -79,4 +80,3 @@ def display_page(pathname):
 print('Site Utilisable')
 if __name__ == '__main__':
     app.run_server(debug=True, port = 8080)
-

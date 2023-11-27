@@ -31,7 +31,7 @@ villes_m2 = villes_m2.groupby('Death Place').agg(
     nombre=('Death Place', 'size')  # Utilisez 'size' pour obtenir le nombre d'occurrences.
 ).reset_index()
 villes_m2_sort= villes_m2.sort_values(by='nombre', ascending=False).head(100)
-villes_m2_sort = villes_m2_sort.drop(2148)
+#villes_m2_sort = villes_m2_sort.drop(2148)
 
 
 figue = px.scatter_mapbox(villes_m2_sort,

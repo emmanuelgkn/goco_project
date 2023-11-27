@@ -21,58 +21,68 @@ international_countries_options.sort(key=lambda x: x['label'])
 
 # App layout
 def page3_layout():
-    
-    return html.Div(className='corpslambda',children=[
+    return html.Div(className='corpslambda', children=[
+        html.H1("Carte", style={'text-align': 'center'}),
+        html.Div([
+                html.H1("Dans cette page, vous pouvez afficher sur la carte les mouvements des personnes qui sont décédées en France. N'hésitez pas à jouer avec la base pour afficher des traces ou des points de chaleur en mode statique ou en mode animation pour voir le passage du temps.",
+                    style={"font-family": "verdana", "font-size": "15px"}),   
+        ]),
+        html.Div([
 
-        html.H1("Carte"),
+            html.Div([
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.Br(),
 
-        html.Div(
-            html.H1("Dans cette page vous pouvez afficher sur la carte les mouvements des personnes qui sont décédés en France. N'hésitez pas a jouer avec la base pour afficher des traces ou des points de chaleur en mode statique ou en mode animation pour voir le passage du temps.",
-                    style = {"font-family" : "verdana",
-                             "font-size" : "15px"})),
+                html.Div([
+                    html.H1("Choisissez le mode d'affichage",
+                            style={"font-family": "verdana", "font-size": "20px", 'text-align': 'center'}),
+            
+                    # Création des options d'affichage
+                    dcc.RadioItems(options=['Lignes', 'Densité'], value='Lignes', id='radio-display', inline=True,
+                    style={'font-family': 'arial'}),
 
-        html.Div(
-            html.H1("Choisissez le mode d'affichage",
-                    style = {"font-family" : "verdana",
-                             "font-size" : "20px"})),
+                    dcc.Checklist(
+                        ['Animation'],
+                        id='animation-check',
+                    ),
+                ], className="container-LDA"),
 
-        # Création des options d'affichage
-        dcc.RadioItems(options=['Lignes', 'Densité'], value='Lignes', id='radio-display', inline=True,
-        style={'font-family': 'arial'}),
+                html.Br(),
 
-        dcc.Checklist(
-            ['Animation'],
-            id = 'animation-check'),
+                html.Div([
+                    html.H1("Choisissez l'endroit de naissance",
+                            style={"font-family": "verdana", "font-size": "20px", 'text-align': 'center'}),
 
-        html.Div(
-            html.H1("Choisissez l'endroit de naissance",
-                    style = {"font-family" : "verdana",
-                             "font-size" : "20px"})),
+                    # Création ménu déroulant
+                    dcc.Dropdown(
+                        options=birthplace_options,
+                        className='dropdown',
+                        id='birthplace-dropdown',
+                        placeholder="Sélectionnez une ville de naissance",
+                        style={'background-color': '#292A30', 'border-color': 'grey'},
+                    ),
 
-        # Création ménu déroulant
+                    html.Div("ou", style={'font-family': 'arial', 'margin-top': '2px','margin-bottom': '2px', 'text-align': 'center'}),
 
-        dcc.Dropdown(
-        birthplace_options,
-        className='dropdown',
-        id='birthplace-dropdown',
-        placeholder="Sélectionnez une ville de naissance",
-        style={'background-color': '#292A30', 'border-color': 'grey'},
-        ),
+                    dcc.Dropdown(
+                        id='international_countries-dropdown',
+                        options=international_countries_options,
+                        placeholder="Sélectionnez un pays étranger",
+                        style={'backgroundColor': '#292A30', 'color': 'black', 'border-color': 'grey'},
+                    ),
+                ]),
+            ], className="container-param"),
+            
+            html.Div([
+                    dcc.Graph(id='map-plot', style={"width": "100%", "height": "80vh"})
+                ], style={"width": "100vw", "height": "100%"}, className="container-carte"),
+            ], className="container-param-carte"),
+    ])
 
-        dcc.Dropdown(
-        id='international_countries-dropdown',
-        options=international_countries_options,
-        placeholder="Sélectionnez un pays étranger",
-        style={'backgroundColor':'#292A30', 'color':'black','border-color':'grey'}
-        ),
-
-         # Affichage carte
-         html.Div([
-            dcc.Graph(id='map-plot', style={"width": "100%", "height": "80vh"})
-        ], style={"width": "100vw", "height": "100%"}),
-
-         ])
-
+prev_birthplace_value = None
+prev_country_value = None
 @app.callback(
     [Output('birthplace-dropdown', 'value'),
      Output('international_countries-dropdown', 'value')],
@@ -80,11 +90,16 @@ def page3_layout():
      Input('international_countries-dropdown', 'value')]
 )
 def update_dropdowns(selected_birthplace, selected_country):
-    if selected_country:
-        return None, selected_country
-    elif selected_birthplace:
+    global prev_birthplace_value, prev_country_value
+    if selected_birthplace != prev_birthplace_value:
+        prev_birthplace_value = selected_birthplace
         return selected_birthplace, None
-    raise exceptions.PreventUpdate
+    elif selected_country != prev_country_value:
+        prev_country_value = selected_country
+        return None, selected_country
+    else:
+        return selected_birthplace, selected_country
+
 
 @app.callback(
     Output('animation-check', 'style'),
@@ -184,7 +199,7 @@ def update_map(selected_display, selected_birthplace, selected_country, selected
         #return fig
             
     elif selected_display == "Densité":
-        fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10,
+        fig = px.density_mapbox(filtered_df, lat='latitude_death', lon='longitude_death', z='density', radius=10, range_color=[0, 8],
                                 center=dict(lat=0, lon=180), zoom=0,
                                 mapbox_style="carto-positron")
         #return fig
