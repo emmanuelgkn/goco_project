@@ -22,10 +22,10 @@ international_countries_options.sort(key=lambda x: x['label'])
 # App layout
 def page3_layout():
     return html.Div(className='corpslambda', children=[
-        html.H1("Carte", style={'text-align': 'center'}),
+        html.H1("Carte mouvements de population", className = "titlePage"),
         html.Div([
                 html.H1("Dans cette page, vous pouvez afficher sur la carte les mouvements des personnes qui sont décédées en France. N'hésitez pas à jouer avec la base pour afficher des traces ou des points de chaleur en mode statique ou en mode animation pour voir le passage du temps.",
-                    style={"font-family": "verdana", "font-size": "15px"}),   
+                    style={"font-family": "verdana", "font-size": "15px", 'text-align': 'center'}),   
         ]),
         html.Div([
 

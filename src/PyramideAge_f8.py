@@ -43,14 +43,14 @@ df_pyramid = df_pyramid[['Age', 'Male', 'Female', 'Male_Left', 'Male_Width', 'Fe
 
 fig_pyramide = go.Figure()
 fig_pyramide.add_trace(go.Bar(y=df_pyramid["Age"], x=df_pyramid["Male_Width"], base=-df_pyramid["Male_Width"],
-                     orientation='h', name='Male', text=df_pyramid["Male"],
+                     orientation='h', name='Hommes', text=df_pyramid["Male"],
                      hoverinfo='text', marker=dict(color="#4682b4")))
 fig_pyramide.add_trace(go.Bar(y=df_pyramid["Age"], x=df_pyramid["Female_Width"], base=0, orientation='h',
-                     name='Female', text=df_pyramid["Female"],
+                     name='Femmes', text=df_pyramid["Female"],
                      hoverinfo='text', marker=dict(color="#ee7a87")))
 
 fig_pyramide.update_layout(barmode='stack',
-                  title="Carte population France",
+                  title="Pyramide d'âge de la population française",
                   xaxis_title="Pourcentage (%)",
                   yaxis_title="Tranche d'âge",
                   plot_bgcolor= '#292A30',
@@ -61,13 +61,13 @@ fig_pyramide.update_layout(barmode='stack',
 
 def page8_layout():
     return html.Div(className='corpslambda',children=[
-    html.H1("Graphiques"),
+    html.H1("Graphes âge", className = "titlePage"),
     html.Br(),
     dcc.Markdown(className="manu", children="""
     Cette page comporte 3 graphes:  
-        - Le Graphique représentant la moyenne d'age des hommes et des femmes  
-        - Le Graphique représentant l'ésperance de vie en fonction de l'année et du genre  
-        - La Pyramide d'age de la population en france
+        - Le graphe représentant la moyenne d'âge des hommes et des femmes  
+        - Le graphe représentant l'espérance de vie et le taux de mortalité infantile en fonction de l'année et du genre  
+        - La pyramide d'âge de la population en France
     """),
     html.Br(),
     dcc.Graph(figure = fig_HF),

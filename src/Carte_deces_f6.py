@@ -62,7 +62,7 @@ def page6_layout():
     
     return html.Div(className='corpslambda', children=[
 
-        html.H1("Carte Décès"),
+        html.H1("Carte Décès", className = "titlePage"),
         html.Br(),
             dcc.Markdown(className="manu", children="""
                 Cette carte à bulle représente les 100 premières villes ayant le plus grand nombre de décès.  

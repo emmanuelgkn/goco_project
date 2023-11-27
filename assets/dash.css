@@ -39,6 +39,7 @@ nav a:hover{
 .manu{
     font-family: Verdana;
     font-size: 15px;
+    text-align: center;
 }
 
 .dash-debug-menu__outer, .dash-debug-menu {
@@ -322,5 +323,13 @@ H5{
     margin-bottom: 300px;
     font-size: 20px;
     margin-left: 20px;
+}
+
+.titlePage{
+    font-family: "Times New Roman";
+    font-size: 60px;
+    color: white;
+    text-align: center;
+    
 }
 
