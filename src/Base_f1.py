@@ -24,6 +24,10 @@ with open("data/positions-pays-étrangers.txt", "r") as file2:
 # On ajoute un 0 dans le cas où les codes on seulement 4 chiffres
 positions_geo['code_commune_INSEE'] = positions_geo['code_commune_INSEE'].str.zfill(5)
 
+# Ouvrir jeu de données esperance vie
+lines_esperance =[]
+with open("data/esperance_vie.txt", "r") as fileEsperance:   
+    lines_esperance = fileEsperance.readlines()
 
 # On initialise les listes vides pour chaque colonne du tableau
 names = []
@@ -157,6 +161,31 @@ def update_coordinates(row):
 merged_df = merged_df.apply(update_coordinates, axis=1)
 merged_df['density'] = 1
 
+years_esperance_list = []
+esperances_hommes_list = []
+esperances_femmes_list = []
+mortalites_infantiles_list = []
+
+for line in lines_esperance:
+    parts = line.strip().split('\t')
+    year_esperance = parts[0]
+    esperance_femmes = parts[1].replace(',', '.')
+    esperance_hommes = parts[2].replace(',', '.')
+
+    years_esperance_list.append(year_esperance)
+    esperances_hommes_list.append(float(esperance_hommes))
+    esperances_femmes_list.append(float(esperance_femmes))
+
+# On crée le tableau à partir des listes créées
+data_esp = {
+    "Year": years_esperance_list,
+    "Esperance Hommes": esperances_hommes_list,
+    "Esperance Femmes": esperances_femmes_list,
+}
+
+# Créez le DataFrame avec pandas
+df_esp = pd.DataFrame(data_esp)
+
 # Initialisez l'application Dash
 app = Dash(__name__, suppress_callback_exceptions=True, assets_folder='../assets', external_stylesheets=[dbc.themes.DARKLY])
 
@@ -166,107 +195,3 @@ theme = {
     'primary': '#00EA64',
     'secondary': '#6E6E6E',
 }
-
-
-# App layout
-def Accueil_layout():
-    return html.Div(className='corpsacceuil',children=[
-        html.H1(className='h1acc', children=["STATISTIQUES SUR LES DONNEES DE DECES"]),
-        html.Div(className='row row0',children=[
-            dcc.Markdown(className="text-acceuil",children=['''
-                            Bienvenue sur notre plateforme dédiée à l'analyse approfondie des données de décès. Explorez les tendances et les schémas qui émergent de ces informations cruciales grâce à nos outils interactifs et visuels. 
-                            Notre page d'accueil offre une vue complète et captivante de divers aspects liés aux décès, avec une interface conviviale pour une expérience utilisateur optimale.
-                            Explorez, analysez et comprenez les dynamiques des décès de manière accessible et enrichissante.
-                        ''']),
-
-        ]),
-        html.Div(className='row row1',children=[
-
-            html.Div(className='col', children=[
-                html.H1(className='h',children=["Cartes"]),
-                html.P("Nous avons fait plusieurs cartes"),
-                html.Button(html.A("Visiter", className="button",href="/page3"))
-            ]),
-
-            html.Div(className='col', children=[
-                html.A(html.Div(className='card card1'),href="http://127.0.0.1:8080/page3"),
-                html.A(html.Div(className='card card2'),href="http://127.0.0.1:8080/page6"),
-                html.A(html.Div(className='card card3'),href="http://127.0.0.1:8080/page3"),
-                html.A(html.Div(className='card card4'),href="http://127.0.0.1:8080/page9"),
-                
-            ]),
-
-        ]),
-        html.Div(className='row row2',children=[
-            html.Div(className='col colr21', children=[
-                html.H1(className='h',children=["Graphiques"]),
-                html.P("Nous avons fait plusieurs Graphiques"),
-                html.Button(html.A("Visiter", className="button",href="http://127.0.0.1:8080/page8"))
-            ]),
-
-            
-            html.Br(),
-            
-            html.Div(className='col colr22', children=[
-
-                html.A(html.Div(className='card graph1'),href="http://127.0.0.1:8080/page8"),
-                html.A(html.Div(className='card graph2'),href="http://127.0.0.1:8080/page7"),
-                # html.Div(className='card graph3'),
-                # html.Div(className='card graph4'),
-                
-            ])
-        ])
-    ]) 
-
-#Page About us
-def pageA_layout():
-    return html.Div(className='corpslambda',children=[
-        html.H1(className='h1acc', children=["ABOUT US"]),
-        dcc.Markdown(className="aboutus", dangerously_allow_html = True, children = ['''
-        # Sujet
-        Dans le cadre de l'UE lifprojet nous avons créé un site web permettant de visuliser les différents apects d'un  
-        jeu de données portant principalement sur les décès enregistrés en france. Nous avons représenté ces données de  
-        différentes façons tels que par des histogrammes, des cartes ou encore une pyramide d'age.
-        <br>
-        <br>                                                                             
-
-        # Présentation personnelle
-        Nous sommes [Gokana Emmannuel](https://github.com/emmanuelgkn) et [Jofre Coll Vila](https://github.com/Jofrix98), étudiants en Licence Informatique  
-        à l'université [Claude Bernard Lyon 1](https://www.univ-lyon1.fr/).
-        <br>
-        <br>
-                                                                                                                                                                  
-        # Outils utilisés
-        Pour atteindre cet objectif, nous avons opté pour une combinaison de technologies puissantes et flexibles, mettant  
-         l'accent sur la simplicité du langage Python.
-        <br>
-        <br>
-                                                                                     
-        ### Python :  
-        [Python](https://www.python.org/) est unangage de programmation polyvalent, offrant une facilité d'utilisation et  
-        une flexibilité pour le traitement des données.
-        <br>
-        <br>
-                                                                                     
-        ### Dash (Framework de Python) :  
-        Nous avons choisi le framework [Dash](https://dash.plotly.com/) pour créer des applications web interactives. Son utilisation simplifié  
-        de Python nous a permis de concevoir des tableaux de bord dynamiques sans nécessiter  
-        une expertise approfondie en développement web.
-        <br>
-        <br>
-                                                                                     
-        ### Matplotlib (Librairie de Visualisation en Python) :  
-        [Matplotlib](https://matplotlib.org/) a été notre choix pour la création de graphiques et de visualisations. Cette librairie nous a permis de représenter  
-        de manière claire et informative les tendances et les modèles présents  
-        dans les données de décès.
-        <br>
-        <br>  
-                                                                                                                                                                                                                                              
-        ### CSS (Cascading Style Sheets) :  
-        Nous avons utilisé CSS pour personnaliser l'aspect visuel de notre site. Cela nous a donné un contrôle total sur  
-        la présentation, garantissant une expérience utilisateur agréable.
-        <br>                                                                         
-        <br>
-                                                                                                                                 
-    '''])
-    ])

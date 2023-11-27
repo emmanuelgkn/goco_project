@@ -2,7 +2,7 @@ from dash import Dash, html, dash_table, dcc
 from dash.dependencies import Input, Output
 
 
-from Deplacements_f10 import *
+from AboutUs_f12 import *
 
 # Affiche de toute notre application Dash
 app.layout = html.Div([
@@ -40,7 +40,7 @@ app.layout = html.Div([
                 html.Br(),
                 html.A("Home", href='/Acceuil', className = "linkFooter"),
                 html.Span(" | "),
-                html.A("About us", href='/Acceuil', className = "linkFooter"),
+                html.A("About us", href='/About', className = "linkFooter"),
                 html.H5("Réalisé par Emmanuel Gokana et Jofre Coll"),
                 html.A(
                     html.Div(className="photoGithub"),

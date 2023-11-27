@@ -41,15 +41,15 @@ df_pyramid["Male_Width"] = df_pyramid["Male"]
 # Inverser l'ordre des colonnes pour afficher les hommes d'abord
 df_pyramid = df_pyramid[['Age', 'Male', 'Female', 'Male_Left', 'Male_Width', 'Female_Left', 'Female_Width']]
 
-fig = go.Figure()
-fig.add_trace(go.Bar(y=df_pyramid["Age"], x=df_pyramid["Male_Width"], base=-df_pyramid["Male_Width"],
+fig_pyramide = go.Figure()
+fig_pyramide.add_trace(go.Bar(y=df_pyramid["Age"], x=df_pyramid["Male_Width"], base=-df_pyramid["Male_Width"],
                      orientation='h', name='Male', text=df_pyramid["Male"],
                      hoverinfo='text', marker=dict(color="#4682b4")))
-fig.add_trace(go.Bar(y=df_pyramid["Age"], x=df_pyramid["Female_Width"], base=0, orientation='h',
+fig_pyramide.add_trace(go.Bar(y=df_pyramid["Age"], x=df_pyramid["Female_Width"], base=0, orientation='h',
                      name='Female', text=df_pyramid["Female"],
                      hoverinfo='text', marker=dict(color="#ee7a87")))
 
-fig.update_layout(barmode='stack',
+fig_pyramide.update_layout(barmode='stack',
                   title="Carte population France",
                   xaxis_title="Pourcentage (%)",
                   yaxis_title="Tranche d'âge",
@@ -66,11 +66,11 @@ def page8_layout():
     dcc.Markdown(className="manu", children="""
     Cette page comporte 3 graphes:  
         - Le Graphique représentant la moyenne d'age des hommes et des femmes  
-        - Le Graphique représentant l'Age moyen en fonction de l'annnée de décès  
+        - Le Graphique représentant l'ésperance de vie en fonction de l'année et du genre  
         - La Pyramide d'age de la population en france
     """),
     html.Br(),
-    dcc.Graph(figure=fig_HF),
-    dcc.Graph(figure = fig_moyenne),
-    dcc.Graph(figure=fig),
+    dcc.Graph(figure = fig_HF),
+    dcc.Graph(figure = fig_esperance),
+    dcc.Graph(figure = fig_pyramide),
 ])

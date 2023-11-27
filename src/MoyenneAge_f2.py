@@ -5,52 +5,44 @@ import plotly.graph_objects as go
 
 from Base_f1 import *
 
-#Dans ce fichier on ne fait que les calculs de graphiques, l'affichage ce fait dans Page8_layout() dans PyramideAge_f8
+# Dans ce fichier on ne fait que les calculs de graphiques, l'affichage ce fait dans Page8_layout() dans PyramideAge_f8
 
 df_moyenne = df.copy()
 df_moyenne['Date of Birth'] = pd.to_datetime(df_moyenne['Date of Birth'], format='%d/%m/%Y', errors='coerce')
-# Créez une nouvelle colonne 'Year of Birth' avec l'année de naissance
+# On crée une nouvelle colonne 'Year of Birth' avec l'année de naissance
 df_moyenne['Year of Birth'] = df_moyenne['Date of Birth'].dt.year.fillna(-1).astype('int')
 
 fig_HF = px.histogram(df, 
                       x='Sex', 
                       y='Age', 
                       histfunc='avg',
-                      color='Sex',  # Utilisez l'argument color pour spécifier la couleur des barres en fonction du genre
+                      color='Sex',  # On a utilisé l'argument color pour spécifier la couleur des barres en fonction du genre
                       color_discrete_map={'Masculin': 'lightblue', 'Féminin': 'crimson'},
                       title = 'Esperence de vie moyenne en fonction du Genre')
 
 fig_HF.update_traces(marker_color=None, selector={'name': 'Masculin'})
 fig_HF.update_layout(
-    xaxis_title='Genre',  # Renommez l'axe x
+    xaxis_title='Genre',
     yaxis_title='Âge moyen',
     plot_bgcolor= '#292A30',
     paper_bgcolor= '#292A30',
     font_color='#e0e0e0'
 )
 
+fig_esperance = go.Figure()
 
-avg_age_by_year = df_moyenne.groupby('Year of Birth')['Age'].mean().reset_index()
-scatter_trace = go.Scatter(x=avg_age_by_year['Year of Birth'], y=avg_age_by_year['Age'], mode='lines+markers')
+fig_esperance.add_trace(go.Scatter(x=df_esp['Year'], y=df_esp['Esperance Hommes'], mode='lines+markers', name='Hommes'))
 
-# Créez le graphique avec les deux tracés
-fig_moyenne = go.Figure(data=[scatter_trace])
+fig_esperance.add_trace(go.Scatter(x=df_esp['Year'], y=df_esp['Esperance Femmes'], mode='lines+markers', name='Femmes'))
 
-# Mettez à jour la mise en page pour spécifier l'intervalle d'années sur l'axe des x
-fig_moyenne.update_layout(
-    title_text='Age moyen de mort en fonction de l\'année de décès',
-    xaxis_title='Année de naissance',
-    yaxis_title='Âge moyen',
-    xaxis=dict(
-        range=[1900, 2025],
-        dtick=5
-    ),
-    plot_bgcolor= '#292A30',
-    paper_bgcolor= '#292A30',
+fig_esperance.update_layout(
+    title_text='Esperance de vie en fonction de l\'année et du genre',
+    xaxis_title='Année',
+    yaxis_title='Esperance de vie',
+    plot_bgcolor='#292A30',
+    paper_bgcolor='#292A30',
     font_color='#e0e0e0'
 )
-
-
 
 
 
