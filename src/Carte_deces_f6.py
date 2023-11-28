@@ -55,7 +55,7 @@ figue.update_layout(
  )
 
 
-figue.update_traces(marker=dict(sizemode='diameter', sizeref=60))
+figue.update_traces(marker=dict(sizemode='diameter', sizeref=80))
 
 
 def page6_layout():
