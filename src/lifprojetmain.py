@@ -29,9 +29,6 @@ app.layout = html.Div([
         ])
     ]),
     html.Div(id='page-content', className='corps wrapper'),
-    html.Br(),
-    html.Br(),
-    html.Br(),
     html.Footer(
         html.Div(
             className="container",
