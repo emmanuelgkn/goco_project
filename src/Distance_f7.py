@@ -33,12 +33,6 @@ def calculate_distance(row, round_to=10):
 # Appliquer la fonction pour calculer la distance
 df_distance['distance'] = df_distance.apply(calculate_distance, axis=1)
 
-# Afficher la nouvelle dataframe avec la colonne de distance
-df_distance_sort = df_distance[['Nom', 'Prenom(s)', 'distance']].sort_values(by='distance', ascending=False)
-
-
-df_distance['Date of Death'] = pd.to_datetime(df_distance['Date of Death'], format='%d/%m/%Y', errors='coerce')
-df_distance['Year of Death'] = df_distance['Date of Death'].dt.year.fillna(-1).astype('int')
 
 fig = px.histogram(df_distance, 
                    x="distance", 
@@ -55,7 +49,7 @@ def page7_layout():
     html.H1("Distance"),
     html.Br(),
     dcc.Markdown(className = "manu",children = """
-    Cet Histogramme représente la distance parcourue (ici la distance entre  le lieu de naissance et le lieu de mort)  
+    Ce graphique représente la distance parcourue (ici la distance entre  le lieu de naissance et le lieu de mort)  
     en fonction du nombre de personnes. Ici on pourra choisir la ville de naissance pour visualiser les distances    
     parcourues par les personnes nées dans la ville. Vous pourrez aussi choisir l'année de déces.
     """),
