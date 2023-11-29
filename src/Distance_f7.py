@@ -46,7 +46,7 @@ fig.update_layout(yaxis_type="log", plot_bgcolor= '#292A30', paper_bgcolor= '#29
 
 def page7_layout():
     return html.Div(className='corpslambda' ,children=[
-    html.H1("Distance"),
+    html.H1("Distance parcourue", className = "titlePage"),
     html.Br(),
     dcc.Markdown(className = "manu",children = """
     Ce graphique représente la distance parcourue (ici la distance entre  le lieu de naissance et le lieu de mort)  
@@ -93,6 +93,7 @@ def update_graph(selected_birthplace, typeaxis):
                          title='Nombre de personnes par de distance parcourue', line_shape="spline", render_mode="svg")
         figure.update_layout(xaxis=dict(title='Distance (Km)'), yaxis=dict(title='Nombre de personnes'),
                              plot_bgcolor= '#292A30', paper_bgcolor= '#292A30', font_color='#e0e0e0')
+        figure.update_layout(xaxis_range=[0, 3000])
     else:
         counts = filtered_df['distance'].value_counts().sort_index()
         figure = px.line(x=counts.index, y=counts.values, labels={'y':'Nombre de personnes','x':'Distance (Km)'},

@@ -5,7 +5,7 @@ from Acceuil_f11 import *
 #Page About us
 def pageA_layout():
     return html.Div(className='corpslambda',children=[
-        html.H1(className='h1acc', children=["ABOUT US"]),
+        html.H1(className='titlePage', children=["ABOUT US"]),
         dcc.Markdown(className="aboutus", dangerously_allow_html = True, children = ['''
         # Sujet
         Dans le cadre de l'UE lifprojet nous avons créé un site web permettant de visuliser les différents apects d'un  

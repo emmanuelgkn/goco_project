@@ -28,7 +28,7 @@ def page9_layout():
 
     #Affichage titre et sous-titre
     return html.Div(className='corpslambda', children=[
-    html.H1("Mes origines", style={"font-family": "verdana"}),
+    html.H1("Mes origines", className = "titlePage"),
     dcc.Markdown(className="manu", children="""
     Cette carte représente les origines d'un prénom ou nom famille en France.
     """),

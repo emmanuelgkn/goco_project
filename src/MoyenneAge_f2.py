@@ -2,6 +2,7 @@ from dash import Dash, html, dash_table, dcc
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 from Base_f1 import *
 
@@ -18,7 +19,7 @@ fig_HF = px.histogram(df,
                       histfunc='avg',
                       color='Sex',  # On a utilisé l'argument color pour spécifier la couleur des barres en fonction du genre
                       color_discrete_map={'Masculin': 'lightblue', 'Féminin': 'crimson'},
-                      title = 'Esperence de vie moyenne en fonction du Genre')
+                      title = 'Espérance de vie moyenne en fonction du genre')
 
 fig_HF.update_traces(marker_color=None, selector={'name': 'Masculin'})
 fig_HF.update_layout(
@@ -29,16 +30,20 @@ fig_HF.update_layout(
     font_color='#e0e0e0'
 )
 
-fig_esperance = go.Figure()
+fig_esperance = make_subplots(specs=[[{"secondary_y": True}]])
 
-fig_esperance.add_trace(go.Scatter(x=df_esp['Year'], y=df_esp['Esperance Hommes'], mode='lines+markers', name='Hommes'))
+fig_esperance.add_trace(go.Scatter(x=df_esp['Year'], y=df_esp['Esperance Hommes'], mode='lines+markers', name='Hommes'), secondary_y=False,)
 
-fig_esperance.add_trace(go.Scatter(x=df_esp['Year'], y=df_esp['Esperance Femmes'], mode='lines+markers', name='Femmes'))
+fig_esperance.add_trace(go.Scatter(x=df_esp['Year'], y=df_esp['Esperance Femmes'], mode='lines+markers', name='Femmes'), secondary_y=False,)
+
+fig_esperance.add_trace(go.Scatter(x=df_esp['Year'], y=df_esp['Mortalité infantile'], mode='lines+markers', name='Taux mortalité infantile en %'), secondary_y=True,)
+
+fig_esperance.update_yaxes(title_text="Espérance de vie", secondary_y=False)
+fig_esperance.update_yaxes(title_text="Taux mortalité infantile en %", secondary_y=True)
 
 fig_esperance.update_layout(
-    title_text='Esperance de vie en fonction de l\'année et du genre',
+    title_text='Espérance de vie en fonction du genre et taux de mortalité infantile en pourcentage selon l\'année',
     xaxis_title='Année',
-    yaxis_title='Esperance de vie',
     plot_bgcolor='#292A30',
     paper_bgcolor='#292A30',
     font_color='#e0e0e0'

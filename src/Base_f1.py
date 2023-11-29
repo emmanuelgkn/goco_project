@@ -171,16 +171,19 @@ for line in lines_esperance:
     year_esperance = parts[0]
     esperance_femmes = parts[1].replace(',', '.')
     esperance_hommes = parts[2].replace(',', '.')
+    mortalite_infantile = parts[3].replace(',', '.')
 
     years_esperance_list.append(year_esperance)
     esperances_hommes_list.append(float(esperance_hommes))
     esperances_femmes_list.append(float(esperance_femmes))
+    mortalites_infantiles_list.append(float(mortalite_infantile))
 
 # On crée le tableau à partir des listes créées
 data_esp = {
     "Year": years_esperance_list,
     "Esperance Hommes": esperances_hommes_list,
     "Esperance Femmes": esperances_femmes_list,
+    "Mortalité infantile": mortalites_infantiles_list,
 }
 
 # Créez le DataFrame avec pandas

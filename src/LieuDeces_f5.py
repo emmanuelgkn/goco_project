@@ -37,7 +37,7 @@ fig.update_layout(
 
 def page5_layout():
         return html.Div(className='corpslambda' ,children=[
-            html.H1("Lieu Deces"),
+            html.H1("Top villes décès", className = "titlePage"),
             html.Br(),
             dcc.Markdown(className="manu", children="""
                 Ce graphe representent le nombre de morts dans les 4 villes plus grandes en France.
