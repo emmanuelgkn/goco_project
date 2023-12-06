@@ -17,7 +17,7 @@ L'instalation de ces différentes libraires ce fait grâce a pip (ex: pip3.8 ins
 Pour executer le projet vous devrez vous situer dans le repertoire goco_projet dans un 
 terminale et taper (si vous etes sous python3.8 par exemple):
 
-- python3.8 lifprojetmain.py
+- python3.8 src/lifprojetmain.py
 
 On vous affichera dans le terminale un lien que vous pourrez utiliser pour afficher le site 
 dans un navigateur web (de préférence chrome)
