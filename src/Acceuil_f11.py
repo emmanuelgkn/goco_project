@@ -23,10 +23,10 @@ def Accueil_layout():
             ]),
 
             html.Div(className='col', children=[
-                html.A(html.Div(className='card card1'),href="http://127.0.0.1:8080/CarteMouvements"),
-                html.A(html.Div(className='card card2'),href="http://127.0.0.1:8080/CarteDeces"),
-                html.A(html.Div(className='card card3'),href="http://127.0.0.1:8080/CarteMouvements"),
-                html.A(html.Div(className='card card4'),href="http://127.0.0.1:8080/MesOrigines"),
+                html.A(html.Div(className='card card1'),href="/CarteMouvements"),
+                html.A(html.Div(className='card card2'),href="/CarteDeces"),
+                html.A(html.Div(className='card card3'),href="/CarteMouvements"),
+                html.A(html.Div(className='card card4'),href="/MesOrigines"),
                 
             ]),
 
@@ -35,7 +35,7 @@ def Accueil_layout():
             html.Div(className='col colr21', children=[
                 html.H1(className='h',children=["Graphiques"]),
                 html.P("Nous avons fait plusieurs graphiques pour représenter l'âge de la population et aussi la distance moyenne parcourue", className="text-acceuil"),
-                html.Button(html.A("Visiter", className="button",href="http://127.0.0.1:8080/GraphesAge"))
+                html.Button(html.A("Visiter", className="button",href="/GraphesAge"))
             ]),
 
             
@@ -43,8 +43,8 @@ def Accueil_layout():
             
             html.Div(className='col colr22', children=[
 
-                html.A(html.Div(className='card graph1'),href="http://127.0.0.1:8080/GraphesAge"),
-                html.A(html.Div(className='card graph2'),href="http://127.0.0.1:8080/DistanceParcourue"),
+                html.A(html.Div(className='card graph1'),href="/GraphesAge"),
+                html.A(html.Div(className='card graph2'),href="/DistanceParcourue"),
                 
             ])
         ])

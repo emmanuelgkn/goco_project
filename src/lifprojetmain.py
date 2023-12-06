@@ -13,7 +13,7 @@ app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Nav(className="nave", children=[
         html.Ul(className="listacceuil", children=[
-            html.Li(html.A("Home", href='/Acceuil')),
+            html.Li(html.A("Home", href='/Accueil')),
             html.Li( children = [ "Stats",
                 html.Ul([
                     html.Li(html.A("Carte mouvements", href="/CarteMouvements")),
@@ -34,7 +34,7 @@ app.layout = html.Div([
             className="container",
             children=[
                 html.Br(),
-                html.A("Home", href='/Acceuil', className = "linkFooter"),
+                html.A("Home", href='/Accueil', className = "linkFooter"),
                 html.Span(" | "),
                 html.A("About us", href='/About', className = "linkFooter"),
                 html.H5("Réalisé par Emmanuel Gokana et Jofre Coll"),
@@ -72,5 +72,6 @@ def display_page(pathname):
     else:
         return Accueil_layout()
 print('Site Utilisable')
+
 if __name__ == '__main__':
-    app.run_server(debug=True, port = 8080)
+    app.run_server(host='0.0.0.0',port=7744)
