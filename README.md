@@ -1,5 +1,7 @@
 # goco_project
-Dans le cadre de l'UE lifprojet nous avons créé un site web permettant de visuliser les différents apects d'un jeu de données portant principalement sur les décès enregistrés en france pour cela nous allons nous aider de différents outils tel que dash une librairie python ou encore Leafet sur javascript
+Dans le cadre de l'UE lifprojet nous avons créé un site web permettant de visuliser les différents apects d'un
+jeu de données portant principalement sur les décès enregistrés en france. Nous avons représenté ces données de
+différentes façons tels que par des histogrammes, des cartes ou encore une pyramide d'age.
 
 LIENS IMPORTANTS:
 
