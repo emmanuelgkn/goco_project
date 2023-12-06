@@ -21,3 +21,5 @@ terminale et taper (si vous etes sous python3.8 par exemple):
 
 On vous affichera dans le terminale un lien que vous pourrez utiliser pour afficher le site 
 dans un navigateur web (de préférence chrome)
+
+Le site est aussi accessible sur internet: http://lif.sci-web.net:7744
