@@ -1,4 +1,4 @@
-# goco_project
+# SITE DE VISUALISATION DES DONNÉES DE DÉCÈS
 Dans le cadre de l'UE lifprojet nous Jofre Coll et Gokana Emmanuel avons créé un site web permettant de visuliser les différents apects d'un
 jeu de données portant principalement sur les décès enregistrés en france. Nous avons représenté ces données de
 différentes façons tels que par des histogrammes, des cartes ou encore une pyramide d'age.
