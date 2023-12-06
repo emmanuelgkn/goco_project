@@ -1,47 +1,23 @@
 # goco_project
-Dans le cadre de l'UE lifprojet nous avons créé un site web permettant de visuliser les différents apects d'un
+Dans le cadre de l'UE lifprojet nous Jofre Coll et Gokana Emmanuel avons créé un site web permettant de visuliser les différents apects d'un
 jeu de données portant principalement sur les décès enregistrés en france. Nous avons représenté ces données de
 différentes façons tels que par des histogrammes, des cartes ou encore une pyramide d'age.
 
-LIENS IMPORTANTS:
+## Dépendances et Exécution
+Pour faire marcher le projet sur votre ordinateur vous devez posseder un version de python supérieur ou egale à la 
+version 3.8, vous aurez aussi besoin de du framework dash et de différentes librairies tel que:
+- matplotlib
+- geopy
+- dash_bootstrap_components
+- dash_daq
+- pandas
 
-1) Projet ---> http://cazabetremy.fr/wiki/doku.php?id=projet:sujets
-2) Tutorial Dash ---> https://dash.plotly.com/tutorial
-3) Creation carte ---> https://python-visualization.github.io/folium/latest/getting_started.html
-4) Creation carte ---> https://leafletjs.com/
-5) Base de données ---> https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/#/resources
-   Dessin d'enregistrement
-Le fichier est fourni au format txt
+L'instalation de ces différentes libraires ce fait grâce a pip (ex: pip3.8 install geopy)
 
-Nom et Prénom - Longueur : 80 - Position : 1-80 - Type : Alphanumérique
-La forme générale est NOM*PRENOMS
+Pour executer le projet vous devrez vous situer dans le repertoire goco_projet dans un 
+terminale et taper (si vous etes sous python3.8 par exemple):
 
-Sexe - Longueur : 1 - Position : 81 - Type : Numérique
-1 = Masculin; 2 = féminin
+- python3.8 lifprojetmain.py
 
-Date de naissance - Longueur : 8 - Position : 82-89 - Type : Numérique
-Forme : AAAAMMJJ - AAAA=0000 si année inconnue; MM=00 si mois inconnu; JJ=00 si jour inconnu
-
-Code du lieu de naissance - Longueur : 5 - Position : 90-94 - Type : Alphanumérique
-Code Officiel Géographique en vigueur au moment de la prise en compte du décès
-
-Commune de naissance en clair - Longueur : 30 - Position : 95-124 - Type : Alphanumérique
-
-DOM/TOM/COM/Pays de naissance en clair - Longueur : 30 - Position : 125-154 - Type : Alphanumérique
-
-Date de décès - Longueur : 8 - Position : 155-162 - Type : Numérique
-Forme : AAAAMMJJ - AAAA=0000 si année inconnue; MM=00 si mois inconnu; JJ=00 si jour inconnu
-
-Code du lieu de décès - Longueur : 5 - Position : 163-167 - Type : Alphanumérique
-Code Officiel Géographique en vigueur au moment de la prise en compte du décès
-
-Numéro d'acte de décès - Longueur : 9 - Position : 168-176 - Type : Alphanumérique
-NOTA : Certains enregistrements peuvent contenir en toute fin des caractères non significatifs. Il est donc important, pour lire correctement ce champ, de bien respecter sa longueur ou sa borne de fin.
-
-idées:
-carte deces
-(https://plotly.com/python/bubble-maps/)
-
-data mining 
--distribution des distances au deces 
-coutbre y - %, x- distance. (havergrind)
+On vous affichera dans le terminale un lien que vous pourrez utiliser pour afficher le site 
+dans un navigateur web (de préférence chrome)
