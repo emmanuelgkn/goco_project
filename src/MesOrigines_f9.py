@@ -75,7 +75,7 @@ def page9_layout():
 
     ])
 
-# Ajoutez ces lignes avant votre fonction de rappel
+# On ajoute ces lignes avant votre fonction de rappel
 prev_firstname_value = None
 prev_secondname_value = None
 

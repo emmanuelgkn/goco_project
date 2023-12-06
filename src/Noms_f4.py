@@ -30,7 +30,7 @@ top_names_toulouse = name_countst.sort_values(by='Count', ascending=False).head(
 name_countsm = marseille_data.groupby('Nom').size().reset_index(name='Count')
 top_names_marseille = name_countsm.sort_values(by='Count', ascending=False).head(5)
 
-# Créez une fonction pour afficher un tableau des noms les plus populaires
+# On crée une fonction pour afficher un tableau des noms les plus populaires
 def create_top_names_table(city_name, top_names_df):
     return html.Div([
         html.H2(f"Top 5 des Noms Populaires à {city_name}"),

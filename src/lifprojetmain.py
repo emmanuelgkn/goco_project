@@ -42,7 +42,7 @@ app.layout = html.Div([
                     html.Div(className="photoGithub"),
                     href = "https://github.com/emmanuelgkn/goco_project",
                 )
-            ], style={'flex': '0 0 auto'}  # Ajoutez ce style pour le positionnement du footer
+            ], style={'flex': '0 0 auto'}  # On ajoute ce style pour le positionnement du footer
         )
     )
 ])

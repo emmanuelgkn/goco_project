@@ -46,7 +46,7 @@ Age = []
 same_places = []
 deathplace = []
 
-# Créez un dictionnaire pour stocker les correspondances deathplace_code_text -> birthplace_text
+# On crée un dictionnaire pour stocker les correspondances deathplace_code_text -> birthplace_text
 deathplace_mapping = {}
 
 # Boucle pour extraire les données et trouver les correspondances
@@ -107,7 +107,7 @@ for line in lines:
     deathplace_value = deathplace_mapping.get(deathplace_code_text, "NULL")
     deathplace.append(deathplace_value)
 
-# Créez le tableau à partir des listes créées
+# On crée le tableau à partir des listes créées
 data = {
     "Nom": noms,
     "Prenom(s)": prenoms,
@@ -124,7 +124,7 @@ data = {
     "Death Place": deathplace,
 }
 
-# Créez le DataFrame avec pandas
+# On crée le DataFrame avec pandas
 df = pd.DataFrame(data)
 
 
@@ -137,7 +137,7 @@ merged_df_death = merged_df_death.rename(columns={'longitude': 'longitude_death'
 merged_df_birth = df.merge(positions_geo, left_on='Birthplace Code', right_on='code_commune_INSEE', how='left')
 merged_df_birth = merged_df_birth.rename(columns={'longitude': 'longitude_birth', 'latitude': 'latitude_birth'})
 
-# Fusionnez les données de décès avec les données de naissance en utilisant la colonne "Nom" comme clé
+# On fusionne les données de décès avec les données de naissance en utilisant la colonne "Nom" comme clé
 merged_df = merged_df_death.merge(merged_df_birth[['longitude_birth', 'latitude_birth']], left_index=True, right_index=True, how='left')
 merged_df.loc[merged_df['Birthplace Details'] != 'FRANCE', ['latitude_birth', 'longitude_birth']] = np.nan
 
@@ -186,10 +186,10 @@ data_esp = {
     "Mortalité infantile": mortalites_infantiles_list,
 }
 
-# Créez le DataFrame avec pandas
+# On crée le DataFrame avec pandas
 df_esp = pd.DataFrame(data_esp)
 
-# Initialisez l'application Dash
+# On initialise l'application Dash
 app = Dash(__name__, suppress_callback_exceptions=True, assets_folder='../assets', external_stylesheets=[dbc.themes.DARKLY])
 
 theme = {

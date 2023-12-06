@@ -8,8 +8,8 @@ from dash.dependencies import Input, Output
 from LieuDeces_f5 import *
 
 villes_m = merged_df.groupby('Death Place').agg({
-    'longitude_death': 'first',  # Utilisez 'first' pour obtenir la premiere valeur non nulle.
-    'latitude_death': 'first',   # Utilisez 'first' pour obtenir la premiere valeur non nulle.
+    'longitude_death': 'first',  # On utilise 'first' pour obtenir la premiere valeur non nulle.
+    'latitude_death': 'first',   # On utilise 'first' pour obtenir la premiere valeur non nulle.
 }).reset_index()
 
 def extract_city_name(place_name):
@@ -26,9 +26,9 @@ villes_m2['Death Place'] = villes_m2['Death Place'].apply(extract_city_name)
 
 villes_m2 = villes_m2.merge(positions_geo, left_on='Deathplace Code', right_on='code_commune_INSEE', how='left')
 villes_m2 = villes_m2.groupby('Death Place').agg(
-    latitude=('latitude', 'first'),  # Utilisez 'first' pour obtenir la première valeur non nulle.
-    longitude=('longitude', 'first'),  # Utilisez 'first' pour obtenir la première valeur non nulle.
-    nombre=('Death Place', 'size')  # Utilisez 'size' pour obtenir le nombre d'occurrences.
+    latitude=('latitude', 'first'),  # On utilise 'first' pour obtenir la première valeur non nulle.
+    longitude=('longitude', 'first'),  # On utilise 'first' pour obtenir la première valeur non nulle.
+    nombre=('Death Place', 'size')  # On utilise 'size' pour obtenir le nombre d'occurrences.
 ).reset_index()
 villes_m2_sort= villes_m2.sort_values(by='nombre', ascending=False).head(100)
 villes_m2_sort = villes_m2_sort.drop(3671)
