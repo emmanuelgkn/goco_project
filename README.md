@@ -5,7 +5,7 @@ différentes façons tels que par des histogrammes, des cartes ou encore une pyr
 
 ## Dépendances et Exécution
 Pour faire marcher le projet sur votre ordinateur vous devez posseder un version de python supérieur ou egale à la 
-version 3.8, vous aurez aussi besoin de du framework dash et de différentes librairies tel que:
+version 3.8, vous aurez aussi besoin de du framework dash et de différentes librairies qui sont:
 - matplotlib
 - geopy
 - dash_bootstrap_components
