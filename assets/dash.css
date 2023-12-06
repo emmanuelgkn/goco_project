@@ -1,0 +1,336 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center; /* Ajout de cette ligne pour centrer verticalement le contenu */ 
+    background-color: rgb(74, 172, 185); 
+    padding-left: 0; 
+    padding-right: 1em; 
+    line-height: 2em; 
+    font-family: verdana; 
+    font-size: 20px; 
+    position: fixed; 
+    right: 10px; 
+    top: 10px; 
+    border-radius: 10px; 
+    z-index: 1000;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color:rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+nav a:link, nav a:visited, nav a:active{
+    text-decoration: none;
+    color:rgb(234, 248, 243);
+}
+
+nav a:hover{
+    color: rgb(249, 249, 249);
+    text-shadow: 2px, rgb(114, 114, 114);
+    
+}
+
+.manu{
+    font-family: Verdana;
+    font-size: 15px;
+    text-align: center;
+}
+
+.dash-debug-menu__outer, .dash-debug-menu {
+    display: none !important;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li{
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+
+}
+
+nav ul li a {
+    display: block;
+}
+
+nav ul li ul{
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    position: absolute;
+    border-radius: 10px; 
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+nav ul li ul li{
+    display: none;
+    text-align: left;
+    color:rgb(234, 248, 243);
+    
+}
+
+nav ul li:hover ul li {
+    display: block;
+}
+
+.corpsacceuil {
+    background-image: url(terre.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+    color: rgb(234, 248, 243);
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    justify-content: end;
+    
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
+}
+
+.corpslambda{
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
+
+.h1acc{
+    padding-top: 60px;
+    padding-left: 10px;
+    margin-top: 0px;
+    text-align: center;
+    font-size: 70px;
+    
+}
+
+.petit-titre{
+    font-family: verdana;
+    background-color: bisque;
+}
+
+.Select-control {
+    background-color: rgb(25, 25, 25) !important;
+    color:white;
+  }
+  
+.Select-menu-outer {
+    background-color: rgb(25, 25, 25);
+    color: white;
+}
+
+.Select-value-label {
+    color: white !important;
+}
+
+h1{
+    font-family: verdana;
+}
+
+.ligita{
+    color: black;
+    text-decoration: none;
+    font-family:arial;
+    font-size: 25px;
+    font-weight: bold;
+    list-style: none;
+}
+
+.ligita:hover{
+    color:rgb(74, 172, 185);
+}
+
+.tete{
+    background-color: antiquewhite;
+}
+
+.row{
+    display: flex;
+    height: 88%;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 50px;
+   /* background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 20px;*/
+    
+}
+
+.col{
+   
+    margin-right: 0px;
+}
+
+.h{
+    font-family: 'Roboto' , sans-serif ;
+    font-size: 70px;
+}
+
+button{
+    width: 180px;
+    color: #000;
+    font-size: 17px;
+    padding: 12px 0;
+    background: #fff;
+    border: 0;
+    border-radius: 20px;
+    outline: none;
+    margin-top: 30px;
+
+}
+
+.card{
+    width: 210px;
+    height: 240px;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 15px;
+    
+    background-position: center;
+    background-size: cover;
+    color:#000;
+    transition: transform 0.5s;
+}
+
+.card1{
+    background-image: url(carteDensite.png);
+}
+
+.card2{
+    background-image: url(CarteDeces.png);
+}
+
+.card3{
+    background-image: url(CarteLigne.png);
+}
+
+.card4{
+    background-image: url(CarteOrigine.png);
+}
+
+.card:hover{
+    transform: translateY(-10px);
+}
+
+.graph1{
+    background-image: url(CartePyr.png);
+    width: 700px;
+    
+}
+
+.graph2{
+    background-image: url(GrapheDistance.png);
+    width: 700px;
+
+}
+
+.row0{
+    margin-top: 200px;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 20px;
+}
+
+.row1{
+    margin-top: 50px; 
+}
+
+.row2{
+    margin-top: 50px;    
+}
+
+.button{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    color:#000;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: auto;
+    background-color: rgb(66, 66, 66);
+    padding: 10px; /* Ajoutez du padding pour un meilleur aspect */
+    text-align: center; /* Centrez le texte dans le footer */
+}
+
+H5{
+    font-family: "press Start 2P", "consolas", sans-serif;
+    font-size: 15px;
+}
+
+.linkFooter{
+    font-family: "press Start 2P", "consolas", sans-serif;
+    font-size: 10px;
+    color: white;
+    margin-top: 0%;
+}
+
+.photoGithub{
+    background: url(logoGithub.png);
+    width: 100px; /* ajustez la largeur selon vos besoins */
+    height: 100px; /* ajustez la hauteur selon vos besoins */
+    margin: 0 auto;
+    display: block;
+    background-size: contain;
+}
+
+/* CARTE */
+
+.container-param-carte{
+    display: flex;
+}
+
+.container-param {
+    padding: 5px 5px 5px 5px;
+    background-color: rgb(66, 66, 66);
+    border-radius: 5px;
+}
+
+.container-LDA,
+.container-LDA + div {
+    width: 100%;
+}
+
+.text-acceuil{
+    font-size: 20px;
+}
+
+.aboutus{
+    margin-bottom: 300px;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.titlePage{
+    font-family: "Times New Roman";
+    font-size: 60px;
+    color: white;
+    text-align: center;
+    
+}
+
